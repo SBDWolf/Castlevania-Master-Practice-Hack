@@ -1,34 +1,42 @@
-	program_reset:
+	action_reset:
 		//TODO: needs to hijack death routine to backup subweapon, multiplier and heart count (maybe time too?)
 		lda #$00
 		sta {practiceMenuCursor}
-		sta $22                 // unpause
+		sta {pauseFlag}                 // unpause
 		
-		lda #$06
-		sta $18
+		lda {SYSTEMSTATE_Respawning}
+		sta {systemState}
 		
-		lda #$08
+		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}
 		sta {practiceMenuIndex}
 		
-		lda $64         // backup subweapon and multiplier
-		sta $600e
-		lda $15b
-		sta $600f
+		// backup player stats
+		lda {currentWhipLevel}
+		sta {backupCurrentWhipLevel}
+		lda {currentSubweapon}
+		sta {backupCurrentSubweapon}
+		lda {currentSubweaponMultiplier} 
+		sta {backupCurrentSubweaponMultiplier}
+		lda {currentHeartCount}
+		sta {backupCurrentHeartCount}
+
+		inc {currentLifeCount} // add a life
+
+		lda {TRUE}
+		sta {practiceShouldKeepPlayerStatsOnDeathFlag}
 		
-		inc $2a // add a life
-		
-		lda {practiceMenuDeconstructMenu00PhaseIndex}								// exit menu
+		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}								// exit menu
 		sta {practiceMenuIndex}
 
 		rts 
 
-	program_test:
-        lda #$40
+	action_whipLevelSelect:
+        lda #$02
         sta {practiceSubMenuCursorMaxValue}
         jsr printSubMenuCursor
         jsr handleSubMenuInputs
         lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {true}
+        cmp {TRUE}
         bne +
 		// perform action, for testing purposes i am updating the current whip level
 		lda {practiceSubMenuCursor}
@@ -39,24 +47,33 @@
 +;      jsr printCurrentNumericalValue
         rts 
 
-	program_test_text_options:
+	action_subweaponSelect:
         lda #$04
         sta {practiceSubMenuCursorMaxValue}
 		jsr printSubMenuCursor
 		jsr handleSubMenuInputs
 		lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {true}
+        cmp {TRUE}
         bne +
-		// convert cursor position to subweapon
+		
+		ldy {practiceSubMenuCursor}
+		lda lookupTable_subweaponSelect,y
+		sta {currentSubweapon}
+
 		jmp exitMenu
         
-+;      jsr printCurrentTextValue
++;		ldx #$00
+      	jsr printCurrentTextValue
         rts 
 
 		rts
 
+	action_about:
+		//TODO
+		rts
+
     exitMenu:
-		lda {practiceMenuDeconstructMenu00PhaseIndex}
+		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}
 		sta {practiceMenuIndex}
 
         rts 

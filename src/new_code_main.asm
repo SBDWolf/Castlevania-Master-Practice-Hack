@@ -3,11 +3,14 @@ bank 5
 base $8000
 org {bank5_freeSpaceCode}
 	practiceRoutine:
+	// saving the state of the x register for when we return from the hijack
 		txa 
-		pha							// saving the state of the x register for when we return from the hijack
+		pha	
 		jsr mainPracticeMenu		
 		
-		ldy #$00					// restore the state from before the hijack
+		
+	// restore the state from before the hijack	
+		ldy #$00
 		pla 
 		tax 
 		rts

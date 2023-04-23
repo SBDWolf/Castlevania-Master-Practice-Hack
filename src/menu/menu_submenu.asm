@@ -1,22 +1,22 @@
 // -- submenu logic -------------------------------------------------
 
 	printSubMenuCursor:									
-		ldy $20									// draws cursor to the right 	
+		ldy {tileDataPointer}									// draws cursor to the right 	
 -;		lda cursorBytesSUB,y
-		sta $700,y
+		sta {PPUBuffer},y
 		iny 
 		cmp #$FF
 		bne -
-		sty $20
+		sty {tileDataPointer}
 		rts 
 	
 	handleSubMenuInputs:
 		clv 							// for later in this subroutine
 		lda {currentInputOneFrame}
-		and {multipleInput_UpOrDown}
+		and {MULTIPLEINPUT_UpOrDown}
 		cmp #$00
 		beq checkForAPress 
-		cmp {input_Down}
+		cmp {INPUT_Down}
 		beq pressedDown
 		// assuming up got pressed, which means if you press up+down, it will get interpreted as up
 		inc {practiceSubMenuCursor}
@@ -43,45 +43,53 @@
 	
 	checkForAPress:
 		lda {currentInputOneFrame}
-		and {input_B}
-		cmp {input_B}
+		and {INPUT_B}
+		cmp {INPUT_B}
 		bne +
-		lda {true}
+		lda {TRUE}
 		sta {practiceSubMenuShouldExecuteMenuActionFlag}
 
 +;		rts 
-
 
 	printCurrentNumericalValue:
 		ldy {practiceSubMenuCursor}
 		lda ones_digits_table,y
 
-		ldx $20
+		ldx {tileDataPointer}
 		dex 
 		dex 
-		sta $700,x
+		sta {PPUBuffer},x
 
 		dex 
 
 		lda tens_digits_table,y
-		sta $700,x
+		sta {PPUBuffer},x
 
 		rts 
-
-//	    jsr someGenericPrintSubRoutine
-	    //sta $08
-	   // lda #$1A
-	   // jsr {someBank7GenericPrintSubRoutine1}
-	   // lda $08
-//	    jsr {someBank7GenericPrintSubRoutine2}
-//	    jmp {someBank7GenericPrintSubRoutine3}
-
-//		ldy $20
-//		ora #$D0								// make it a number character and print
-//		dey
-//		dey
-//		sta $700,y
-//		rts 
     
     printCurrentTextValue:
-        //TODO
+        lda submenu_text_master_table,x
+		sta $00
+		lda submenu_text_master_table+1,x
+		sta $01
+		
+		ldy {practiceSubMenuCursor}
+		lda ($00),y
+		tay 
+
+		ldx {tileDataPointer}
+		dex 
+		dex 
+		dex 
+		
+-;		lda ($00),y						// write text loop
+		sta {PPUBuffer},x
+		inx
+		iny
+		cmp #$FF
+		bne -
+
+		stx {tileDataPointer}
+
+		rts
+

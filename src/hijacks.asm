@@ -11,7 +11,8 @@ org {bank7_freeSpace}
 		// switch back to bank 6 real quick, which is what the game is expecting at this point
 		lda #$06
 		sta $8000
-		jsr {bank7_pauseCheck}		// hijack fix -- SBDWolf: TODO - figure out what this $CF28 is and maybe give this a better name
+		// hijack fix
+		jsr {bank7_pauseCheck}
 		rts 
 
 org {bank7_scorePrintHijack}
@@ -26,11 +27,14 @@ org {bank7_mainJumpTable}+8
 
 org {bank7_pauseCheck}+14
 		// letting the game pause even when pressing select, on top of start
-		and {multipleInput_StartOrSelect}
+		and {MULTIPLEINPUT_StartOrSelect}
 
 org {bank7_pauseCheck}+32
 		// letting the game unpause even when pressing select, on top of start
-		and {multipleInput_StartOrSelect}
+		and {MULTIPLEINPUT_StartOrSelect}
+
+org {bank7_deathHijack}
+		jsr levelLoadHijack
 
 bank 6
 base $8000
@@ -76,12 +80,58 @@ org {bank6_freeSpace}
 
 	allowSkippingIntro:   	
 		lda {currentInputHeld}
-		and {input_Start}
-		cmp {input_Start}
+		and {INPUT_Start}
+		cmp {INPUT_Start}
 		bne +
 		lda #$01
 		sta {introTimer}					// set timer to 01 start (00 actually makes it underflow)
-+;		jmp {bank7_originalIntroGameStatePointer}	// hijack fix	
++;		jmp {bank7_originalIntroGameStatePointer}	// hijack fix
+
+	levelLoadHijack:
+		tya
+		pha
+
+//		jsr print2CharacterTable
+//		lda #$37							// set PPU pointer to a different location
+//		sta PPU_BurstUpdateTable
+//		lda #$20
+//		sta PPU_BurstUpdateTable+1		
+//		lda #$60
+//		sta PPU_BurstUpdateTable+2			// draw a block ..
+
+		lda {practiceShouldKeepPlayerStatsOnDeathFlag}
+		cmp {TRUE}
+		bne deathEnd
+		
+		lda {backupCurrentWhipLevel}
+		sta {currentWhipLevel}
+		lda {backupCurrentSubweaponMultiplier}					
+		sta {currentSubweaponMultiplier}
+		lda {backupCurrentSubweapon}				
+		sta {currentSubweapon}
+		lda {backupCurrentHeartCount}
+		sta {currentHeartCount}
+//		lda lifeBackup
+//		bne +
+//		lda #$02						// give lifes in case the counter was 00 else the game goes to gameover with minus lifes 
+//	+	sta $2a							// simon_Lifes
+
+//		lda colorModBackup				
+//		sta $fe
+		lda #$04						// make the multiplier appear again
+		sta	$141
+		lda {FALSE}
+		sta {practiceShouldKeepPlayerStatsOnDeathFlag}
+		
+	deathEnd:			
+		pla
+		tay
+		lda $19								// hijack fix
+		clc 
+		rts 
+
+
+
 
 org {bank6_hudPrintHijack}
 		// skips the writing of any unnecessary text in the HUD, such as SCORE-, PLAYER, ENEMY, TIME, etc.

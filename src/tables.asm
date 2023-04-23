@@ -12,94 +12,54 @@ org {bank5_freeSpaceData}
 		dw bufferFrame,menuAction			
 		dw bufferFrame,closeMenu		
     
-    text_Table:							// this two following tables need to have the same size. They use the same index to execute the program 							
+    textTable_menuOptions:							// this two following tables need to have the same size. They use the same index to execute the program 							
 		dw text_reset								
-		dw text_goToLevel               
-		dw text_gameMod
-		dw text_GiveEquip
-		dw text_gameLoop                
-		dw text_SlowMo 
-		dw text_colorMode 
+		dw text_whipLevelSelect
 		dw text_subweaponSelect             	
-		dw text_whipLevel	
-		dw text_multiShot
+		dw text_about
+        dw $FFFF    
 
-		 
-		dw text_placeHolder   
-        dw $ffff                         
-
-	text_Program_Table:					
-		dw program_reset
-		dw program_test
-		dw program_test_text_options
-//		dw program_goToLevel            
-//		dw program_gameMode
-//		dw program_giveEquip
-//		dw program_gameLoop	
-//		dw program_SlowMo
-//		dw program_colorMode 		
-//		dw program_subweaponSelect           		           
-//		dw program_WhipLevel
-//		dw program_multiShot
-
-	program_maxSubMenuValues:				// SBDWolf: add values to this table for new actions
-		db $05
-		 
-//		dw program_placeHolder   		
-//	    dw $ffff                       	
-	
-	text_SlowMo:
-		db "SLOW MOTION ",$ff		
 	text_reset:
-		db "RESET       ",$ff	
-	text_gameLoop:
-		db "GAME LOOP   ",$ff				// we waste space so it clears out other names when scrolling list
-	text_goToLevel:
-		db "SELECT LEVEL",$ff	
+		db "RESET STAGE /"
+	text_whipLevelSelect:
+		db "WHIP LEVEL  /"		
 	text_subweaponSelect:
-		db "SUBWEAPON   ",$ff	
-	text_colorMode:
-		db "COLOR MODE  ",$ff	
-	text_placeHolder:
-		db "PLACE HOLDER",$ff
-	text_whipLevel:
-		db "WHIP LEVEL  ",$ff	
-	text_multiShot:
-		db "MULTI SHOT  ",$ff	
-	text_gameMod:
-		db "GAME MODE   ",$FF
-	text_GiveEquip:
-		db "GIVE ALL    ",$FF	
-	text_blank:
-		db "              ",$FF
-	text_level_numbers:
-		db "00010203040506070809101112131415161718",$ff
-	text_HEX_numbers:
-		db "0123456789ABCDEF",$ff
+		db "SUBWEAPON   /"
+	text_about:
+		db "ABOUT       /"
+	                     
+
+	pointerTable_actionTable:					
+		dw action_reset
+		dw action_whipLevelSelect
+		dw action_subweaponSelect
+		dw action_about
 	
-	text_program_test_text:
-		db "DAGGER    "
-		db "CROSS     "
-		db "HOLY WATER"
-		db "AXE       "
-		db "STOPWATCH "
+	
+
+	submenu_text_master_table:
+		dw textTable_subweaponSelect
+		// etc
 
 
 
-	cursorBytes:
-		db $01,$00,$00,$dc,$ff,$00	
-	cursorBytesSUB:
-		db $01,$20,$31,$dc," 00",$ff,$00	
-	menuCursorPos:
-		dw $2021,$2041,$2061,$2081,$ff,$ff	
+	textTable_subweaponSelect:
+		db $05,$10,$1B,$26,$31
+		db "DAGGER    /"
+		db "CROSS     /"
+		db "HOLY WATER/"
+		db "HATCHET   /"						//TODO: FIX (as if)
+		db "STOPWATCH /"
 
-	text_blank:
-		db "              ",$FF
+	lookupTable_subweaponSelect:
+		// 0x08 = dagger, 0x09 = cross, 0x0B = holy water 0x0D = axe, 0x0F
+		db $08,$09,$0B,$0D,$0F
 
-	// the subweapon frame is made up of 8 sprites
-	subweapon_frame_sprites:
-		db $16,$FB,$03,$80,$16,$FD,$03,$88,$16,$FD,$03,$90,$16,$FB,$43,$98
-		db $26,$9D,$03,$80,$2A,$FD,$03,$88,$2A,$FD,$03,$90,$26,$9D,$43,$98
+	
+	textTable_about:
+		// TODO: write the about section
+
+
 
 
 	// lookup tables for quick hex to dec conversion. this saves CPU time at the expense of ROM space.
@@ -126,3 +86,15 @@ org {bank5_freeSpaceData}
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 70
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 80
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 90
+
+	cursorBytes:
+		db $01,$00,$00,$DC,$FF,$00	
+	cursorBytesSUB:
+		db $01,$20,$31,$DC,"   ",$FF,$00	
+	menuCursorPos:
+		dw $2021,$2041,$2061,$2081,$FF,$FF	
+
+	// the subweapon frame is made up of 8 sprites
+	subweapon_frame_sprites:
+		db $16,$FB,$03,$80,$16,$FD,$03,$88,$16,$FD,$03,$90,$16,$FB,$43,$98
+		db $26,$9D,$03,$80,$2A,$FD,$03,$88,$2A,$FD,$03,$90,$26,$9D,$43,$98

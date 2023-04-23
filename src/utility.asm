@@ -1,7 +1,7 @@
     // this is code from the original game that prints the current stage in the top-right
     // i couldn't call it as-is because it is in bank 6, so i am copying it here in bank 5
     printHeartCount:
-        lda {heartCount}
+        lda {currentHeartCount}
 	    jsr someGenericPrintSubRoutine
 	    sta $08
 	    lda #$1B
