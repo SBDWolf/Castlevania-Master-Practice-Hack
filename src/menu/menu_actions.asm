@@ -92,6 +92,7 @@
 
 
 	action_about:
+		clv 
 		// this is done in two phases to hopefully not overload the ppu
 		lda {practiceAboutPrintPhase}
 		cmp #$02
@@ -111,7 +112,7 @@
 		dex 
 		jsr printTextAtProvidedLocation
 		inc {practiceAboutPrintPhase}
-		rts 
+		bvc + 
 
 		phase2: 
 		lda submenu_text_master_table+{ABOUT_MasterTableIndex}
@@ -124,7 +125,9 @@
 		dex 
 		jsr printTextAtProvidedLocation
 		inc {practiceAboutPrintPhase}
-+;		rts 
+
+		// allow any input to close the menu
++;		jmp allowAnyInputToCloseMenu 
 
     exitMenu:
 		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}

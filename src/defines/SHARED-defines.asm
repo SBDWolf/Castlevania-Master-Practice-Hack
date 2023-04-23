@@ -11,6 +11,7 @@ define INPUT_A #$80
 
 define MULTIPLEINPUT_UpOrDown #$0C
 define MULTIPLEINPUT_StartOrSelect #$30
+define MULTIPLEINPUT_AOrB #$C0
 
 define FALSE #$00
 define TRUE #$01

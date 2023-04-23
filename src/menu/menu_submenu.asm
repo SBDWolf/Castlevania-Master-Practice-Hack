@@ -107,3 +107,13 @@
 		stx {tileDataPointer}
 
 		rts 
+
+	allowAnyInputToCloseMenu:
+		lda {currentInputOneFrame}		// exit menu with select OR start
+		and {MULTIPLEINPUT_AOrB}
+		cmp #$00
+		beq +;
+
+		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}
+		sta {practiceMenuPhaseIndex}
++;		rts 
