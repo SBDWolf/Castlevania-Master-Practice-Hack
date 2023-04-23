@@ -1,4 +1,5 @@
 	program_reset:
+		//TODO: needs to hijack death routine to backup subweapon, multiplier and heart count (maybe time too?)
 		lda #$00
 		sta {practiceMenuCursor}
 		sta $22                 // unpause
@@ -22,7 +23,7 @@
 		rts 
 
 	program_test:
-        lda #$05
+        lda #$40
         sta {practiceSubMenuCursorMaxValue}
         jsr printSubMenuCursor
         jsr handleSubMenuInputs

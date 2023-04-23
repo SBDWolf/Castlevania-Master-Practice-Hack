@@ -192,6 +192,10 @@
 		rts
     
     runMenu:	
+		// move sprite 0 to not glitch the text's bottom 
+		lda #$2f						
+		sta $200
+
 		// the game might have been already unpaused while the menu was drawing
 		// we check if the game is still paused, and start deconstructing the menu if not	
 		lda {pauseFlag}
@@ -361,6 +365,9 @@
 +;		rts 
 
 	closeMenu:
+		// move sprite 0 back to its original position 
+		lda #$25						
+		sta $200
 		lda #$00
 		sta {practiceMenuIndex}
 		rts 

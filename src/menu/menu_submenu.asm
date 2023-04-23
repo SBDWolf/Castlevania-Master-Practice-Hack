@@ -53,13 +53,35 @@
 
 
 	printCurrentNumericalValue:
-		lda {practiceSubMenuCursor}
-		ldy $20
-		ora #$D0								// make it a number character and print
-		dey
-		dey
-		sta $700,y
+		ldy {practiceSubMenuCursor}
+		lda ones_digits_table,y
+
+		ldx $20
+		dex 
+		dex 
+		sta $700,x
+
+		dex 
+
+		lda tens_digits_table,y
+		sta $700,x
+
 		rts 
+
+//	    jsr someGenericPrintSubRoutine
+	    //sta $08
+	   // lda #$1A
+	   // jsr {someBank7GenericPrintSubRoutine1}
+	   // lda $08
+//	    jsr {someBank7GenericPrintSubRoutine2}
+//	    jmp {someBank7GenericPrintSubRoutine3}
+
+//		ldy $20
+//		ora #$D0								// make it a number character and print
+//		dey
+//		dey
+//		sta $700,y
+//		rts 
     
     printCurrentTextValue:
         //TODO

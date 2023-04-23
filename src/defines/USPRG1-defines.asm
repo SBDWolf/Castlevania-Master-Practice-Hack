@@ -32,7 +32,7 @@ define bank5_mirrorCodeToBank6 $A357
 
 define bank6_freeSpace $BA40
 
-define someBank7GenericPrintSubRoutine1 $CC95
+define someBank7GenericPrintSubRoutine1 $CC95 // decimal conversion?
 
 define someBank7GenericPrintSubRoutine2 $CC68
 

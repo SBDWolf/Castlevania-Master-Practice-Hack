@@ -100,3 +100,29 @@ org {bank5_freeSpaceData}
 	subweapon_frame_sprites:
 		db $16,$FB,$03,$80,$16,$FD,$03,$88,$16,$FD,$03,$90,$16,$FB,$43,$98
 		db $26,$9D,$03,$80,$2A,$FD,$03,$88,$2A,$FD,$03,$90,$26,$9D,$43,$98
+
+
+	// lookup tables for quick hex to dec conversion. this saves CPU time at the expense of ROM space.
+	tens_digits_table:
+		db $D0,$D0,$D0,$D0,$D0,$D0,$D0,$D0,$D0,$D0 // 0
+		db $D1,$D1,$D1,$D1,$D1,$D1,$D1,$D1,$D1,$D1 // 10
+		db $D2,$D2,$D2,$D2,$D2,$D2,$D2,$D2,$D2,$D2 // 20
+		db $D3,$D3,$D3,$D3,$D3,$D3,$D3,$D3,$D3,$D3 // 30
+		db $D4,$D4,$D4,$D4,$D4,$D4,$D4,$D4,$D4,$D4 // 40
+		db $D5,$D5,$D5,$D5,$D5,$D5,$D5,$D5,$D5,$D5 // 50
+		db $D6,$D6,$D6,$D6,$D6,$D6,$D6,$D6,$D6,$D6 // 60
+		db $D7,$D7,$D7,$D7,$D7,$D7,$D7,$D7,$D7,$D7 // 70
+		db $D8,$D8,$D8,$D8,$D8,$D8,$D8,$D8,$D8,$D8 // 80
+		db $D9,$D9,$D9,$D9,$D9,$D9,$D9,$D9,$D9,$D9 // 90
+
+	ones_digits_table:
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 0
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 10
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 20
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 30
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 40
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 50
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 60
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 70
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 80
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 90
