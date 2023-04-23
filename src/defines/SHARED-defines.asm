@@ -15,17 +15,26 @@ define MULTIPLEINPUT_StartOrSelect #$30
 define FALSE #$00
 define TRUE #$01
 
-define PRACTICEMENU_DeconstructMenu00PhaseIndex #$08
-define PRACTICEMENU_MenuActionPhaseIndex #$0E
-define PRACTICEMENU_LastPhaseIndex #$10
+// keep these updated if ever adding new menu phases
+define PRACTICEMENU_DeconstructMenu00PhaseIndex #$0A
+define PRACTICEMENU_MenuActionPhaseIndex #$12
+define PRACTICEMENU_LastPhaseIndex #$14
+
+// keep this updated when adding new menu options that uses text selection :)
+define ABOUT_MasterTableIndex 2
 
 define SYSTEMSTATE_Respawning #$06
+define SYSTEMSTAGE_Win #$0C
+
+define SPRITE0_MenuMovedPosition #$2F
+define SPRITE0_OriginalPosition #$25
 
 // -- RAM Addresses -------------------------------------------------
 
 define practiceMenuTextPointer $00	// dw 
 
 define systemState $18
+define systemSubState $19
 
 define introTimer $1D
 define frameCounter $1A
@@ -36,6 +45,7 @@ define tileDataPointer $20
 define pauseFlag $22
 
 define currentStage $28
+define previousStage $29
 
 define currentLifeCount $2A
 
@@ -50,7 +60,7 @@ define currentInputHeld $F7
 
 define currentSubweapon $15B
 
-define practiceMenuIndex $100		// (NEW!) used to determine in what phase of the menu drawing we're currently on
+define practiceMenuPhaseIndex $100		// (NEW!) used to determine in what phase of the menu drawing we're currently on
 define practiceMenuCursor $101
 define practiceTextPos $102
 define practiceText_Dest $103		// word-sized
@@ -59,10 +69,12 @@ define practiceSubMenuCursorMaxValue $106
 define practiceSubMenuShouldExecuteMenuActionFlag $107
 define practiceShouldKeepPlayerStatsOnDeathFlag $108
 
-define backupCurrentWhipLevel $109
-define backupCurrentSubweapon $10A
-define backupCurrentSubweaponMultiplier $10B
-define backupCurrentHeartCount $10C
+define practiceAboutPrintPhase $109
+
+define backupCurrentWhipLevel $10A
+define backupCurrentSubweapon $10B
+define backupCurrentSubweaponMultiplier $10C
+define backupCurrentHeartCount $10D
 
 define sprite0ForOAM $200
 

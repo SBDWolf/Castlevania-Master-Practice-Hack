@@ -8,7 +8,7 @@
 		sta {systemState}
 		
 		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}
-		sta {practiceMenuIndex}
+		sta {practiceMenuPhaseIndex}
 		
 		// backup player stats
 		lda {currentWhipLevel}
@@ -26,7 +26,7 @@
 		sta {practiceShouldKeepPlayerStatsOnDeathFlag}
 		
 		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}								// exit menu
-		sta {practiceMenuIndex}
+		sta {practiceMenuPhaseIndex}
 
 		rts 
 
@@ -38,7 +38,6 @@
         lda {practiceSubMenuShouldExecuteMenuActionFlag}
         cmp {TRUE}
         bne +
-		// perform action, for testing purposes i am updating the current whip level
 		lda {practiceSubMenuCursor}
         sta {currentWhipLevel}
 
@@ -68,14 +67,66 @@
 
 		rts
 
+	action_stageSelect:
+		lda #$12
+        sta {practiceSubMenuCursorMaxValue}
+		jsr printSubMenuCursor
+		jsr handleSubMenuInputs
+
+        lda {practiceSubMenuShouldExecuteMenuActionFlag}
+        cmp {TRUE}
+        bne +
+		// select stage
+		lda {practiceSubMenuCursor}
+		sta {previousStage}
+		
+		lda {SYSTEMSTAGE_Win}
+		sta {systemState}
+		// i don't know what this 08 is, was in the original code for the level select
+		lda #$08
+		sta {systemSubState}
+		jmp exitMenu
+        
++;      jsr printCurrentNumericalValue
+        rts 
+
+
 	action_about:
-		//TODO
-		rts
+		// this is done in two phases to hopefully not overload the ppu
+		lda {practiceAboutPrintPhase}
+		cmp #$02
+		bcs +
+		// beq might be enough here
+		cmp #$00
+		bne phase2
+
+		// phase 1
+		lda submenu_text_master_table+{ABOUT_MasterTableIndex}
+		sta $00
+		lda submenu_text_master_table+{ABOUT_MasterTableIndex}+1
+		sta $01
+		ldx {tileDataPointer}
+		ldy #$00
+		jsr printTextAtProvidedLocation
+		dex 
+		jsr printTextAtProvidedLocation
+		inc {practiceAboutPrintPhase}
+		rts 
+
+		phase2: 
+		lda submenu_text_master_table+{ABOUT_MasterTableIndex}
+		sta $00
+		lda submenu_text_master_table+{ABOUT_MasterTableIndex}+1
+		sta $01
+		ldy #$45
+		ldx {tileDataPointer}
+		jsr printTextAtProvidedLocation
+		dex 
+		jsr printTextAtProvidedLocation
+		inc {practiceAboutPrintPhase}
++;		rts 
 
     exitMenu:
 		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}
-		sta {practiceMenuIndex}
-
+		sta {practiceMenuPhaseIndex}
         rts 
-
-    

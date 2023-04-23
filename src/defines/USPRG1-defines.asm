@@ -8,6 +8,9 @@ define bank7_pauseCheck $CF28
 
 define bank7_deathHijack $C29F
 
+define bank7_sprite0Hijack $C13F
+define bank7_sprite0LocalOAMTable $C13B
+
 define bank7_mainJumpTable $C1F4
 define bank7_originalIntroGameStatePointer $B911
 

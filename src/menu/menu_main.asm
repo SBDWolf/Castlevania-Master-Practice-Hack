@@ -1,5 +1,5 @@
     mainPracticeMenu:						
-		lda {practiceMenuIndex}
+		lda {practiceMenuPhaseIndex}
 		asl 
 		tay 
 		
@@ -18,7 +18,7 @@
 		cmp {INPUT_Select}
 		bne +
 		lda #$01
-		sta {practiceMenuIndex}		
+		sta {practiceMenuPhaseIndex}		
 		// hack: unset the pause flag. if the game is already paused, it'll allow this menu to come up with select while keeping the game paused.
 		// this is because after unsetting this flag, the game will immediately pause again, instead of unpausing.	
 		// other variables are also initialized to 00 here
@@ -26,6 +26,7 @@
 		sta {pauseFlag}
 		sta {practiceSubMenuCursor}	
 		sta {practiceSubMenuShouldExecuteMenuActionFlag}
+		sta {practiceAboutPrintPhase}
 	+;	rts 
 	
 	
@@ -34,12 +35,12 @@
 		and #$01					
 		cmp #$01
 		bne +
-		inc {practiceMenuIndex}
+		inc {practiceMenuPhaseIndex}
 	+;	rts 	
 		
 	constructMenu00:		
 		ldy {tileDataPointer}
-		ldx #$41					// set loop size to fill blank
+		ldx #$28					// set loop size to fill blank
 			
 		lda #$01
 		sta {PPUBuffer},y
@@ -78,12 +79,12 @@
 		sta {subweaponFrameSprite1ForOAM}+24
 		sta {subweaponFrameSprite1ForOAM}+28
 		
-		inc {practiceMenuIndex}		// this is spliced in two parts so it runs without glitching		
+		inc {practiceMenuPhaseIndex}		// this is spliced in two parts so it runs without glitching		
 		rts 
 
 	constructMenu01:
 		ldy {tileDataPointer}
-		ldx #$41					// set loop size to fill blank
+		ldx #$2D					// set loop size to fill blank
 	
 		lda #$01
 		sta {PPUBuffer},y
@@ -92,7 +93,39 @@
 		lda #$20
 		sta {PPUBuffer},y
 		iny 
-		lda #$60
+		lda #$47
+		sta {PPUBuffer},y
+		iny 
+	
+		lda #$00
+	-;	sta {PPUBuffer},y					// fill loop
+		iny 
+		dex 
+		bpl -						
+		
+		dey 
+		sty {tileDataPointer}						// ppu dest and backup table offset		
+						
+		dey 
+		lda #$FF					// end byte for PPU job
+		sta {PPUBuffer},y
+		
+		inc {practiceMenuPhaseIndex}
+		rts 
+
+	constructMenu02:
+		//todo
+		ldy {tileDataPointer}
+		ldx #$2D					// set loop size to fill blank
+	
+		lda #$01
+		sta {PPUBuffer},y
+		iny 
+
+		lda #$20
+		sta {PPUBuffer},y
+		iny 
+		lda #$73
 		sta {PPUBuffer},y
 		iny 
 	
@@ -114,8 +147,9 @@
 		lda #$FF
 		sta {subweaponSprite1ForOAM}
 		sta {subweaponSprite2ForOAM}
-		
-		inc {practiceMenuIndex}		// run menu next frame 		
+
+		inc {practiceMenuPhaseIndex}		// run menu next frame 		
+
 		rts 
     
     drawText:			
@@ -188,12 +222,12 @@
 	endDrawTextLoop:
 		stx {tileDataPointer}
 		
-		inc {practiceMenuIndex}			// go to sub menu logic	
+		inc {practiceMenuPhaseIndex}			// go to sub menu logic	
 		rts
     
     runMenu:	
 		// move sprite 0 to not glitch the text's bottom 
-		lda #$2F
+		lda {SPRITE0_MenuMovedPosition}
 		sta {sprite0ForOAM}
 
 		// the game might have been already unpaused while the menu was drawing
@@ -207,7 +241,7 @@
 		jmp checkIfShouldCloseMenu
 
 +;		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}
-		sta {practiceMenuIndex}
+		sta {practiceMenuPhaseIndex}
 		rts 
 
     deconstructMenu00:	
@@ -218,6 +252,9 @@
 	deconstructMenu01:			
 		jmp constructMenu01
 	
+	deconstructMenu02:			
+		jmp constructMenu02
+
 	reBuildHUD:
 		ldx #$1F					// rebuild sub-weapon Frame
 -;		lda subweapon_frame_sprites,x
@@ -238,7 +275,7 @@
 		sta {practiceSubMenuCursor}
 		
 		lda {PRACTICEMENU_LastPhaseIndex}
-		sta {practiceMenuIndex}		// extra buffer cycle
+		sta {practiceMenuPhaseIndex}		// extra buffer cycle
 		rts
 	
 	cursorLogic:	// ------------------- cursor logic -------------------------------			
@@ -295,7 +332,7 @@
 	skipCursorMovingPastMenuBounderies:
 		
 		lda #$02								// clear redraw
-		sta {practiceMenuIndex}		
+		sta {practiceMenuPhaseIndex}		
 	endDownCheckInMenu:	
 	
 		lda {currentInputOneFrame}				// ------------------- press up -------------------------------	
@@ -323,7 +360,7 @@
 	doNotUnderflowCursorIndexSkip:	
 		
 		lda #$02								// clear redraw
-		sta {practiceMenuIndex}		
+		sta {practiceMenuPhaseIndex}		
 	endUpCheckInMenu:	
 		
 		lda {currentInputOneFrame}				// ------------------- press B button -------------------------------	
@@ -335,7 +372,7 @@
 		sta {PPUBuffer}+3								
 		
 		lda {PRACTICEMENU_MenuActionPhaseIndex}		// enter sub menu 
-		sta {practiceMenuIndex}	
+		sta {practiceMenuPhaseIndex}	
 	+;	rts 
 
 	menuAction:
@@ -361,13 +398,13 @@
 		beq +;
 
 		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}
-		sta {practiceMenuIndex}
+		sta {practiceMenuPhaseIndex}
 +;		rts 
 
 	closeMenu:
 		// move sprite 0 back to its original position 
-		lda #$25						
+		lda {SPRITE0_OriginalPosition}						
 		sta {sprite0ForOAM}
 		lda #$00
-		sta {practiceMenuIndex}
+		sta {practiceMenuPhaseIndex}
 		rts 

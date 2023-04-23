@@ -68,6 +68,7 @@
 		rts 
     
     printCurrentTextValue:
+		// x register is expected to be passed to this routine, containing the index of the text table to be used
         lda submenu_text_master_table,x
 		sta $00
 		lda submenu_text_master_table+1,x
@@ -84,8 +85,8 @@
 		
 -;		lda ($00),y						// write text loop
 		sta {PPUBuffer},x
-		inx
-		iny
+		inx 
+		iny 
 		cmp #$FF
 		bne -
 
@@ -93,3 +94,16 @@
 
 		rts
 
+	printTextAtProvidedLocation:
+		// x register determined ppu buffer location
+		// y register determines table offset
+		// $00 contains the pointer to the table
+-;		lda ($00),y						// write text loop
+		sta {PPUBuffer},x
+		inx 
+		iny 
+		cmp #$FF
+		bne -
+		stx {tileDataPointer}
+
+		rts 

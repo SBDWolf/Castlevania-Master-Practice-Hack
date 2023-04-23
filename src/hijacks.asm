@@ -36,6 +36,18 @@ org {bank7_pauseCheck}+32
 org {bank7_deathHijack}
 		jsr levelLoadHijack
 
+//org {bank7_sprite0Hijack}
+//		// skip updating sprite 0's y position if the menu is open
+//		jsr sprite0CheckIfInMenu
+//		nop 
+//		nop 
+//		nop 
+//		nop 
+//		nop 
+//		nop 
+//		nop 
+//		nop 
+
 bank 6
 base $8000
 org {bank6_subweaponPrintHijack}
@@ -52,7 +64,7 @@ org {bank6_freeSpace}
 		tya
 		pha 
 		
-		lda {practiceMenuIndex}		// dont run any HUD upates while the menu is open!!
+		lda {practiceMenuPhaseIndex}		// dont run any HUD upates while the menu is open!!
 		bne +
 		
 		pla
@@ -70,7 +82,7 @@ org {bank6_freeSpace}
 		rts 
 
 	subweaponSpriteUpdate:	
-		lda {practiceMenuIndex}		// dont run any HUD upates while the menu is open!!
+		lda {practiceMenuPhaseIndex}		// dont run any HUD upates while the menu is open!!
 		bne +
 
 		ldx #$1A					// hijack fix
@@ -130,8 +142,17 @@ org {bank6_freeSpace}
 		clc 
 		rts 
 
+	sprite0CheckIfInMenu:
+		lda {practiceMenuPhaseIndex}
+		cmp #$00
+		bne +
+		ldx #$03
+-;		lda {bank7_sprite0LocalOAMTable},x
+		sta {sprite0ForOAM},x
+		dex 
+		bpl -
 
-
++;		rts 
 
 org {bank6_hudPrintHijack}
 		// skips the writing of any unnecessary text in the HUD, such as SCORE-, PLAYER, ENEMY, TIME, etc.

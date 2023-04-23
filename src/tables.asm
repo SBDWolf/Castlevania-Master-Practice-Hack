@@ -4,10 +4,12 @@ org {bank5_freeSpaceData}
 	mainPauseMenu:
 		dw initWhilePause,constructMenu00
 		dw bufferFrame,constructMenu01
+		dw bufferFrame,constructMenu02
 		dw bufferFrame,drawText
 		dw bufferFrame,runMenu
 		dw bufferFrame,deconstructMenu00
 		dw bufferFrame,deconstructMenu01
+		dw bufferFrame,deconstructMenu02
 		dw bufferFrame,reBuildHUD
 		dw bufferFrame,menuAction			
 		dw bufferFrame,closeMenu		
@@ -16,6 +18,7 @@ org {bank5_freeSpaceData}
 		dw text_reset								
 		dw text_whipLevelSelect
 		dw text_subweaponSelect             	
+		dw text_stageSelect
 		dw text_about
         dw $FFFF    
 
@@ -25,6 +28,8 @@ org {bank5_freeSpaceData}
 		db "WHIP LEVEL  /"		
 	text_subweaponSelect:
 		db "SUBWEAPON   /"
+	text_stageSelect:
+		db "STAGE SELECT/"
 	text_about:
 		db "ABOUT       /"
 	                     
@@ -33,12 +38,14 @@ org {bank5_freeSpaceData}
 		dw action_reset
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
+		dw action_stageSelect
 		dw action_about
 	
 	
 
 	submenu_text_master_table:
 		dw textTable_subweaponSelect
+		dw textTable_about
 		// etc
 
 
@@ -57,7 +64,11 @@ org {bank5_freeSpaceData}
 
 	
 	textTable_about:
-		// TODO: write the about section
+		// TODO: header -- maybe i don't need it in this case after all
+		db $01,$20,$20,"CASTLEVANIA PRACTICE HACK V0.DEV/"
+		db "    FOR A USER MANUAL VISIT     /"
+		db $01,$20,$60,"   TINYURL.COM SLASH 2P4E6FFM   /"
+		db "                                /"
 
 
 
