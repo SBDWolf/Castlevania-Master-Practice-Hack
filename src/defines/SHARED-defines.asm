@@ -16,9 +16,9 @@ define FALSE #$00
 define TRUE #$01
 
 // keep these updated if ever adding new menu phases
-define PRACTICEMENU_DeconstructMenu00PhaseIndex #$0A
-define PRACTICEMENU_MenuActionPhaseIndex #$12
-define PRACTICEMENU_LastPhaseIndex #$14
+define PRACTICEMENU_DeconstructMenu00PhaseIndex #$08
+define PRACTICEMENU_MenuActionPhaseIndex #$0E
+define PRACTICEMENU_LastPhaseIndex #$10
 
 // keep this updated when adding new menu options that uses text selection :)
 define ABOUT_MasterTableIndex 2

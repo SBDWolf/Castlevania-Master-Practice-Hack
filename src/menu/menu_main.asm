@@ -40,7 +40,7 @@
 		
 	constructMenu00:		
 		ldy {tileDataPointer}
-		ldx #$28					// set loop size to fill blank
+		ldx #$41					// set loop size to fill blank
 			
 		lda #$01
 		sta {PPUBuffer},y
@@ -84,7 +84,7 @@
 
 	constructMenu01:
 		ldy {tileDataPointer}
-		ldx #$2D					// set loop size to fill blank
+		ldx #$41					// set loop size to fill blank
 	
 		lda #$01
 		sta {PPUBuffer},y
@@ -93,39 +93,7 @@
 		lda #$20
 		sta {PPUBuffer},y
 		iny 
-		lda #$47
-		sta {PPUBuffer},y
-		iny 
-	
-		lda #$00
-	-;	sta {PPUBuffer},y					// fill loop
-		iny 
-		dex 
-		bpl -						
-		
-		dey 
-		sty {tileDataPointer}						// ppu dest and backup table offset		
-						
-		dey 
-		lda #$FF					// end byte for PPU job
-		sta {PPUBuffer},y
-		
-		inc {practiceMenuPhaseIndex}
-		rts 
-
-	constructMenu02:
-		//todo
-		ldy {tileDataPointer}
-		ldx #$2D					// set loop size to fill blank
-	
-		lda #$01
-		sta {PPUBuffer},y
-		iny 
-
-		lda #$20
-		sta {PPUBuffer},y
-		iny 
-		lda #$73
+		lda #$60
 		sta {PPUBuffer},y
 		iny 
 	
@@ -251,9 +219,6 @@
  	
 	deconstructMenu01:			
 		jmp constructMenu01
-	
-	deconstructMenu02:			
-		jmp constructMenu02
 
 	reBuildHUD:
 		ldx #$1F					// rebuild sub-weapon Frame

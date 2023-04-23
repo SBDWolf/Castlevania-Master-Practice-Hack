@@ -36,17 +36,15 @@ org {bank7_pauseCheck}+32
 org {bank7_deathHijack}
 		jsr levelLoadHijack
 
-//org {bank7_sprite0Hijack}
-//		// skip updating sprite 0's y position if the menu is open
-//		jsr sprite0CheckIfInMenu
-//		nop 
-//		nop 
-//		nop 
-//		nop 
-//		nop 
-//		nop 
-//		nop 
-//		nop 
+org {bank7_sprite0Hijack}
+		// skip updating sprite 0's y position if the menu is open
+		// switching to bank 6 because it's not always loaded, particularly in rooms with many enemies
+		lda #$06
+		sta $8000
+		jsr sprite0CheckIfInMenu
+		nop 
+		nop 
+		nop 
 
 bank 6
 base $8000

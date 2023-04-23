@@ -4,12 +4,10 @@ org {bank5_freeSpaceData}
 	mainPauseMenu:
 		dw initWhilePause,constructMenu00
 		dw bufferFrame,constructMenu01
-		dw bufferFrame,constructMenu02
 		dw bufferFrame,drawText
 		dw bufferFrame,runMenu
 		dw bufferFrame,deconstructMenu00
 		dw bufferFrame,deconstructMenu01
-		dw bufferFrame,deconstructMenu02
 		dw bufferFrame,reBuildHUD
 		dw bufferFrame,menuAction			
 		dw bufferFrame,closeMenu		
