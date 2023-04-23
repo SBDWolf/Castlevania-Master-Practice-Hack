@@ -16,8 +16,10 @@ org {bank5_freeSpaceData}
 		dw text_reset								
 		dw text_whipLevelSelect
 		dw text_subweaponSelect 
-		dw text_subweaponMultiplierSelect            	
+		dw text_subweaponMultiplierSelect
+		dw text_gameLoop           	
 		dw text_stageSelect
+		dw text_slowMo
 		dw text_about
         dw $FFFF    
 
@@ -29,10 +31,15 @@ org {bank5_freeSpaceData}
 		db "SUBWEAPON   /"
 	text_subweaponMultiplierSelect:
 		db "MULTIPLIER  /"
+	text_gameLoop:
+		db "GAME LOOP   /"
 	text_stageSelect:
 		db "STAGE SELECT/"
+	text_slowMo:
+		db "SLOW MOTION /"
 	text_about:
 		db "ABOUT       /"
+	
 	                     
 
 	pointerTable_actionTable:					
@@ -40,7 +47,9 @@ org {bank5_freeSpaceData}
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
 		dw action_subweaponMultiplierSelect
+		dw action_gameLoop
 		dw action_stageSelect
+		dw action_slowMo
 		dw action_about
 	
 	

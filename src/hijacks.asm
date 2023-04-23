@@ -46,6 +46,57 @@ org {bank7_sprite0Hijack}
 		nop 
 		nop 
 
+org {bank7_endOfNMIHijack}
+		jmp checkIfShouldSlowGameDown
+		nop 
+		nop 
+		nop 
+		rti 
+ 
+org {bank7_tableThatGetsOverwritten}
+		// we don't know what it's for... hopefully nothing important :)
+	checkIfShouldSlowGameDown:
+
+		lda #$00
+		sta {isLagging}
+		lda {systemState}
+		// on reset this could softlock, so only run while in-game
+		cmp {SYSTEMSTATE_InGame}
+		bne +
+
+		lda {currentGameSpeed}
+		beq +
+
+		lda {practiceMenuPhaseIndex}
+		bne +
+
+		jsr slowDownAccordingToGameSpeed
+
+		// hijack fix
++;		pla 
+		tay 
+		pla 
+		tax 
+		pla 
+		plp 
+		jmp {bank7_endOfNMIHijack}+6
+
+	//WIP copied over, value can take between 0 and 6
+	slowDownAccordingToGameSpeed:		
+		lda {slowDownCounter}
+		beq +
+		sec
+		dec {slowDownCounter}
+		// set to lag
+		lda {TRUE}
+		sta {isLagging}	
+		rts 
+		
++;		lda {currentGameSpeed}
+		sta {slowDownCounter}
+		rts 
+
+
 bank 6
 base $8000
 org {bank6_subweaponPrintHijack}
@@ -121,13 +172,6 @@ org {bank6_freeSpace}
 		sta {currentSubweapon}
 		lda {backupCurrentHeartCount}
 		sta {currentHeartCount}
-//		lda lifeBackup
-//		bne +
-//		lda #$02						// give lifes in case the counter was 00 else the game goes to gameover with minus lifes 
-//	+	sta $2a							// simon_Lifes
-
-//		lda colorModBackup				
-//		sta $fe
 		lda #$04						// make the multiplier appear again
 		sta	$141
 		lda {FALSE}

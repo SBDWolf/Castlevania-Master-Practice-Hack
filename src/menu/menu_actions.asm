@@ -83,6 +83,22 @@
 +;      jsr printCurrentNumericalValue
         rts 
 
+	action_gameLoop:
+		lda #$01
+        sta {practiceSubMenuCursorMaxValue}
+        jsr printSubMenuCursor
+        jsr handleSubMenuInputs
+        lda {practiceSubMenuShouldExecuteMenuActionFlag}
+        cmp {TRUE}
+        bne +
+		lda {practiceSubMenuCursor}
+        sta {currentGameLoop}
+
+		jmp exitMenu
+        
++;      jsr printCurrentNumericalValue
+        rts 
+
 
 	action_stageSelect:
 		lda #$12
@@ -102,6 +118,22 @@
 		// i don't know what this 08 is, was in the original code for the level select
 		lda #$08
 		sta {systemSubState}
+		jmp exitMenu
+        
++;      jsr printCurrentNumericalValue
+        rts 
+
+	action_slowMo:
+		lda #$06
+        sta {practiceSubMenuCursorMaxValue}
+        jsr printSubMenuCursor
+        jsr handleSubMenuInputs
+        lda {practiceSubMenuShouldExecuteMenuActionFlag}
+        cmp {TRUE}
+        bne +
+		lda {practiceSubMenuCursor}
+        sta {currentGameSpeed}
+
 		jmp exitMenu
         
 +;      jsr printCurrentNumericalValue

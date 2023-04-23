@@ -1,3 +1,7 @@
+// -- RAM Addresses -------------------------------------------------
+
+define currentInputHeld $F7
+
 // -- ROM Addresses -------------------------------------------------
 
 define bank7_scorePrintHijack $CC84
@@ -13,6 +17,9 @@ define bank7_sprite0LocalOAMTable $C13B
 
 define bank7_mainJumpTable $C1F4
 define bank7_originalIntroGameStatePointer $B911
+
+define bank7_endOfNMIHijack $C0B9
+define bank7_tableThatGetsOverwritten $CDBB
 
 define bank6_hudPrintHijack $A18D
 

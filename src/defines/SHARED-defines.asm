@@ -24,6 +24,7 @@ define PRACTICEMENU_LastPhaseIndex #$10
 // keep this updated when adding new menu options that uses text selection :)
 define ABOUT_MasterTableIndex 2
 
+define SYSTEMSTATE_InGame #$05
 define SYSTEMSTATE_Respawning #$06
 define SYSTEMSTAGE_Win #$0C
 
@@ -40,6 +41,8 @@ define systemSubState $19
 define introTimer $1D
 define frameCounter $1A
 
+define isLagging $1B
+
 define tileDataPointer $20
 
 // 0x1 if the game is paused, 0x0 if not
@@ -50,6 +53,8 @@ define previousStage $29
 
 define currentLifeCount $2A
 
+define currentGameLoop $2B
+
 define currentSubweaponMultiplier $64
 
 define currentWhipLevel $70
@@ -57,7 +62,6 @@ define currentWhipLevel $70
 define currentHeartCount $71
 
 define currentInputOneFrame $F5
-define currentInputHeld $F7
 
 define currentSubweapon $15B
 
@@ -76,6 +80,10 @@ define backupCurrentWhipLevel $10A
 define backupCurrentSubweapon $10B
 define backupCurrentSubweaponMultiplier $10C
 define backupCurrentHeartCount $10D
+
+// currentGameSpeed: the higher the value, the slower it is.
+define currentGameSpeed $110
+define slowDownCounter $111
 
 define sprite0ForOAM $200
 
