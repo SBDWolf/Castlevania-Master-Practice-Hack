@@ -15,7 +15,8 @@ org {bank5_freeSpaceData}
     textTable_menuOptions:							// this two following tables need to have the same size. They use the same index to execute the program 							
 		dw text_reset								
 		dw text_whipLevelSelect
-		dw text_subweaponSelect             	
+		dw text_subweaponSelect 
+		dw text_subweaponMultiplierSelect            	
 		dw text_stageSelect
 		dw text_about
         dw $FFFF    
@@ -26,6 +27,8 @@ org {bank5_freeSpaceData}
 		db "WHIP LEVEL  /"		
 	text_subweaponSelect:
 		db "SUBWEAPON   /"
+	text_subweaponMultiplierSelect:
+		db "MULTIPLIER  /"
 	text_stageSelect:
 		db "STAGE SELECT/"
 	text_about:
@@ -36,6 +39,7 @@ org {bank5_freeSpaceData}
 		dw action_reset
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
+		dw action_subweaponMultiplierSelect
 		dw action_stageSelect
 		dw action_about
 	

@@ -67,6 +67,23 @@
 
 		rts
 
+	action_subweaponMultiplierSelect:
+		lda #$02
+        sta {practiceSubMenuCursorMaxValue}
+        jsr printSubMenuCursor
+        jsr handleSubMenuInputs
+        lda {practiceSubMenuShouldExecuteMenuActionFlag}
+        cmp {TRUE}
+        bne +
+		lda {practiceSubMenuCursor}
+        sta {currentSubweaponMultiplier}
+
+		jmp exitMenu
+        
++;      jsr printCurrentNumericalValue
+        rts 
+
+
 	action_stageSelect:
 		lda #$12
         sta {practiceSubMenuCursorMaxValue}
