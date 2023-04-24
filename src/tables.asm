@@ -19,7 +19,6 @@ org {bank5_freeSpaceData}
 		dw text_subweaponMultiplierSelect
 		dw text_gameLoop           	
 		dw text_stageSelect
-		dw text_slowMo
 		dw text_about
         dw $FFFF    
 
@@ -35,8 +34,6 @@ org {bank5_freeSpaceData}
 		db "GAME LOOP   /"
 	text_stageSelect:
 		db "STAGE SELECT/"
-	text_slowMo:
-		db "SLOW MOTION /"
 	text_about:
 		db "ABOUT       /"
 	
@@ -49,7 +46,6 @@ org {bank5_freeSpaceData}
 		dw action_subweaponMultiplierSelect
 		dw action_gameLoop
 		dw action_stageSelect
-		dw action_slowMo
 		dw action_about
 	
 	

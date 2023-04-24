@@ -46,56 +46,6 @@ org {bank7_sprite0Hijack}
 		nop 
 		nop 
 
-org {bank7_endOfNMIHijack}
-		jmp checkIfShouldSlowGameDown
-		nop 
-		nop 
-		nop 
-		rti 
- 
-org {bank7_tableThatGetsOverwritten}
-		// we don't know what it's for... hopefully nothing important :)
-	checkIfShouldSlowGameDown:
-
-		lda #$00
-		sta {isLagging}
-		lda {systemState}
-		// on reset this could softlock, so only run while in-game
-		cmp {SYSTEMSTATE_InGame}
-		bne +
-
-		lda {currentGameSpeed}
-		beq +
-
-		lda {practiceMenuPhaseIndex}
-		bne +
-
-		jsr slowDownAccordingToGameSpeed
-
-		// hijack fix
-+;		pla 
-		tay 
-		pla 
-		tax 
-		pla 
-		plp 
-		jmp {bank7_endOfNMIHijack}+6
-
-	//WIP copied over, value can take between 0 and 6
-	slowDownAccordingToGameSpeed:		
-		lda {slowDownCounter}
-		beq +
-		sec
-		dec {slowDownCounter}
-		// set to lag
-		lda {TRUE}
-		sta {isLagging}	
-		rts 
-		
-+;		lda {currentGameSpeed}
-		sta {slowDownCounter}
-		rts 
-
 
 bank 6
 base $8000

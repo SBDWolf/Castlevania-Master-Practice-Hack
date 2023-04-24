@@ -123,23 +123,6 @@
 +;      jsr printCurrentNumericalValue
         rts 
 
-	action_slowMo:
-		lda #$06
-        sta {practiceSubMenuCursorMaxValue}
-        jsr printSubMenuCursor
-        jsr handleSubMenuInputs
-        lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {TRUE}
-        bne +
-		lda {practiceSubMenuCursor}
-        sta {currentGameSpeed}
-
-		jmp exitMenu
-        
-+;      jsr printCurrentNumericalValue
-        rts 
-
-
 	action_about:
 		clv 
 		// this is done in two phases to hopefully not overload the ppu
