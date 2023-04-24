@@ -213,6 +213,58 @@
 		rts 
 
     deconstructMenu00:	
+		// update the list of active tools
+		clv 
+		lda {TOOLS_ToolCount}
+		sta {toolsCountForMenuDeconstruction}
+		asl {toolsCountForMenuDeconstruction}
+
+		lda {activeTools}
+		// y register is used as a cursor to determine where to store the pointer to the tool's code
+		ldy #$00
+		// x register is used both as an index to determine which pointer to store, as well as a loop counter
+		ldx #$00
+
+		bvc + 
+		// executed only when looping back. couldn't put these instructiong before the bne because they mess with the zero flag :)
+-;		tax 
+		pla 
+
+		// in this loop, we check activeTools bit for bit, and determine which tools are active.
+		// we check the first bit, then asl at every iteration until we've checked for every tool
+		// good luck expanding this past the size of one byte :)
+
+		// push the value in the accumulator to the stack. this is used to memorize the current state of the byte for the next iteration
++;		pha 
+		and #$80
+		cmp #$80
+		bne + 
+		lda pointerTable_toolsList,x
+		sta {toolsToRunPointerList},y
+		iny 
+		lda pointerTable_toolsList+1,x
+		sta {toolsToRunPointerList},y
+		iny 
+		
+		// retrieve the value pushed earlier
++;		pla 
+		asl 
+		inx 
+		inx 
+		pha 
+		txa 
+		cmp {toolsCountForMenuDeconstruction}
+		bne -
+
+		tax 
+		pla 
+
+		lda pointerTable_toolsEnd
+		sta {toolsToRunPointerList},y
+		lda pointerTable_toolsEnd+1
+		sta {toolsToRunPointerList}+1,y
+
+
 		lda {FALSE}
 		sta {pauseFlag}					// unpause, intended for if coming after selecting a submenu option
 		jmp constructMenu00				// clear

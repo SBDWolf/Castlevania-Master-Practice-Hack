@@ -17,3 +17,5 @@ incsrc "src/hijacks.asm"
 incsrc "src/tables.asm"
 incsrc "src/mirror_code.asm"
 incsrc "src/new_code_main.asm"
+
+warnpc $C000

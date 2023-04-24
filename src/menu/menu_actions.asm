@@ -1,5 +1,79 @@
+	action_timer:
+        lda #$01
+        sta {practiceSubMenuCursorMaxValue}
+		jsr printSubMenuCursor
+		jsr handleSubMenuInputs
+		lda {practiceSubMenuShouldExecuteMenuActionFlag}
+        cmp {TRUE}
+        bne +
+		
+		// enable/disable timer
+		lda {practiceSubMenuCursor}
+		cmp {TRUE}
+		bne timer_disableTool
+		lda {activeTools}
+		ora {TOOLS_TimerToolBitSet}
+		sta {activeTools}
+
+		// initialize stuff used for the timer
+		lda #$00
+		sta {timerLevelTimerMinutes}
+		sta {timerLevelTimerSeconds}
+		sta {timerLevelTimerFrames}
+		sta {timerRoomTimerCurrentMinutes}
+		sta {timerRoomTimerCurrentSeconds}
+		sta {timerRoomTimerCurrentFrames}
+		sta {timerRoomTimerPreviousMinutes}
+		sta {timerRoomTimerPreviousSeconds}
+		sta {timerRoomTimerPreviousFrames}
+
+		jmp exitMenu
+
+
+	timer_disableTool:
+		lda {activeTools}
+		and {TOOLS_TimerToolBitUnSet}
+		sta {activeTools}
+
+	timer_localExitMenu:
+		jmp exitMenu
+        
++;		ldx {INDEX_TimerTextMasterTableIndex}
+      	jsr printCurrentTextValue
+        rts 
+
+		rts
+	
+	action_toolTest:
+	// testing the tool orchestration
+	    lda #$01
+        sta {practiceSubMenuCursorMaxValue}
+        jsr printSubMenuCursor
+        jsr handleSubMenuInputs
+        lda {practiceSubMenuShouldExecuteMenuActionFlag}
+        cmp {TRUE}
+        bne +
+
+		lda {practiceSubMenuCursor}
+		cmp {TRUE}
+		bne test_disableTool
+		lda {activeTools}
+		ora {TOOLS_TestToolBitSet}
+		sta {activeTools}
+		jmp exitMenu
+
+	test_disableTool:
+		lda {activeTools}
+		and {TOOLS_TestToolBitUnSet}
+		sta {activeTools}
+		jmp exitMenu
+        
++;      jsr printCurrentNumericalValue
+        rts 	
+
+
+	
 	action_reset:
-		//TODO: needs to hijack death routine to backup subweapon, multiplier and heart count (maybe time too?)
 		lda #$00
 		sta {practiceMenuCursor}
 		sta {pauseFlag}                 // unpause
@@ -61,7 +135,7 @@
 
 		jmp exitMenu
         
-+;		ldx #$00
++;		ldx {INDEX_SubweaponTextMasterTableIndex}
       	jsr printCurrentTextValue
         rts 
 
@@ -134,9 +208,9 @@
 		bne phase2
 
 		// phase 1
-		lda submenu_text_master_table+{ABOUT_MasterTableIndex}
+		lda submenu_text_master_table+{INDEX_AboutTextMasterTableIndex}
 		sta $00
-		lda submenu_text_master_table+{ABOUT_MasterTableIndex}+1
+		lda submenu_text_master_table+{INDEX_AboutTextMasterTableIndex}+1
 		sta $01
 		ldx {tileDataPointer}
 		ldy #$00
@@ -147,9 +221,9 @@
 		bvc + 
 
 		phase2: 
-		lda submenu_text_master_table+{ABOUT_MasterTableIndex}
+		lda submenu_text_master_table+{INDEX_AboutTextMasterTableIndex}
 		sta $00
-		lda submenu_text_master_table+{ABOUT_MasterTableIndex}+1
+		lda submenu_text_master_table+{INDEX_AboutTextMasterTableIndex}+1
 		sta $01
 		ldy #$45
 		ldx {tileDataPointer}

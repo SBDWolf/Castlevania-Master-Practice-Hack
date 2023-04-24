@@ -21,8 +21,10 @@ define PRACTICEMENU_DeconstructMenu00PhaseIndex #$08
 define PRACTICEMENU_MenuActionPhaseIndex #$0E
 define PRACTICEMENU_LastPhaseIndex #$10
 
-// keep this updated when adding new menu options that uses text selection :)
-define ABOUT_MasterTableIndex 2
+// keep these updated when adding new menu options that uses text selection :)
+define INDEX_TimerTextMasterTableIndex #$00
+define INDEX_SubweaponTextMasterTableIndex #$02
+define INDEX_AboutTextMasterTableIndex 4
 
 define SYSTEMSTATE_InGame #$05
 define SYSTEMSTATE_Respawning #$06
@@ -30,6 +32,13 @@ define SYSTEMSTAGE_Win #$0C
 
 define SPRITE0_MenuMovedPosition #$2F
 define SPRITE0_OriginalPosition #$25
+
+// keep this updated when adding a new tool
+define TOOLS_ToolCount #$02
+define TOOLS_TestToolBitSet #$80
+define TOOLS_TimerToolBitSet #$40
+define TOOLS_TestToolBitUnSet #$7F
+define TOOLS_TimerToolBitUnSet #$BF
 
 // -- RAM Addresses -------------------------------------------------
 
@@ -82,8 +91,20 @@ define backupCurrentSubweaponMultiplier $10C
 define backupCurrentHeartCount $10D
 
 // currentGameSpeed: the higher the value, the slower it is.
-define currentGameSpeed $110
-define slowDownCounter $111
+define activeTools $110
+define toolsCountForMenuDeconstruction $111
+
+define timerLevelTimerMinutes $120
+define timerLevelTimerSeconds $121
+define timerLevelTimerFrames $122
+define timerRoomTimerCurrentMinutes $123
+define timerRoomTimerCurrentSeconds $124
+define timerRoomTimerCurrentFrames $125
+define timerRoomTimerPreviousMinutes $126
+define timerRoomTimerPreviousSeconds $127
+define timerRoomTimerPreviousFrames $128
+
+define toolsToRunPointerList $130
 
 define sprite0ForOAM $200
 

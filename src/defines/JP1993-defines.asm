@@ -17,6 +17,7 @@ define bank7_sprite0LocalOAMTable $C161
 
 define bank7_mainJumpTable $C211
 define bank7_originalIntroGameStatePointer $B708
+define bank7_originalTitleScreenGameStatePointer $B5E1
 
 define bank7_endOfNMIHijack $C0DF
 define bank7_tableThatGetsOverwritten $CDFA
@@ -32,7 +33,7 @@ define bank6_subweaponPrintHijack $A118
 // a lot of bank 5 is free space. i am defining my own arbitrary free space ranges to be used by my own code.
 define bank5_freeSpaceData $9A40
 
-define bank5_freeSpaceCode $A000
+define bank5_freeSpaceCode $A400
 
 // contain some duplicate code originally in bank 6.
 // the game expects bank 6 to be loaded when calling some subroutines that i, in turn, call from my own code.

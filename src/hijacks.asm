@@ -21,6 +21,10 @@ org {bank7_scorePrintHijack}
 		nop 
 		nop 
 
+org {bank7_mainJumpTable}+2
+		// this is hijacking the castle entrance scene
+		dw initializeMemory
+
 org {bank7_mainJumpTable}+8
 		// this is hijacking the castle entrance scene
 		dw allowSkippingIntro
@@ -102,14 +106,6 @@ org {bank6_freeSpace}
 		tya
 		pha
 
-//		jsr print2CharacterTable
-//		lda #$37							// set PPU pointer to a different location
-//		sta PPU_BurstUpdateTable
-//		lda #$20
-//		sta PPU_BurstUpdateTable+1		
-//		lda #$60
-//		sta PPU_BurstUpdateTable+2			// draw a block ..
-
 		lda {practiceShouldKeepPlayerStatsOnDeathFlag}
 		cmp {TRUE}
 		bne deathEnd
@@ -145,6 +141,19 @@ org {bank6_freeSpace}
 		bpl -
 
 +;		rts 
+
+	initializeMemory:
+		lda localPointerTable_toolsEnd
+		sta {toolsToRunPointerList}
+		lda localPointerTable_toolsEnd+1
+		sta {toolsToRunPointerList}+1
+
+		jmp {bank7_originalTitleScreenGameStatePointer}
+
+	localPointerTable_toolsEnd:
+		dw returnToGame
+
+	warnpc $C000
 
 org {bank6_hudPrintHijack}
 		// skips the writing of any unnecessary text in the HUD, such as SCORE-, PLAYER, ENEMY, TIME, etc.

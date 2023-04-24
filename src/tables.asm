@@ -13,6 +13,8 @@ org {bank5_freeSpaceData}
 		dw bufferFrame,closeMenu		
     
     textTable_menuOptions:							// this two following tables need to have the same size. They use the same index to execute the program 							
+		dw text_timer
+		dw text_toolTest
 		dw text_reset								
 		dw text_whipLevelSelect
 		dw text_subweaponSelect 
@@ -22,6 +24,10 @@ org {bank5_freeSpaceData}
 		dw text_about
         dw $FFFF    
 
+	text_timer:
+		db "TIMER       /"
+	text_toolTest:
+		db "TOOL TEST   /"
 	text_reset:
 		db "RESET STAGE /"
 	text_whipLevelSelect:
@@ -39,7 +45,9 @@ org {bank5_freeSpaceData}
 	
 	                     
 
-	pointerTable_actionTable:					
+	pointerTable_actionTable:
+		dw action_timer	
+		dw action_toolTest				
 		dw action_reset
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
@@ -51,10 +59,16 @@ org {bank5_freeSpaceData}
 	
 
 	submenu_text_master_table:
+		dw textTable_timer
 		dw textTable_subweaponSelect
 		dw textTable_about
 		// etc
 
+	textTable_timer:
+		// header contains index of each text entry
+		db $02,$0D
+		db "DISABLED  /"
+		db "ENABLED   /"
 
 
 	textTable_subweaponSelect:
@@ -77,6 +91,12 @@ org {bank5_freeSpaceData}
 		db $01,$20,$60,"   TINYURL.COM SLASH 2P4E6FFM   /"
 		db "                                /"
 
+	pointerTable_toolsList:
+		dw tool_test
+		dw tool_timer
+	
+	pointerTable_toolsEnd:
+		dw returnToGame
 
 
 
@@ -116,3 +136,5 @@ org {bank5_freeSpaceData}
 	subweapon_frame_sprites:
 		db $16,$FB,$03,$80,$16,$FD,$03,$88,$16,$FD,$03,$90,$16,$FB,$43,$98
 		db $26,$9D,$03,$80,$2A,$FD,$03,$88,$2A,$FD,$03,$90,$26,$9D,$43,$98
+
+	warnpc {bank5_mirrorCodeToBank6}
