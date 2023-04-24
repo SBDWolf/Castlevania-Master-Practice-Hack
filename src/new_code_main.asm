@@ -32,8 +32,8 @@ org {bank5_freeSpaceCode}
 		cmp {SYSTEMSTATE_AutoClimb}
 		beq -
 
-//		cmp {SYSTEMSTATE_Win}
-//		beq -
+		cmp {SYSTEMSTATE_Win}
+		beq -
 
 		cmp {SYSTEMSTATE_Falling}
 		beq -
@@ -47,7 +47,7 @@ incsrc "src/menu/menu_submenu.asm"
 incsrc "src/menu/menu_actions.asm"
 
 incsrc "src/tools/tool_test.asm"
-incsrc "src/tools/tool_timer.asm"
+incsrc "src/tools/timer/tool_timer_main.asm"
 
 incsrc "src/utility.asm"
 

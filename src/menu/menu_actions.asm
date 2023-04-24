@@ -26,6 +26,9 @@
 		sta {timerRoomTimerPreviousMinutes}
 		sta {timerRoomTimerPreviousSeconds}
 		sta {timerRoomTimerPreviousFrames}
+		sta {timerPreviousFrameStage}
+		sta {timerPreviousFrameSubStage}
+		sta {timerAlreadyRanUpdatesFlag}
 
 		jmp exitMenu
 

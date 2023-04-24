@@ -36,6 +36,10 @@ define SYSTEMSTATE_AutoClimb #$0B
 define SYSTEMSTATE_Win #$0C
 define SYSTEMSTATE_Falling #$0E
 
+define STAGE_MapScreen #$14
+define STAGE_DraculaStage #$12
+define STAGE_DraculaSubStage #$01
+
 define SPRITE0_MenuMovedPosition #$2F
 define SPRITE0_OriginalPosition #$25
 
@@ -69,6 +73,8 @@ define previousStage $29
 define currentLifeCount $2A
 
 define currentGameLoop $2B
+
+define currentSubStage $46
 
 define currentSubweaponMultiplier $64
 
@@ -109,6 +115,10 @@ define timerRoomTimerCurrentFrames $125
 define timerRoomTimerPreviousMinutes $126
 define timerRoomTimerPreviousSeconds $127
 define timerRoomTimerPreviousFrames $128
+
+define timerPreviousFrameStage $129
+define timerPreviousFrameSubStage $12A
+define timerAlreadyRanUpdatesFlag $12B
 
 define toolsToRunPointerList $130
 
