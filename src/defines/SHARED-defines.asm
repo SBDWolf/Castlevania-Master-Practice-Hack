@@ -26,9 +26,15 @@ define INDEX_TimerTextMasterTableIndex #$00
 define INDEX_SubweaponTextMasterTableIndex #$02
 define INDEX_AboutTextMasterTableIndex 4
 
+define SYSTEMSTATE_TitleScreen #$02
 define SYSTEMSTATE_InGame #$05
 define SYSTEMSTATE_Respawning #$06
-define SYSTEMSTAGE_Win #$0C
+define SYSTEMSTATE_DoorTransition #$08
+define SYSTEMSTATE_AutoWalk #$09
+define SYSTEMSTATE_EnteringCastle #$0A
+define SYSTEMSTATE_AutoClimb #$0B
+define SYSTEMSTATE_Win #$0C
+define SYSTEMSTATE_Falling #$0E
 
 define SPRITE0_MenuMovedPosition #$2F
 define SPRITE0_OriginalPosition #$25

@@ -6,7 +6,7 @@ define currentInputHeld $F7
 
 define bank7_scorePrintHijack $CC84
 
-define bank7_pauseCheckHijack $CEF3
+define bank7_mainGameLoopHijack $C1E4
 
 define bank7_pauseCheck $CF28
 

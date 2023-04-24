@@ -187,7 +187,7 @@
 		lda {practiceSubMenuCursor}
 		sta {previousStage}
 		
-		lda {SYSTEMSTAGE_Win}
+		lda {SYSTEMSTATE_Win}
 		sta {systemState}
 		// i don't know what this 08 is, was in the original code for the level select
 		lda #$08

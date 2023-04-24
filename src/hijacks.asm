@@ -1,7 +1,8 @@
 bank 7
 base $C000
-org {bank7_pauseCheckHijack}
+org {bank7_mainGameLoopHijack}
 		jsr {bank7_freeSpace}
+		nop 
 
 org {bank7_freeSpace}
 		// switch bank to bank 5. quick! there is no space!
@@ -12,8 +13,11 @@ org {bank7_freeSpace}
 		lda #$06
 		sta $8000
 		// hijack fix
-		jsr {bank7_pauseCheck}
+		inc {frameCounter}
+		lda {systemState}
+
 		rts 
+
 
 org {bank7_scorePrintHijack}
 		// don't ever draw the score. overwriting a jsr instruction
@@ -55,6 +59,7 @@ bank 6
 base $8000
 org {bank6_subweaponPrintHijack}
 		jmp subweaponSpriteUpdate 	// intentionally not updating the stack with the program counter
+		nop 
 		nop 
 
 org {bank6_scoreCheckHijack}

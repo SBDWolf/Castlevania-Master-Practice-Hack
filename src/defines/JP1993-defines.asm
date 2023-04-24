@@ -6,7 +6,8 @@ define currentInputHeld $F6
 
 define bank7_scorePrintHijack $CC6F
 
-define bank7_pauseCheckHijack $CF46
+//define bank7_pauseCheckHijack $CF46
+define bank7_mainGameLoopHijack $C20A
 
 define bank7_pauseCheck $CF7B
 
@@ -18,9 +19,6 @@ define bank7_sprite0LocalOAMTable $C161
 define bank7_mainJumpTable $C211
 define bank7_originalIntroGameStatePointer $B708
 define bank7_originalTitleScreenGameStatePointer $B5E1
-
-define bank7_endOfNMIHijack $C0DF
-define bank7_tableThatGetsOverwritten $CDFA
 
 define bank6_hudPrintHijack $A192
 
