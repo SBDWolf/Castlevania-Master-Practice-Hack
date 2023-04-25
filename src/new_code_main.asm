@@ -1,48 +1,69 @@
-// -- menu main ------------------------------------------------------
 bank 5
 base $8000
 org {bank5_freeSpaceCode}
-	practiceRoutine:
-
-		// don't run the menu if not in the middle of gameplay
-		lda {systemState}
-		cmp {SYSTEMSTATE_InGame}
-		bne +
+	// only runs during the in-gameplay state (systemState == 0x05)
+	menuRoutine:
+	// backup state of the x register
+		txa 
+		pha 
 		
 		jsr mainPracticeMenu
-		// start going through tools. the last pointer is the address of returnToGame
-		// the x register is the index of the tool being run
--;		ldx #$00
-		jmp ({toolsToRunPointerList})
 
-		// only run tools if in an acceptable system state
-+;		lda {systemState}
-//		cmp {SYSTEMSTATE_Respawning}
-//		beq -
-
-		cmp {SYSTEMSTATE_DoorTransition}
-		beq -
-
-		cmp {SYSTEMSTATE_AutoWalk}
-		beq -
-
-		cmp {SYSTEMSTATE_EnteringCastle}
-		beq -
-
-		cmp {SYSTEMSTATE_AutoClimb}
-		beq -
-
-		cmp {SYSTEMSTATE_Win}
-		beq -
-
-		cmp {SYSTEMSTATE_Falling}
-		beq -
-
-	returnToGame:
+		// hijack fix
+		ldy #$00
+		pla 
+		tax 
 		rts 
 
 
-incsrc "src/menu/menu_main.asm"
+	toolsRoutine:
+		// this gets stepped into every frame regardless of systemState
+
+		// only run tools if in an acceptable system state
+		lda {systemState}
+		cmp {SYSTEMSTATE_InGame}
+		beq .runTools
+
+//		cmp {SYSTEMSTATE_Respawning}
+//		beq .runTools
+
+		cmp {SYSTEMSTATE_DoorTransition}
+		beq .runTools
+
+		cmp {SYSTEMSTATE_AutoWalk}
+		beq .runTools
+
+		cmp {SYSTEMSTATE_EnteringCastle}
+		beq .runTools
+
+		cmp {SYSTEMSTATE_AutoClimb}
+		beq .runTools
+
+		cmp {SYSTEMSTATE_Win}
+		beq .runTools
+
+		cmp {SYSTEMSTATE_Falling}
+		bne returnToGame
+
+		// start going through tools. the last pointer is the address of returnToGame
+		// the x register is the index of the tool being run
+		.runTools:
+			ldx #$00
+			jmp ({toolsToRunPointerList})
+
+		
+
+
+	returnToGame:
+		// hijack fix
+		inc {frameCounter}
+		lda {systemState}
+
+		jmp {bank7_switchToBank_Bank6}
+
+mainPracticeMenu:	
+	incsrc "src/menu/menu_main.asm"
+	
 incsrc "src/menu/menu_submenu.asm"
 incsrc "src/menu/menu_actions.asm"
 

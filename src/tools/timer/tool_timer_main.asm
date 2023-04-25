@@ -22,9 +22,17 @@ tool_timer:
     // current screen is exactly the same
     beq onRegularGameplay
 
+
+onRegularGameplay:
+    jsr incrementTimer
+    lda {FALSE}
+    sta {timerAlreadyRanUpdatesFlag}
+    jmp tool_timerExit
+
+
 onScreenTransition:
 //    lda {timerAlreadyRanUpdatesFlag}
- //   cmp {TRUE}
+//    cmp {TRUE}
 //    beq +
     // update previous stage
     lda {currentStage}
@@ -40,13 +48,6 @@ onScreenTransition:
     lda {TRUE}
     sta {timerAlreadyRanUpdatesFlag}
     jmp tool_timerExit
-
-onRegularGameplay:
-    jsr incrementTimer
-    lda {FALSE}
-    sta {timerAlreadyRanUpdatesFlag}
-    jmp tool_timerExit
-
 
 
 onMapScreen:

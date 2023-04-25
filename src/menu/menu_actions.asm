@@ -1,16 +1,17 @@
 	action_timer:
-        lda #$01
-        sta {practiceSubMenuCursorMaxValue}
-		jsr printSubMenuCursor
+        ldx #$01
 		jsr handleSubMenuInputs
-		lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {TRUE}
-        bne +
-		
-		// enable/disable timer
+        cpy {TRUE}
+        beq +
+
+		ldx {INDEX_TimerTextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// enable/disable timer
 		lda {practiceSubMenuCursor}
 		cmp {TRUE}
-		bne timer_disableTool
+		bne .timer_disableTool
+		// enable timer
 		lda {activeTools}
 		ora {TOOLS_TimerToolBitSet}
 		sta {activeTools}
@@ -33,52 +34,47 @@
 		jmp exitMenu
 
 
-	timer_disableTool:
-		lda {activeTools}
-		and {TOOLS_TimerToolBitUnSet}
-		sta {activeTools}
+		.timer_disableTool:
+			// disable timer
+			lda {activeTools}
+			and {TOOLS_TimerToolBitUnSet}
+			sta {activeTools}
 
-	timer_localExitMenu:
-		jmp exitMenu
-        
-+;		ldx {INDEX_TimerTextMasterTableIndex}
-      	jsr printCurrentTextValue
-        rts 
+			jmp exitMenu
 
-		rts
 	
 	action_toolTest:
 	// testing the tool orchestration
-	    lda #$01
-        sta {practiceSubMenuCursorMaxValue}
-        jsr printSubMenuCursor
+	    ldx #$01
         jsr handleSubMenuInputs
-        lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {TRUE}
-        bne +
+        cpy {TRUE}
+        beq +
 
-		lda {practiceSubMenuCursor}
+		jmp genericMenuPrint_selectBetweenNumericalValue
+    
++;		lda {practiceSubMenuCursor}
 		cmp {TRUE}
-		bne test_disableTool
+		bne .test_disableTool
+		// enable tool
 		lda {activeTools}
 		ora {TOOLS_TestToolBitSet}
 		sta {activeTools}
 		jmp exitMenu
 
-	test_disableTool:
-		lda {activeTools}
-		and {TOOLS_TestToolBitUnSet}
-		sta {activeTools}
-		jmp exitMenu
-        
-+;      jsr printCurrentNumericalValue
-        rts 	
+		.test_disableTool:
+			// disable tool
+			lda {activeTools}
+			and {TOOLS_TestToolBitUnSet}
+			sta {activeTools}
+			jmp exitMenu
 
 
 	
 	action_reset:
-		lda #$00
-		sta {practiceMenuCursor}
+		// done in two passes to maybe avoid graphical gliches?
+
+		lda #$00				
+		sta {practiceMenuCursor}			// SBDWolf -- can this be removed? there is no menu for this action
 		sta {pauseFlag}                 // unpause
 		
 		lda {SYSTEMSTATE_Respawning}
@@ -108,85 +104,73 @@
 		rts 
 
 	action_whipLevelSelect:
-        lda #$02
-        sta {practiceSubMenuCursorMaxValue}
-        jsr printSubMenuCursor
+        ldx #$02
         jsr handleSubMenuInputs
-        lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {TRUE}
-        bne +
-		lda {practiceSubMenuCursor}
+        cpy {TRUE}
+        beq +
+
+		jmp genericMenuPrint_selectBetweenNumericalValue
+        
++; 		lda {practiceSubMenuCursor}
         sta {currentWhipLevel}
 
-		jmp exitMenu
-        
-+;      jsr printCurrentNumericalValue
-        rts 
+		jmp exitMenu     
 
 	action_subweaponSelect:
-        lda #$04
-        sta {practiceSubMenuCursorMaxValue}
-		jsr printSubMenuCursor
+        ldx #$04
 		jsr handleSubMenuInputs
-		lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {TRUE}
-        bne +
-		
-		ldy {practiceSubMenuCursor}
+        cpy {TRUE}
+        beq +
+
+		ldx {INDEX_SubweaponTextMasterTableIndex}
+        jmp genericMenuPrint_selectBetweenTextValues
+        
++;		ldy {practiceSubMenuCursor}
 		lda lookupTable_subweaponSelect,y
 		sta {currentSubweapon}
 
-		jmp exitMenu
-        
-+;		ldx {INDEX_SubweaponTextMasterTableIndex}
-      	jsr printCurrentTextValue
-        rts 
-
-		rts
+		jmp exitMenu	
 
 	action_subweaponMultiplierSelect:
-		lda #$02
-        sta {practiceSubMenuCursorMaxValue}
-        jsr printSubMenuCursor
+		ldx #$02
         jsr handleSubMenuInputs
-        lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {TRUE}
-        bne +
-		lda {practiceSubMenuCursor}
+        cpy {TRUE}
+        beq +
+
+		jmp genericMenuPrint_selectBetweenNumericalValue
+     
++;      lda {practiceSubMenuCursor}
         sta {currentSubweaponMultiplier}
 
 		jmp exitMenu
-        
-+;      jsr printCurrentNumericalValue
-        rts 
+		
 
 	action_gameLoop:
-		lda #$01
-        sta {practiceSubMenuCursorMaxValue}
-        jsr printSubMenuCursor
+		ldx #$01
         jsr handleSubMenuInputs
-        lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {TRUE}
-        bne +
-		lda {practiceSubMenuCursor}
+        cpy {TRUE}
+        beq +
+
+		jmp genericMenuPrint_selectBetweenNumericalValue
+        
++;		lda {practiceSubMenuCursor}
         sta {currentGameLoop}
 
-		jmp exitMenu
-        
-+;      jsr printCurrentNumericalValue
-        rts 
+		jmp exitMenu      
+
+
 
 
 	action_stageSelect:
-		lda #$12
-        sta {practiceSubMenuCursorMaxValue}
-		jsr printSubMenuCursor
+		ldx #$12
 		jsr handleSubMenuInputs
 
-        lda {practiceSubMenuShouldExecuteMenuActionFlag}
-        cmp {TRUE}
-        bne +
-		// select stage
+        cpy {TRUE}
+        beq +
+
+		jmp genericMenuPrint_selectBetweenNumericalValue
+     
++;      // select stage
 		lda {practiceSubMenuCursor}
 		sta {previousStage}
 		
@@ -196,9 +180,6 @@
 		lda #$08
 		sta {systemSubState}
 		jmp exitMenu
-        
-+;      jsr printCurrentNumericalValue
-        rts 
 
 	action_about:
 		clv 
@@ -237,6 +218,19 @@
 
 		// allow any input to close the menu
 +;		jmp allowAnyInputToCloseMenu 
+
+
+	genericMenuPrint_selectBetweenNumericalValue:
+		jsr printSubMenuCursor
+		jsr printCurrentNumericalValue
+		rts 
+
+	genericMenuPrint_selectBetweenTextValues:
+		// needs x register as a parameter to determine the index of the text master table to be used to print menu options
+		jsr printSubMenuCursor
+      	jsr printCurrentTextValue
+		rts 
+
 
     exitMenu:
 		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}

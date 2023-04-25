@@ -1,22 +1,28 @@
 bank 7
 base $C000
+org {bank7_pauseCheckHijack}
+	jsr {bank7_freeSpaceforMenu}
+
 org {bank7_mainGameLoopHijack}
-		jsr {bank7_freeSpace}
+		jsr {bank7_freeSpaceforTools}
 		nop 
 
-org {bank7_freeSpace}
+// on the US version,the combination of these two next routines fills up exactly all the free space there is at this location in bank 7,
+// down to the byte :)
+org {bank7_freeSpaceforMenu}
+		lda #$05
+		sta $8000
+		jsr menuRoutine
+		jsr {bank7_pauseCheck}
+		jmp {bank7_switchToBank_Bank6}
+
+org {bank7_freeSpaceforTools}
+
 		// switch bank to bank 5. quick! there is no space!
 		lda #$05
 		sta $8000
-		jsr practiceRoutine
-		// switch back to bank 6 real quick, which is what the game is expecting at this point
-		lda #$06
-		sta $8000
-		// hijack fix
-		inc {frameCounter}
-		lda {systemState}
+		jmp toolsRoutine
 
-		rts 
 
 
 org {bank7_scorePrintHijack}

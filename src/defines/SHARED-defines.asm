@@ -43,7 +43,7 @@ define STAGE_DraculaSubStage #$01
 define SPRITE0_MenuMovedPosition #$2F
 define SPRITE0_OriginalPosition #$25
 
-// keep this updated when adding a new tool
+// keep these updated when adding a new tool
 define TOOLS_ToolCount #$02
 define TOOLS_TestToolBitSet #$80
 define TOOLS_TimerToolBitSet #$40
@@ -91,18 +91,15 @@ define practiceMenuCursor $101
 define practiceTextPos $102
 define practiceText_Dest $103		// word-sized
 define practiceSubMenuCursor $105
-define practiceSubMenuCursorMaxValue $106
-define practiceSubMenuShouldExecuteMenuActionFlag $107
-define practiceShouldKeepPlayerStatsOnDeathFlag $108
+define practiceShouldKeepPlayerStatsOnDeathFlag $106
 
-define practiceAboutPrintPhase $109
+define practiceAboutPrintPhase $107
 
-define backupCurrentWhipLevel $10A
-define backupCurrentSubweapon $10B
-define backupCurrentSubweaponMultiplier $10C
-define backupCurrentHeartCount $10D
+define backupCurrentWhipLevel $108
+define backupCurrentSubweapon $109
+define backupCurrentSubweaponMultiplier $10A
+define backupCurrentHeartCount $10B
 
-// currentGameSpeed: the higher the value, the slower it is.
 define activeTools $110
 define toolsCountForMenuDeconstruction $111
 
@@ -132,5 +129,6 @@ define subweaponSprite2ForOAM $240
 define PPUBuffer $700
 // -- ROM Addresses -------------------------------------------------
 
-// there is EXTREMELY little free space left in bank 7, but it's just enough to do a bank switch.
-define bank7_freeSpace $FF2D
+// extremely tight on free space here, particularly on the US version
+define bank7_freeSpaceforMenu $FF2A
+define bank7_freeSpaceforTools $FF38

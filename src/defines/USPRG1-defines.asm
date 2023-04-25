@@ -6,6 +6,8 @@ define currentInputHeld $F7
 
 define bank7_scorePrintHijack $CC84
 
+define bank7_pauseCheckHijack $CEF3
+
 define bank7_mainGameLoopHijack $C1E4
 
 define bank7_pauseCheck $CF28
@@ -18,6 +20,8 @@ define bank7_sprite0LocalOAMTable $C13B
 define bank7_mainJumpTable $C1F4
 define bank7_originalIntroGameStatePointer $B911
 define bank7_originalTitleScreenGameStatePointer $B823
+
+define bank7_switchToBank_Bank6 $C1D4
 
 define bank6_hudPrintHijack $A18D
 
@@ -42,7 +46,7 @@ define bank5_mirrorCodeToBank6 $A357
 
 define bank6_freeSpace $BA40
 
-define someBank7GenericPrintSubRoutine1 $CC95 // decimal conversion?
+define someBank7GenericPrintSubRoutine1 $CC95
 
 define someBank7GenericPrintSubRoutine2 $CC68
 

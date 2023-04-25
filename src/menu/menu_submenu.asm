@@ -11,6 +11,10 @@
 		rts 
 	
 	handleSubMenuInputs:
+		// x register has to be passed to this routine to determine the maximum value the menu cursor can allow
+		// y register will contain a boolean return value, to be used to determine whether a menu action should be executed or not
+
+		ldy {FALSE}
 		clv 							// for later in this subroutine
 		lda {currentInputOneFrame}
 		and {MULTIPLEINPUT_UpOrDown}
@@ -20,8 +24,7 @@
 		beq pressedDown
 		// assuming up got pressed, which means if you press up+down, it will get interpreted as up
 		inc {practiceSubMenuCursor}
-		lda {practiceSubMenuCursorMaxValue}
-		cmp {practiceSubMenuCursor}
+		cpx {practiceSubMenuCursor}
 		bcc +
 		bvc checkForAPress 
 
@@ -38,18 +41,17 @@
 		bvc checkForAPress 
 
 		// underflow cursor value
-+;		lda {practiceSubMenuCursorMaxValue}
-		sta {practiceSubMenuCursor}
++;		stx {practiceSubMenuCursor}
 	
 	checkForAPress:
 		lda {currentInputOneFrame}
 		and {INPUT_B}
 		cmp {INPUT_B}
 		bne +
-		lda {TRUE}
-		sta {practiceSubMenuShouldExecuteMenuActionFlag}
-
-+;		rts 
+		// should execute the menu action
+		ldy {TRUE}
++;		
+		rts 
 
 	printCurrentNumericalValue:
 		ldy {practiceSubMenuCursor}

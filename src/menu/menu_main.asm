@@ -1,4 +1,5 @@
-    mainPracticeMenu:						
+// -- menu main ------------------------------------------------------
+
 		lda {practiceMenuPhaseIndex}
 		asl 
 		tay 
@@ -25,7 +26,6 @@
 		lda #$00
 		sta {pauseFlag}
 		sta {practiceSubMenuCursor}	
-		sta {practiceSubMenuShouldExecuteMenuActionFlag}
 		sta {practiceAboutPrintPhase}
 	+;	rts 
 	
@@ -225,17 +225,12 @@
 		// x register is used both as an index to determine which pointer to store, as well as a loop counter
 		ldx #$00
 
-		bvc + 
-		// executed only when looping back. couldn't put these instructiong before the bne because they mess with the zero flag :)
--;		tax 
-		pla 
-
 		// in this loop, we check activeTools bit for bit, and determine which tools are active.
 		// we check the first bit, then asl at every iteration until we've checked for every tool
 		// good luck expanding this past the size of one byte :)
 
 		// push the value in the accumulator to the stack. this is used to memorize the current state of the byte for the next iteration
-+;		pha 
+-;		pha 
 		and #$80
 		cmp #$80
 		bne + 
@@ -250,14 +245,9 @@
 +;		pla 
 		asl 
 		inx 
-		inx 
-		pha 
-		txa 
-		cmp {toolsCountForMenuDeconstruction}
+		inx  
+		cpx {toolsCountForMenuDeconstruction}
 		bne -
-
-		tax 
-		pla 
 
 		lda pointerTable_toolsEnd
 		sta {toolsToRunPointerList},y
