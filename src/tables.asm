@@ -14,6 +14,7 @@ org {bank5_freeSpaceData}
     
     textTable_menuOptions:							// this two following tables need to have the same size. They use the same index to execute the program 							
 		dw text_timer
+		dw text_memoryWatch00
 		dw text_toolTest
 		dw text_reset								
 		dw text_whipLevelSelect
@@ -26,6 +27,8 @@ org {bank5_freeSpaceData}
 
 	text_timer:
 		db "TIMER       /"
+	text_memoryWatch00:
+		db "VIEWER 1    /"
 	text_toolTest:
 		db "TOOL TEST   /"
 	text_reset:
@@ -47,7 +50,8 @@ org {bank5_freeSpaceData}
 
 	pointerTable_actionTable:
 		dw action_timer	
-		dw action_toolTest				
+		dw action_memoryWatch00
+		dw action_toolTest	
 		dw action_reset
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
@@ -60,24 +64,40 @@ org {bank5_freeSpaceData}
 
 	submenu_text_master_table:
 		dw textTable_timer
+		dw textTable_memoryWatch00
 		dw textTable_subweaponSelect
 		dw textTable_about
 		// etc
 
 	textTable_timer:
 		// header contains index of each text entry
-		db $02,$0D
-		db "DISABLED  /"
-		db "ENABLED   /"
+		db $02,$0E
+		db "DISABLED   /"
+		db "ENABLED    /"
 
+	textTable_memoryWatch00:
+		db $05,$11,$1D,$29,$35
+		db "DISABLED   /"
+		db "LAG COUNTER/"
+		db "SIMON X    /"
+		db "SIMON Y    /"
+		db "WHIP FRAMES/"
+		// etc
+
+	lookupTable_memoryWatchAddresses:
+		dw $0000
+		dw {totalLagFrameCounter}
+		dw {simonXHighByte}
+		dw {simonY}
+		dw {whipAnimationTimer}
 
 	textTable_subweaponSelect:
-		db $05,$10,$1B,$26,$31
-		db "DAGGER    /"
-		db "CROSS     /"
-		db "HOLY WATER/"
-		db "HATCHET   /"						//TODO: FIX (as if)
-		db "STOPWATCH /"
+		db $05,$11,$1D,$29,$35
+		db "DAGGER     /"
+		db "CROSS      /"
+		db "HOLY WATER /"
+		db "HATCHET    /"						//TODO: FIX (as if)
+		db "STOPWATCH  /"
 
 	lookupTable_subweaponSelect:
 		// 0x08 = dagger, 0x09 = cross, 0x0B = holy water 0x0D = axe, 0x0F
@@ -93,7 +113,13 @@ org {bank5_freeSpaceData}
 
 	pointerTable_toolsList:
 		dw tool_test
+		dw tool_memoryWatch00
+		dw $FFFF
+		dw $FFFF
+		dw $FFFF
+		dw $FFFF
 		dw tool_timer
+		dw $FFFF
 	
 	pointerTable_toolsEnd:
 		dw returnToGame
@@ -124,6 +150,9 @@ org {bank5_freeSpaceData}
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 70
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 80
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 90
+
+	hex_digits_table:
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9,$E0,$E1,$E2,$E3,$E4,$E5
 
 	cursorBytes:
 		db $01,$00,$00,$DC,$FF,$00	

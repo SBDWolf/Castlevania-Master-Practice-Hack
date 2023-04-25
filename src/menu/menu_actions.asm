@@ -42,6 +42,47 @@
 
 			jmp exitMenu
 
+	action_memoryWatch00:
+		ldx #$03
+		jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
+
+		ldx {INDEX_MemoryWatch00TextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// select memory watch for slot 00
+		
+		lda {practiceSubMenuCursor}
+		cmp {MEMORYWATCHMENU_DisabledIndex}
+		beq .memoryWatch00_disableTool
+
+		// enable memory watch
+		lda {activeTools}
+		ora {TOOLS_MemoryWatch00ToolBitSet}
+		sta {activeTools}
+
+		// store pointer to memory location it needs to watch
+		lda {practiceSubMenuCursor}
+		asl 
+		tax 
+
+		lda lookupTable_memoryWatchAddresses,x
+		sta {memorywatch00Pointer}
+		lda lookupTable_memoryWatchAddresses+1,x
+		sta {memorywatch00Pointer}+1
+
+		jmp exitMenu
+
+		.memoryWatch00_disableTool:
+			// disable memory watch 00
+			lda {activeTools}
+			and {TOOLS_MemoryWatch00ToolBitUnSet}
+			sta {activeTools}
+
+			jmp exitMenu
+
+
 	
 	action_toolTest:
 	// testing the tool orchestration

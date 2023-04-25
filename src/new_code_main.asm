@@ -69,6 +69,7 @@ incsrc "src/menu/menu_actions.asm"
 
 incsrc "src/tools/tool_test.asm"
 incsrc "src/tools/timer/tool_timer_main.asm"
+incsrc "src/tools/memory_watch/tool_memory_watch_00.asm"
 
 incsrc "src/utility.asm"
 

@@ -23,8 +23,9 @@ define PRACTICEMENU_LastPhaseIndex #$10
 
 // keep these updated when adding new menu options that uses text selection :)
 define INDEX_TimerTextMasterTableIndex #$00
-define INDEX_SubweaponTextMasterTableIndex #$02
-define INDEX_AboutTextMasterTableIndex 4
+define INDEX_MemoryWatch00TextMasterTableIndex #$02
+define INDEX_SubweaponTextMasterTableIndex #$04
+define INDEX_AboutTextMasterTableIndex 6
 
 define SYSTEMSTATE_TitleScreen #$02
 define SYSTEMSTATE_InGame #$05
@@ -45,12 +46,21 @@ define STAGE_DraculaSubStage #$01
 define SPRITE0_MenuMovedPosition #$2F
 define SPRITE0_OriginalPosition #$25
 
+define MEMORYWATCHMENU_DisabledIndex #$00
+define MEMORYWATCHMENU_TotalLagFrameCounterIndex #$01
+define MEMORYWATCHMENU_SimonXHighByteIndex #$02
+define MEMORYWATCHMENU_SimonYIndex #$03
+define MEMORYWATCHMENU_WhipAnimationTimerIndex #$04
+
+
 // keep these updated when adding a new tool
-define TOOLS_ToolCount #$02
+define TOOLS_ToolCount #$07
 define TOOLS_TestToolBitSet #$80
-define TOOLS_TimerToolBitSet #$40
+define TOOLS_MemoryWatch00ToolBitSet #$40
+define TOOLS_TimerToolBitSet #$02
 define TOOLS_TestToolBitUnSet #$7F
-define TOOLS_TimerToolBitUnSet #$BF
+define TOOLS_TimerToolBitUnSet #$FD
+define TOOLS_MemoryWatch00ToolBitUnSet #$BF
 
 // -- RAM Addresses -------------------------------------------------
 
@@ -75,6 +85,11 @@ define previousStage $29
 define currentLifeCount $2A
 
 define currentGameLoop $2B
+
+
+define simonY $3F
+define simonXHighByte $40
+define simonXLowByte $41
 
 define currentSubStage $46
 
@@ -107,6 +122,10 @@ define toolsCountForMenuDeconstruction $111
 
 define consecutiveLagFramesCounter $112
 
+define totalLagFrameCounter $113
+
+define memorywatch00Pointer $114 // 2 bytes
+
 define timerLevelTimerMinutes $120
 define timerLevelTimerSeconds $121
 define timerLevelTimerFrames $122
@@ -129,6 +148,8 @@ define subweaponFrameSprite1ForOAM $21C
 
 define subweaponSprite1ForOAM $23C
 define subweaponSprite2ForOAM $240
+
+define whipAnimationTimer $568
 
 define PPUBuffer $700
 // -- ROM Addresses -------------------------------------------------
