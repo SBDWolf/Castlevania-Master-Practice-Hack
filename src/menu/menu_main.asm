@@ -139,7 +139,7 @@
 		
 		lda textTable_menuOptions+1,y
 		sta {practiceMenuTextPointer}+1
-		cmp #$FF						// check for end of text table. Just dont store text at $FFXX
+		cmp #$FF						// check for end of text table. Just don't store text at $FFXX
 		bne +
 		dey								// stop table to advance
 		dey

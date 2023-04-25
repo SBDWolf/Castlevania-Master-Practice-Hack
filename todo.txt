@@ -1,5 +1,3 @@
-- fix the figgin level select
 - fix life counter refreshing when getting a 1up
 - make timer handle lag
-- print timer on screen
 - make timer not count one frame after credits (maybe update previous stage variable to a random number after grabbing drac orb?)

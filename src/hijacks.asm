@@ -32,12 +32,16 @@ org {bank7_scorePrintHijack}
 		nop 
 
 org {bank7_mainJumpTable}+2
-		// this is hijacking the castle entrance scene
+		// this is hijacking the title screen
 		dw initializeMemory
 
 org {bank7_mainJumpTable}+8
 		// this is hijacking the castle entrance scene
 		dw allowSkippingIntro
+
+org {bank7_mainJumpTable}+30
+		// this is hijacking the credits scene
+		dw allowSkippingCredits
 
 org {bank7_pauseCheck}+14
 		// letting the game pause even when pressing select, on top of start
@@ -110,8 +114,19 @@ org {bank6_freeSpace}
 		cmp {INPUT_Start}
 		bne +
 		lda #$01
-		sta {introTimer}					// set timer to 01 start (00 actually makes it underflow)
+		sta {generalTimer}					// set timer to 01 start (00 actually makes it underflow)
 +;		jmp {bank7_originalIntroGameStatePointer}	// hijack fix
+
+	allowSkippingCredits:
+		lda {currentInputHeld}
+		and {INPUT_Start}
+		cmp {INPUT_Start}
+		bne +
+		lda #$01
+		sta {generalTimer}					// set timer to 01 start (00 actually makes it underflow)
+		lda {CREDITS_Ending}
+		sta {systemSubState}
++;		jmp {bank7_originalCreditsGameStatePointer}	// hijack fix
 
 	levelLoadHijack:
 		tya

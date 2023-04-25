@@ -20,6 +20,7 @@ define bank7_sprite0LocalOAMTable $C13B
 define bank7_mainJumpTable $C1F4
 define bank7_originalIntroGameStatePointer $B911
 define bank7_originalTitleScreenGameStatePointer $B823
+define bank7_originalCreditsGameStatePointer $8B4B
 
 define bank7_switchToBank_Bank6 $C1D4
 

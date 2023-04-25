@@ -36,6 +36,8 @@ define SYSTEMSTATE_AutoClimb #$0B
 define SYSTEMSTATE_Win #$0C
 define SYSTEMSTATE_Falling #$0E
 
+define CREDITS_Ending #$0A
+
 define STAGE_MapScreen #$14
 define STAGE_DraculaStage #$12
 define STAGE_DraculaSubStage #$01
@@ -57,7 +59,7 @@ define practiceMenuTextPointer $00	// dw
 define systemState $18
 define systemSubState $19
 
-define introTimer $1D
+define generalTimer $1D
 define frameCounter $1A
 
 define isLagging $1B
