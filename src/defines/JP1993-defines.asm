@@ -17,10 +17,14 @@ define bank7_deathHijack $C2BE
 define bank7_sprite0Hijack $C165
 define bank7_sprite0LocalOAMTable $C161
 
+define bank7_NMIHijack $C0E6
+
 define bank7_mainJumpTable $C211
 define bank7_originalIntroGameStatePointer $B708
 define bank7_originalTitleScreenGameStatePointer $B5E1
 define bank7_originalCreditsGameStatePointer $8B4B
+
+define bank7_stagePropertyTableReadingHijack $D079
 
 define bank7_switchToBank_Bank6 $C1FA
 
@@ -45,7 +49,9 @@ define bank5_mirrorCodeToBank6 $A366
 // there is an ok amount of free space in bank 6 on the us version, but not so much on the jp version.
 // i only use this in a couple bank 6 hijacks
 
-define bank6_freeSpace $BF60
+define bank6_freeSpace $BF5C
+
+define bank7_freedUpSpaceForLagCounter $FC2E
 
 define someBank7GenericPrintSubRoutine1 $CC80
 

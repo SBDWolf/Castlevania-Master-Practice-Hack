@@ -1,3 +1,4 @@
 - fix life counter refreshing when getting a 1up
 - make timer handle lag
-- make timer not count one frame after credits (maybe update previous stage variable to a random number after grabbing drac orb?)
+- make scroll glitch tool
+- make memory watch tool

@@ -105,6 +105,8 @@ define backupCurrentHeartCount $10B
 define activeTools $110
 define toolsCountForMenuDeconstruction $111
 
+define consecutiveLagFramesCounter $112
+
 define timerLevelTimerMinutes $120
 define timerLevelTimerSeconds $121
 define timerLevelTimerFrames $122

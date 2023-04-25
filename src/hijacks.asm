@@ -4,8 +4,12 @@ org {bank7_pauseCheckHijack}
 	jsr {bank7_freeSpaceforMenu}
 
 org {bank7_mainGameLoopHijack}
-		jsr {bank7_freeSpaceforTools}
-		nop 
+	jsr {bank7_freeSpaceforTools}
+	nop 
+
+org {bank7_NMIHijack}
+	jsr {bank7_freedUpSpaceForLagCounter}
+	nop 
 
 // on the US version,the combination of these two next routines fills up exactly all the free space there is at this location in bank 7,
 // down to the byte :)
@@ -17,13 +21,18 @@ org {bank7_freeSpaceforMenu}
 		jmp {bank7_switchToBank_Bank6}
 
 org {bank7_freeSpaceforTools}
-
 		// switch bank to bank 5. quick! there is no space!
 		lda #$05
 		sta $8000
 		jmp toolsRoutine
 
-
+org {bank7_freedUpSpaceForLagCounter}
+		// this code will only run if the game is lagging (questionable)
+		inc {consecutiveLagFramesCounter}
+		// hijack fix
+		lda $FE
+		ldx $1F
+		rts 
 
 org {bank7_scorePrintHijack}
 		// don't ever draw the score. overwriting a jsr instruction
@@ -64,6 +73,9 @@ org {bank7_sprite0Hijack}
 		nop 
 		nop 
 
+org {bank7_stagePropertyTableReadingHijack}
+	lda reroutedStagePropertyTableFromBank7,x
+
 
 bank 6
 base $8000
@@ -77,26 +89,15 @@ org {bank6_scoreCheckHijack}
 
 org {bank6_freeSpace}
     scoreUpdate:		
-		txa 
-		pha
-		tya
-		pha 
-		
+	// i might need to dump x and y backups, which is what was in this code originally, but it seems to runs fine without doing that for now		
 		lda {practiceMenuPhaseIndex}		// dont run any HUD upates while the menu is open!!
 		bne +
-		
-		pla
-		tay
-		pla
-		tax
 
 		jsr {bank6_hijackedJsr}		// hijack fix
 		rts 
 	
-+;		pla							// dump x y backups
-		pla 
-		pla							// skip all update routines
-		pla							
++;		pla							// skip all update routines
+		pla 						
 		rts 
 
 	subweaponSpriteUpdate:	
@@ -108,11 +109,10 @@ org {bank6_freeSpace}
 		jmp {bank6_subweaponPrintHijack}+5 	// return to main routine
 +;		rts 
 
-	allowSkippingIntro:   	
+	allowSkippingIntro:  	
 		lda {currentInputHeld}
 		and {INPUT_Start}
-		cmp {INPUT_Start}
-		bne +
+		beq +
 		lda #$01
 		sta {generalTimer}					// set timer to 01 start (00 actually makes it underflow)
 +;		jmp {bank7_originalIntroGameStatePointer}	// hijack fix
@@ -120,14 +120,14 @@ org {bank6_freeSpace}
 	allowSkippingCredits:
 		lda {currentInputHeld}
 		and {INPUT_Start}
-		cmp {INPUT_Start}
-		bne +
+		beq +
 		lda #$01
 		sta {generalTimer}					// set timer to 01 start (00 actually makes it underflow)
 		lda {CREDITS_Ending}
 		sta {systemSubState}
 +;		jmp {bank7_originalCreditsGameStatePointer}	// hijack fix
 
+	
 	levelLoadHijack:
 		tya
 		pha
@@ -150,15 +150,14 @@ org {bank6_freeSpace}
 		sta {practiceShouldKeepPlayerStatsOnDeathFlag}
 		
 	deathEnd:			
-		pla
-		tay
+		pla 
+		tay 
 		lda $19								// hijack fix
 		clc 
 		rts 
 
 	sprite0CheckIfInMenu:
 		lda {practiceMenuPhaseIndex}
-		cmp #$00
 		bne +
 		ldx #$03
 -;		lda {bank7_sprite0LocalOAMTable},x
@@ -178,6 +177,10 @@ org {bank6_freeSpace}
 
 	localPointerTable_toolsEnd:
 		dw returnToGame
+
+	reroutedStagePropertyTableFromBank7:
+		db $FF,$FF,$FF,$FF,$0F,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$3F,$1F
+		db $FF,$FF,$0F
 
 	warnpc $C000
 

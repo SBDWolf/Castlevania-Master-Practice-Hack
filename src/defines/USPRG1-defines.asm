@@ -17,10 +17,14 @@ define bank7_deathHijack $C29F
 define bank7_sprite0Hijack $C13F
 define bank7_sprite0LocalOAMTable $C13B
 
+define bank7_NMIHijack $C0C0
+
 define bank7_mainJumpTable $C1F4
 define bank7_originalIntroGameStatePointer $B911
 define bank7_originalTitleScreenGameStatePointer $B823
 define bank7_originalCreditsGameStatePointer $8B4B
+
+define bank7_stagePropertyTableReadingHijack $D027
 
 define bank7_switchToBank_Bank6 $C1D4
 
@@ -46,6 +50,8 @@ define bank5_mirrorCodeToBank6 $A357
 // i only use this in a couple bank 6 hijacks
 
 define bank6_freeSpace $BA40
+
+define bank7_freedUpSpaceForLagCounter $FBB3
 
 define someBank7GenericPrintSubRoutine1 $CC95
 
