@@ -1,25 +1,7 @@
-bank 5
-base $8000
-org {bank5_freeSpaceCode}
-	// only runs during the in-gameplay state (systemState == 0x05)
-	menuRoutine:
-	// backup state of the x register
-		txa 
-		pha 
-		
-		jsr mainPracticeMenu
-
-		// hijack fix
-		ldy #$00
-		pla 
-		tax 
-		rts 
-
-
 	toolsRoutine:
 		// this gets stepped into every frame regardless of systemState
+		// so we have to manually check for that variable and not run tools in certain states
 
-		// only run tools if in an acceptable system state
 		lda {systemState}
 		cmp {SYSTEMSTATE_InGame}
 		beq .runTools
@@ -61,16 +43,12 @@ org {bank5_freeSpaceCode}
 
 		jmp {bank7_switchToBank_Bank6}
 
-mainPracticeMenu:	
-	incsrc "src/menu/menu_main.asm"
-	
-incsrc "src/menu/menu_submenu.asm"
-incsrc "src/menu/menu_actions.asm"
 
 incsrc "src/tools/tool_test.asm"
 incsrc "src/tools/timer/tool_timer_main.asm"
 incsrc "src/tools/memory_watch/tool_memory_watch_00.asm"
-
-incsrc "src/utility.asm"
-
+incsrc "src/tools/memory_watch/tool_memory_watch_01.asm"
+incsrc "src/tools/memory_watch/tool_memory_watch_02.asm"
+incsrc "src/tools/memory_watch/tool_memory_watch_03.asm"
+incsrc "src/tools/scroll_glitch/tool_scroll_glitch_main.asm"
 

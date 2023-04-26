@@ -1,4 +1,20 @@
-// -- menu main ------------------------------------------------------
+	menuRoutine:
+	// backup state of the x register
+		txa 
+		pha 
+		
+		jsr menuManager
+
+		// hijack fix
+		ldy #$00
+		pla 
+		tax 
+		rts 
+
+// -- menu main -----------------------------------------------------
+	
+	menuManager:
+		// check in what phase of the menu we're on (awaiting for select press, constructing, deconstructing, etc.) and execute the matching code
 
 		lda {practiceMenuPhaseIndex}
 		asl 
@@ -7,18 +23,22 @@
 		lda mainPauseMenu+1,y
 		sta $01
 		lda mainPauseMenu,y
-		sta $00						// rts + 1 fix
-		
-		jmp ($0000)  				// menu jump table
+		sta $00
 
-// -- menu framework and logic ---------------------------------------	
+		jmp ($0000)
+
+// -- menu framework and logic --------------------------------------
 	
 	initWhilePause:
-		lda {currentInputOneFrame}	// check if select is pressed 
+		// check if select is pressed, and open the menu if so 
+		lda {currentInputOneFrame}	
 		and {INPUT_Select}
-		cmp {INPUT_Select}
+		// branch instructions are a CPU cycle slower if followed...
+		// ...so we want the path that is going to be taken during normal gameplay (that is, during action and the player is not opening the menu)...
+		// ... to be the fastest one.
 		bne +
-		lda #$01
+		rts 
+	+;	lda #$01
 		sta {practiceMenuPhaseIndex}		
 		// hack: unset the pause flag. if the game is already paused, it'll allow this menu to come up with select while keeping the game paused.
 		// this is because after unsetting this flag, the game will immediately pause again, instead of unpausing.	
@@ -27,20 +47,23 @@
 		sta {pauseFlag}
 		sta {practiceSubMenuCursor}	
 		sta {practiceAboutPrintPhase}
-	+;	rts 
+		rts 
 	
 	
 	bufferFrame:
-		lda {frameCounter}			// the game seems to offload routines to run on even or odd frames
+		// the game seems to offload routines to run on even or odd frames, so we respect this practice
+		lda {frameCounter}			
 		and #$01					
-		cmp #$01
 		bne +
-		inc {practiceMenuPhaseIndex}
-	+;	rts 	
+		rts 
+	+;	inc {practiceMenuPhaseIndex}
+		rts 	
 		
-	constructMenu00:		
+	openMenu_clearHUD00:
+		// clear hud. this is the first pass
 		ldy {tileDataPointer}
-		ldx #$41					// set loop size to fill blank
+		// the x register here is the loop size
+		ldx #$41
 			
 		lda #$01
 		sta {PPUBuffer},y
@@ -54,21 +77,21 @@
 		iny
 	
 		lda #$00
-	-;	sta {PPUBuffer},y					// fill loop
+	-;	sta {PPUBuffer},y
 		iny
 		dex 
 		bpl -	
 		
 		dey
-		sty {tileDataPointer}						// ppu dest and backup table offset		
+		sty {tileDataPointer}	
 						
 		dey
-		lda #$FF					// end byte for PPU job
+		// 0xFF is terminator byte for the PPU job
+		lda #$FF
 		sta {PPUBuffer},y
 
 		// make subweapon frame invisible while contructing. it is actually made up of 8 sprites
-		// DRY? what's that?
-		// (this code is faster than a loop with an index on a y register, i have the ROM space, would rather optimize for speed)
+		// unrolled loop
 		lda #$FF					
 		sta {subweaponFrameSprite1ForOAM}
 		sta {subweaponFrameSprite1ForOAM}+4
@@ -79,12 +102,15 @@
 		sta {subweaponFrameSprite1ForOAM}+24
 		sta {subweaponFrameSprite1ForOAM}+28
 		
-		inc {practiceMenuPhaseIndex}		// this is spliced in two parts so it runs without glitching		
+		// end of first pass
+		inc {practiceMenuPhaseIndex}	
 		rts 
 
-	constructMenu01:
+	openMenu_clearHUD01:
+		// clear hud. this is the second pass
 		ldy {tileDataPointer}
-		ldx #$41					// set loop size to fill blank
+		// the x register here is the loop size
+		ldx #$41
 	
 		lda #$01
 		sta {PPUBuffer},y
@@ -98,16 +124,17 @@
 		iny 
 	
 		lda #$00
-	-;	sta {PPUBuffer},y					// fill loop
+	-;	sta {PPUBuffer},y
 		iny 
 		dex 
-		bpl -						
+		bpl -
 		
 		dey 
-		sty {tileDataPointer}						// ppu dest and backup table offset		
-						
+		sty {tileDataPointer}
+
+		// 0xFF is terminator byte for the PPU job
 		dey 
-		lda #$FF					// end byte for PPU job
+		lda #$FF
 		sta {PPUBuffer},y
 
 		// make subweapon sprite invisible while constructing. it is actually made up of 2 sprites!
@@ -116,52 +143,59 @@
 		sta {subweaponSprite1ForOAM}
 		sta {subweaponSprite2ForOAM}
 
-		inc {practiceMenuPhaseIndex}		// run menu next frame 		
-
+		// end of second pass
+		inc {practiceMenuPhaseIndex}
 		rts 
     
-    drawText:			
-		lda #$23 						// set destination Base Pointer
+	printMenuTextOptions:
+		// set destination Base Pointer		
+		lda #$23 						
 		sta {practiceText_Dest}
 		lda #$20
 		sta {practiceText_Dest}+1
 		
-		lda #$00						// a counter to count 4 words to print
+		// $02 is used as a counter here, to stop printing words after having printed four
+		lda #$00
 		sta $02							
-		ldx {tileDataPointer}							// text draw loop 	
+		ldx {tileDataPointer}
 		lda {practiceTextPos}
 		asl
 		tay
 
-    drawTextLoop:						// setBasePointer
+    printMenuTextMainLoop:
+		// set the pointer to the menu option text
 		lda textTable_menuOptions,y
 		sta {practiceMenuTextPointer}
 		
 		lda textTable_menuOptions+1,y
 		sta {practiceMenuTextPointer}+1
-		cmp #$FF						// check for end of text table. Just don't store text at $FFXX
+		// check if the end of the table has been reached
+		cmp #$FF
 		bne +
-		dey								// stop table to advance
+		dey
 		dey
 		sty {practiceTextPos}
-		jmp drawTextLoop
+		jmp printMenuTextMainLoop
 	
-	+;	lda #$01						// set job and destination 
+		// SBDWolf: i'm not actually sure what this byte is for, but it seems important to signal the PPU to actually print stuff :)
+	+;	lda #$01
 		sta {PPUBuffer},x		
 		inx
 		
-		lda {practiceText_Dest}+1		// set destination pointer
+		// set destination pointer in the nametable
+		lda {practiceText_Dest}+1
 		sta {PPUBuffer},x
 		inx
 		lda {practiceText_Dest}		
 		sta {PPUBuffer},x	
 		inx				
 		
-		tya								// backup to keep track of text pointer
+		// backup to keep track of the text pointer
+		tya								
 		pha
 
-		ldy #$00		
-	-;	lda ($00),y						// write text loop
+		ldy #$00
+	-;	lda ($00),y
 		sta {PPUBuffer},x
 		inx
 		iny
@@ -174,23 +208,26 @@
 		iny
 		iny
 		
-		lda {practiceText_Dest}			// put base to next line of menu entery 
+		// move the destination address in the nametable forward, so that the next menu option gets printed on a new line in the HUD
+		lda {practiceText_Dest}
 		clc 
 		adc #$20
 		sta {practiceText_Dest}
 		
-		lda $02							// check if we did draw 4 words 
+		// check if four words have been drawn
+		lda $02
 		clc
 		adc #$01
 		sta $02
 		cmp #$04							
-		beq endDrawTextLoop
-		jmp drawTextLoop
+		beq endprintMenuTextMainLoop
+		jmp printMenuTextMainLoop
 
-	endDrawTextLoop:
+	endprintMenuTextMainLoop:
 		stx {tileDataPointer}
 		
-		inc {practiceMenuPhaseIndex}			// go to sub menu logic	
+		// menu has been fully initialized! the main logic will run on the next frame
+		inc {practiceMenuPhaseIndex}
 		rts
     
     runMenu:	
@@ -204,7 +241,8 @@
 		cmp {TRUE}
 		bne +
 		
-		jsr cursorLogic					// we have indexed pointers with practice menuCurserPos and practiceTextPos when we change them we decrease the menu state 
+		// we have indexed pointers with practice menuCurserPos and practiceTextPos when we change them we decrease the menu state 
+		jsr cursorLogic
 
 		jmp checkIfShouldCloseMenu
 
@@ -212,7 +250,7 @@
 		sta {practiceMenuPhaseIndex}
 		rts 
 
-    deconstructMenu00:	
+    closeMenu_clearHUD00:	
 		// update the list of active tools
 		clv 
 		lda {TOOLS_ToolCount}
@@ -227,7 +265,7 @@
 
 		// in this loop, we check activeTools bit for bit, and determine which tools are active.
 		// we check the first bit, then asl at every iteration until we've checked for every tool
-		// good luck expanding this past the size of one byte :)
+		// expanding the number of tools past 8 will require modifying this loop and using a second byte
 
 		// push the value in the accumulator to the stack. this is used to memorize the current state of the byte for the next iteration
 -;		pha 
@@ -254,38 +292,113 @@
 		lda pointerTable_toolsEnd+1
 		sta {toolsToRunPointerList}+1,y
 
-
+		// unpause, intended for if coming after selecting a submenu option
 		lda {FALSE}
-		sta {pauseFlag}					// unpause, intended for if coming after selecting a submenu option
-		jmp constructMenu00				// clear
+		sta {pauseFlag}
+		
+		
+		// clear hud. this is again done in two passes. this is the first pass
+		ldy {tileDataPointer}
+		// the x register here is the loop size
+		ldx #$41
+			
+		lda #$01
+		sta {PPUBuffer},y
+		iny
+
+		lda #$20
+		sta {PPUBuffer},y
+		iny
+		lda #$20
+		sta {PPUBuffer},y
+		iny
+	
+		lda #$00
+	-;	sta {PPUBuffer},y
+		iny
+		dex 
+		bpl -	
+		
+		dey
+		sty {tileDataPointer}	
+						
+		dey
+		// 0xFF is terminator byte for the PPU job
+		lda #$FF
+		sta {PPUBuffer},y
+
+		// end of first pass
+		inc {practiceMenuPhaseIndex}	
+		rts 
+
  	
-	deconstructMenu01:			
-		jmp constructMenu01
+	closeMenu_clearHUD01:
+		// clear hud. this is the second pass
+		ldy {tileDataPointer}
+		// the x register here is the loop size
+		ldx #$41
+	
+		lda #$01
+		sta {PPUBuffer},y
+		iny 
+
+		lda #$20
+		sta {PPUBuffer},y
+		iny 
+		lda #$60
+		sta {PPUBuffer},y
+		iny 
+	
+		lda #$00
+	-;	sta {PPUBuffer},y
+		iny 
+		dex 
+		bpl -
+		
+		dey 
+		sty {tileDataPointer}
+
+		// 0xFF is terminator byte for the PPU job
+		dey 
+		lda #$FF
+		sta {PPUBuffer},y
+
+		// end of second pass
+		inc {practiceMenuPhaseIndex}	
+		rts 
+
 
 	reBuildHUD:
-		ldx #$1F					// rebuild sub-weapon Frame
+		// rebuild sub-weapon Frame
+		ldx #$1F
 -;		lda subweapon_frame_sprites,x
 		sta $021C,x
 		dex 
 		bpl -		
 		
-		jsr printCurrentStage		// in src/utility.asm
+		// in src/utility.asm
+		jsr printCurrentStage		
 		jsr printHeartCount
 
-		inc $141					// update subweapon multiplier appear 
-		inc $44 					// update player life meter
-		inc $1AA					// update boss life meter
+		// this inc $141 will update the graphic for the subweapon multiplier
+		inc $141
+		// update the player's life meter			
+		inc $44
+		// update the boss's life meter			
+		inc $1AA
 		
+		// close subMenu
 		lda #$00						
-		sta {practiceMenuCursor}	// close subMenu
+		sta {practiceMenuCursor}
 		sta {practiceTextPos}
 		sta {practiceSubMenuCursor}
 		
 		lda {PRACTICEMENU_LastPhaseIndex}
-		sta {practiceMenuPhaseIndex}		// extra buffer cycle
+		sta {practiceMenuPhaseIndex}
 		rts
 	
-	cursorLogic:	// ------------------- cursor logic -------------------------------			
+	// ------------------- cursor logic -------------------------------	
+	cursorLogic:			
 		ldy {tileDataPointer}									
 	-;	lda cursorBytes,y
 		sta {PPUBuffer},y
@@ -378,7 +491,7 @@
 		lda #$00								// undraw Heart
 		sta {PPUBuffer}+3								
 		
-		lda {PRACTICEMENU_MenuActionPhaseIndex}		// enter sub menu 
+		lda {PRACTICEMENU_MenuActionPhaseIndex}	// enter sub menu 
 		sta {practiceMenuPhaseIndex}	
 	+;	rts 
 
@@ -399,7 +512,7 @@
 		jmp ($0000)
 
 	checkIfShouldCloseMenu:
-		lda {currentInputOneFrame}		// exit menu with select OR start
+		lda {currentInputOneFrame}				// exit menu with select OR start
 		and {MULTIPLEINPUT_StartOrSelect}
 		cmp #$00
 		beq +;

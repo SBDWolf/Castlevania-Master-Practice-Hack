@@ -23,9 +23,10 @@ define PRACTICEMENU_LastPhaseIndex #$10
 
 // keep these updated when adding new menu options that uses text selection :)
 define INDEX_TimerTextMasterTableIndex #$00
-define INDEX_MemoryWatch00TextMasterTableIndex #$02
-define INDEX_SubweaponTextMasterTableIndex #$04
-define INDEX_AboutTextMasterTableIndex 6
+define INDEX_ScrollGlitchTextMasterTableIndex #$04
+define INDEX_MemoryWatchTextMasterTableIndex #$04
+define INDEX_SubweaponTextMasterTableIndex #$06
+define INDEX_AboutTextMasterTableIndex 8
 
 define SYSTEMSTATE_TitleScreen #$02
 define SYSTEMSTATE_InGame #$05
@@ -55,12 +56,20 @@ define MEMORYWATCHMENU_WhipAnimationTimerIndex #$04
 
 // keep these updated when adding a new tool
 define TOOLS_ToolCount #$07
-define TOOLS_TestToolBitSet #$80
+
+define TOOLS_TimerToolBitSet #$80
 define TOOLS_MemoryWatch00ToolBitSet #$40
-define TOOLS_TimerToolBitSet #$02
-define TOOLS_TestToolBitUnSet #$7F
-define TOOLS_TimerToolBitUnSet #$FD
+define TOOLS_MemoryWatch01ToolBitSet #$20
+define TOOLS_MemoryWatch02ToolBitSet #$10
+define TOOLS_MemoryWatch03ToolBitSet #$08
+define TOOLS_ScrollGlitchToolBitSet #$04
+
+define TOOLS_TimerToolBitUnSet #$7F
 define TOOLS_MemoryWatch00ToolBitUnSet #$BF
+define TOOLS_MemoryWatch01ToolBitUnSet #$DF
+define TOOLS_MemoryWatch02ToolBitUnSet #$EF
+define TOOLS_MemoryWatch03ToolBitUnSet #$F7
+define TOOLS_ScrollGlitchToolBitUnSet #$FB
 
 // -- RAM Addresses -------------------------------------------------
 
@@ -86,10 +95,13 @@ define currentLifeCount $2A
 
 define currentGameLoop $2B
 
+define blockCounter $30
 
 define simonY $3F
 define simonXHighByte $40
 define simonXLowByte $41
+
+define currentPlayerHealth $45
 
 define currentSubStage $46
 
@@ -126,6 +138,12 @@ define totalLagFrameCounter $113
 
 define memorywatch00Pointer $114 // 2 bytes
 
+define memorywatch01Pointer $116 // 2 bytes
+
+define memorywatch02Pointer $118 // 2 bytes
+
+define memorywatch03Pointer $11A // 2 bytes
+
 define timerLevelTimerMinutes $120
 define timerLevelTimerSeconds $121
 define timerLevelTimerFrames $122
@@ -142,6 +160,8 @@ define timerAlreadyRanUpdatesFlag $12B
 
 define toolsToRunPointerList $130
 
+define currentBossHealth $1A9
+
 define sprite0ForOAM $200
 
 define subweaponFrameSprite1ForOAM $21C
@@ -149,7 +169,12 @@ define subweaponFrameSprite1ForOAM $21C
 define subweaponSprite1ForOAM $23C
 define subweaponSprite2ForOAM $240
 
+// if left then 0x01, else 0x00
+define isSimonFacingLeft $0450
+
 define whipAnimationTimer $568
+
+define levelTileData $5A0
 
 define PPUBuffer $700
 // -- ROM Addresses -------------------------------------------------

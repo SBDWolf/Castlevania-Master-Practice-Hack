@@ -1,4 +1,4 @@
-tool_memoryWatch00:
+tool_memoryWatch02:
     // don't print anything on screen if the menu is open!
     lda {practiceMenuPhaseIndex}
     bne +
@@ -7,9 +7,9 @@ tool_memoryWatch00:
     txa 
     pha 
 
-    lda {memorywatch00Pointer}
+    lda {memorywatch02Pointer}
     sta $00
-    lda {memorywatch00Pointer}+1
+    lda {memorywatch02Pointer}+1
     sta $01
 
     // print on screen
@@ -22,7 +22,7 @@ tool_memoryWatch00:
     lda #$20
     sta {PPUBuffer},x
     inx
-    lda #$25
+    lda #$2D
     sta {PPUBuffer},x
     inx
 

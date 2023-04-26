@@ -1,4 +1,19 @@
 tool_timer:
+    // if the game has lagged on the previous frame(s), update totalLagFrameCounter and force a graphical update
+    lda {consecutiveLagFramesCounter}
+    beq .checkForGameState
+    clc 
+    adc {totalLagFrameCounter}
+    // cap totalLagFrameCounter at 99
+    cmp #100
+    bcc +
+    lda #99
++;  sta {totalLagFrameCounter} 
+
+    // force a graphical update of totalLagFrameCounter
+    incsrc "src/tools/timer/tool_timer_print_lag_counter.asm"
+
+    .checkForGameState:
     // the map screen in-between stages is considered to be "stage 20" by the game
     lda {currentStage}
     cmp {STAGE_MapScreen}
@@ -43,9 +58,6 @@ onRegularGameplay:
 
 
 onScreenTransition:
-//    lda {timerAlreadyRanUpdatesFlag}
-//    cmp {TRUE}
-//    beq +
     // update previous stage
     lda {currentStage}
     sta {timerPreviousFrameStage}
@@ -86,6 +98,8 @@ onMapScreen:
     sta {timerLevelTimerMinutes}
     sta {timerLevelTimerSeconds}
     sta {timerLevelTimerFrames}
+    // zero out totalLagFrameCounter
+    sta {totalLagFrameCounter}
 
     lda {TRUE}
     sta {timerAlreadyRanUpdatesFlag}

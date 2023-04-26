@@ -42,13 +42,44 @@
 
 			jmp exitMenu
 
-	action_memoryWatch00:
-		ldx #$03
+
+	action_scrollGlitch:
+	    ldx #$01
 		jsr handleSubMenuInputs
         cpy {TRUE}
         beq +
 
-		ldx {INDEX_MemoryWatch00TextMasterTableIndex}
+		ldx {INDEX_ScrollGlitchTextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// enable/disable scroll glitch tool
+		lda {practiceSubMenuCursor}
+		cmp {TRUE}
+		bne .scrollGlitch_disableTool
+		// enable scroll glitch tool
+		lda {activeTools}
+		ora {TOOLS_ScrollGlitchToolBitSet}
+		sta {activeTools}
+
+		jmp exitMenu
+
+
+		.scrollGlitch_disableTool:
+			// disable scroll glitch tool
+			lda {activeTools}
+			and {TOOLS_ScrollGlitchToolBitUnSet}
+			sta {activeTools}
+
+			jmp exitMenu	
+
+
+	action_memoryWatch00:
+		ldx #$05
+		jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
+
+		ldx {INDEX_MemoryWatchTextMasterTableIndex}
 		jmp genericMenuPrint_selectBetweenTextValues
         		
 +;		// select memory watch for slot 00
@@ -83,32 +114,127 @@
 			jmp exitMenu
 
 
-	
-	action_toolTest:
-	// testing the tool orchestration
-	    ldx #$01
-        jsr handleSubMenuInputs
+	action_memoryWatch01:
+		ldx #$05
+		jsr handleSubMenuInputs
         cpy {TRUE}
         beq +
 
-		jmp genericMenuPrint_selectBetweenNumericalValue
-    
-+;		lda {practiceSubMenuCursor}
-		cmp {TRUE}
-		bne .test_disableTool
-		// enable tool
+		ldx {INDEX_MemoryWatchTextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// select memory watch for slot 01
+		
+		lda {practiceSubMenuCursor}
+		cmp {MEMORYWATCHMENU_DisabledIndex}
+		beq .memoryWatch01_disableTool
+
+		// enable memory watch
 		lda {activeTools}
-		ora {TOOLS_TestToolBitSet}
+		ora {TOOLS_MemoryWatch01ToolBitSet}
 		sta {activeTools}
+
+		// store pointer to memory location it needs to watch
+		lda {practiceSubMenuCursor}
+		asl 
+		tax 
+
+		lda lookupTable_memoryWatchAddresses,x
+		sta {memorywatch01Pointer}
+		lda lookupTable_memoryWatchAddresses+1,x
+		sta {memorywatch01Pointer}+1
+
 		jmp exitMenu
 
-		.test_disableTool:
-			// disable tool
+		.memoryWatch01_disableTool:
+			// disable memory watch 01
 			lda {activeTools}
-			and {TOOLS_TestToolBitUnSet}
+			and {TOOLS_MemoryWatch01ToolBitUnSet}
 			sta {activeTools}
+
 			jmp exitMenu
 
+
+	action_memoryWatch02:
+		ldx #$05
+		jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
+
+		ldx {INDEX_MemoryWatchTextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// select memory watch for slot 02
+		
+		lda {practiceSubMenuCursor}
+		cmp {MEMORYWATCHMENU_DisabledIndex}
+		beq .memoryWatch02_disableTool
+
+		// enable memory watch
+		lda {activeTools}
+		ora {TOOLS_MemoryWatch02ToolBitSet}
+		sta {activeTools}
+
+		// store pointer to memory location it needs to watch
+		lda {practiceSubMenuCursor}
+		asl 
+		tax 
+
+		lda lookupTable_memoryWatchAddresses,x
+		sta {memorywatch02Pointer}
+		lda lookupTable_memoryWatchAddresses+1,x
+		sta {memorywatch02Pointer}+1
+
+		jmp exitMenu
+
+		.memoryWatch02_disableTool:
+			// disable memory watch 02
+			lda {activeTools}
+			and {TOOLS_MemoryWatch02ToolBitUnSet}
+			sta {activeTools}
+
+			jmp exitMenu
+
+
+	action_memoryWatch03:
+		ldx #$05
+		jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
+
+		ldx {INDEX_MemoryWatchTextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// select memory watch for slot 03
+		
+		lda {practiceSubMenuCursor}
+		cmp {MEMORYWATCHMENU_DisabledIndex}
+		beq .memoryWatch03_disableTool
+
+		// enable memory watch
+		lda {activeTools}
+		ora {TOOLS_MemoryWatch03ToolBitSet}
+		sta {activeTools}
+
+		// store pointer to memory location it needs to watch
+		lda {practiceSubMenuCursor}
+		asl 
+		tax 
+
+		lda lookupTable_memoryWatchAddresses,x
+		sta {memorywatch03Pointer}
+		lda lookupTable_memoryWatchAddresses+1,x
+		sta {memorywatch03Pointer}+1
+
+		jmp exitMenu
+
+		.memoryWatch03_disableTool:
+			// disable memory watch 03
+			lda {activeTools}
+			and {TOOLS_MemoryWatch03ToolBitUnSet}
+			sta {activeTools}
+
+			jmp exitMenu
 
 	
 	action_reset:

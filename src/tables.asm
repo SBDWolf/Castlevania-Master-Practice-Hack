@@ -2,20 +2,23 @@ bank 5
 base $8000
 org {bank5_freeSpaceData}
 	mainPauseMenu:
-		dw initWhilePause,constructMenu00
-		dw bufferFrame,constructMenu01
-		dw bufferFrame,drawText
+		dw initWhilePause,openMenu_clearHUD00
+		dw bufferFrame,openMenu_clearHUD01
+		dw bufferFrame,printMenuTextOptions
 		dw bufferFrame,runMenu
-		dw bufferFrame,deconstructMenu00
-		dw bufferFrame,deconstructMenu01
+		dw bufferFrame,closeMenu_clearHUD00
+		dw bufferFrame,closeMenu_clearHUD01
 		dw bufferFrame,reBuildHUD
 		dw bufferFrame,menuAction			
 		dw bufferFrame,closeMenu		
     
     textTable_menuOptions:							// this two following tables need to have the same size. They use the same index to execute the program 							
 		dw text_timer
+		dw text_scrollGlitch
 		dw text_memoryWatch00
-		dw text_toolTest
+		dw text_memoryWatch01
+		dw text_memoryWatch02
+		dw text_memoryWatch03
 		dw text_reset								
 		dw text_whipLevelSelect
 		dw text_subweaponSelect 
@@ -26,32 +29,41 @@ org {bank5_freeSpaceData}
         dw $FFFF    
 
 	text_timer:
-		db "TIMER       /"
+		db "TIMER        /"
+	text_scrollGlitch:
+		db "SCROLL GLITCH/"
 	text_memoryWatch00:
-		db "VIEWER 1    /"
-	text_toolTest:
-		db "TOOL TEST   /"
-	text_reset:
-		db "RESET STAGE /"
+		db "VIEWER 1     /"
+	text_memoryWatch01:
+		db "VIEWER 2     /"
+	text_memoryWatch02:
+		db "VIEWER 3     /"
+	text_memoryWatch03:
+		db "VIEWER 4     /"
+	text_reset: 
+		db "RESET STAGE  /"
 	text_whipLevelSelect:
-		db "WHIP LEVEL  /"		
+		db "WHIP LEVEL   /"		
 	text_subweaponSelect:
-		db "SUBWEAPON   /"
+		db "SUBWEAPON    /"
 	text_subweaponMultiplierSelect:
-		db "MULTIPLIER  /"
+		db "MULTIPLIER   /"
 	text_gameLoop:
-		db "GAME LOOP   /"
+		db "GAME LOOP    /"
 	text_stageSelect:
-		db "STAGE SELECT/"
+		db "STAGE SELECT /"
 	text_about:
-		db "ABOUT       /"
+		db "ABOUT        /"
 	
 	                     
 
 	pointerTable_actionTable:
-		dw action_timer	
+		dw action_timer
+		dw action_scrollGlitch
 		dw action_memoryWatch00
-		dw action_toolTest	
+		dw action_memoryWatch01
+		dw action_memoryWatch02
+		dw action_memoryWatch03
 		dw action_reset
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
@@ -64,7 +76,8 @@ org {bank5_freeSpaceData}
 
 	submenu_text_master_table:
 		dw textTable_timer
-		dw textTable_memoryWatch00
+		dw textTable_scrollGlitch
+		dw textTable_memoryWatch
 		dw textTable_subweaponSelect
 		dw textTable_about
 		// etc
@@ -75,51 +88,81 @@ org {bank5_freeSpaceData}
 		db "DISABLED   /"
 		db "ENABLED    /"
 
-	textTable_memoryWatch00:
-		db $05,$11,$1D,$29,$35
+	textTable_scrollGlitch:
+		db $02,$0E
 		db "DISABLED   /"
-		db "LAG COUNTER/"
-		db "SIMON X    /"
+		db "ENABLED    /"
+
+	textTable_memoryWatch:
+		// header contains index of each text entry
+		db $06,$12,$1E,$2A,$36,$42
+		db "DISABLED   /"
+		db "SIMON K    /"
 		db "SIMON Y    /"
 		db "WHIP FRAMES/"
-		// etc
+		db "BOSS HEALTH/"
+		db "BLK COUNTER/"
 
 	lookupTable_memoryWatchAddresses:
 		dw $0000
-		dw {totalLagFrameCounter}
 		dw {simonXHighByte}
 		dw {simonY}
 		dw {whipAnimationTimer}
+		dw {currentBossHealth}
+		dw {blockCounter}
 
 	textTable_subweaponSelect:
 		db $05,$11,$1D,$29,$35
 		db "DAGGER     /"
 		db "CROSS      /"
 		db "HOLY WATER /"
-		db "HATCHET    /"						//TODO: FIX (as if)
+		db "HATCHET    /"
 		db "STOPWATCH  /"
+		// would be nice to not have to call the axe "hatchet" but there is no X character in castlevania's tileset :(
 
 	lookupTable_subweaponSelect:
-		// 0x08 = dagger, 0x09 = cross, 0x0B = holy water 0x0D = axe, 0x0F
+		// 0x08 = dagger, 0x09 = cross, 0x0B = holy water 0x0D = axe, 0x0F = stopwatch
 		db $08,$09,$0B,$0D,$0F
 
 	
 	textTable_about:
-		// TODO: header -- maybe i don't need it in this case after all
 		db $01,$20,$20,"CASTLEVANIA PRACTICE HACK V0.DEV/"
 		db "    FOR A USER MANUAL VISIT     /"
+		// done in two passes, so the ppu job destination is included in this third line
 		db $01,$20,$60,"   TINYURL.COM SLASH 2P4E6FFM   /"
 		db "                                /"
 
 	pointerTable_toolsList:
-		dw tool_test
-		dw tool_memoryWatch00
-		dw $FFFF
-		dw $FFFF
-		dw $FFFF
-		dw $FFFF
+		// WIP, $FFFF bytes are filler
 		dw tool_timer
+		dw tool_memoryWatch00
+		dw tool_memoryWatch01
+		dw tool_memoryWatch02
+		dw tool_memoryWatch03
+		dw tool_scrollGlitch
 		dw $FFFF
+		dw $FFFF
+
+	pointerTable_scrollGlitchStageCode
+		dw scrollGlitch_stage00
+		dw scrollGlitch_stage01
+		dw scrollGlitch_stage02
+		dw scrollGlitch_stage03
+		dw scrollGlitch_stage04
+		dw scrollGlitch_stage05
+		dw scrollGlitch_stage06
+		dw scrollGlitch_stage07
+		dw scrollGlitch_stage08
+		dw scrollGlitch_stage09
+		dw scrollGlitch_stage10
+		dw scrollGlitch_stage11
+		dw scrollGlitch_stage12
+		dw scrollGlitch_stage13
+		dw scrollGlitch_stage14
+		dw scrollGlitch_stage15
+		dw scrollGlitch_stage16
+		dw scrollGlitch_stage17
+		dw scrollGlitch_stage18
 	
 	pointerTable_toolsEnd:
 		dw returnToGame
@@ -151,6 +194,7 @@ org {bank5_freeSpaceData}
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 80
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9 // 90
 
+	// used for memory view
 	hex_digits_table:
 		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9,$E0,$E1,$E2,$E3,$E4,$E5
 

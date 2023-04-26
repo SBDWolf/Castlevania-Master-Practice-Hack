@@ -1,5 +1,5 @@
 tool_test:
-    // test
+    // test tool. to be deleted
     inc {currentSubweapon}
 
     // execute next tool

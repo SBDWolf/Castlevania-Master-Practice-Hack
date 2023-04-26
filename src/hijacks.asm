@@ -16,6 +16,7 @@ org {bank7_NMIHijack}
 org {bank7_freeSpaceforMenu}
 		lda #$05
 		sta $8000
+		// in menu_main.asm
 		jsr menuRoutine
 		jsr {bank7_pauseCheck}
 		jmp {bank7_switchToBank_Bank6}
@@ -27,7 +28,7 @@ org {bank7_freeSpaceforTools}
 		jmp toolsRoutine
 
 org {bank7_freedUpSpaceForLagCounter}
-		// this code will only run if the game is lagging (questionable)
+		// this code will only run if the game is lagging. it will also run during lag frames on loading screeens!
 		inc {consecutiveLagFramesCounter}
 		// hijack fix
 		lda $FE
