@@ -143,7 +143,7 @@ org {bank5_freeSpaceData}
 		dw $FFFF
 		dw $FFFF
 
-	pointerTable_scrollGlitchStageCode
+	pointerTable_scrollGlitchStageCode:
 		dw scrollGlitch_stage00
 		dw scrollGlitch_stage01
 		dw scrollGlitch_stage02

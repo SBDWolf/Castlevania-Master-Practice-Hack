@@ -52,6 +52,10 @@
 		rts 
         
     scrollGlitch_exitTool:
+        // restore tool index
+        pla 
+        tax 
+
         // execute next tool
 +;      inx 
         inx 

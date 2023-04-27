@@ -5,7 +5,7 @@
 		beq +
 		jsr killSimon
         jmp scrollGlitch_exitTool
-	+	lda $5F5
++;		lda $5F5
 		beq .stage06Pass
 		jsr killSimon
 

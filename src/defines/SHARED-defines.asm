@@ -23,7 +23,7 @@ define PRACTICEMENU_LastPhaseIndex #$10
 
 // keep these updated when adding new menu options that uses text selection :)
 define INDEX_TimerTextMasterTableIndex #$00
-define INDEX_ScrollGlitchTextMasterTableIndex #$04
+define INDEX_ScrollGlitchTextMasterTableIndex #$02
 define INDEX_MemoryWatchTextMasterTableIndex #$04
 define INDEX_SubweaponTextMasterTableIndex #$06
 define INDEX_AboutTextMasterTableIndex 8

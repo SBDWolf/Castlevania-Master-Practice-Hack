@@ -10,7 +10,7 @@
         jmp scrollGlitch_exitTool
 
 +;		lda $5E7
-		bne .stage13Pass
+		bne .stage05Pass
 		jsr killSimon
 
         .stage05Pass:
