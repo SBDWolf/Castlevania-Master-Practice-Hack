@@ -3,6 +3,7 @@
         txa 
         pha 
 
+
         // we use a table that contains all the pointers to the scroll glitch code for the current stage. we read from this table, then jump to that pointer
         ldy {currentStage}
         tya 
@@ -19,7 +20,6 @@
     scrollGlitch_stage02:
     scrollGlitch_stage03:
     scrollGlitch_stage04:
-    scrollGlitch_stage07:
     scrollGlitch_stage08:
     scrollGlitch_stage09:
     scrollGlitch_stage10:
@@ -34,27 +34,24 @@
         incsrc "src/tools/scroll_glitch/tool_scroll_glitch_stage05.asm"
     scrollGlitch_stage06:
         incsrc "src/tools/scroll_glitch/tool_scroll_glitch_stage06.asm"
-        jmp scrollGlitch_exitTool
+    scrollGlitch_stage07:
+        incsrc "src/tools/scroll_glitch/tool_scroll_glitch_stage07.asm"
     scrollGlitch_stage13:
         incsrc "src/tools/scroll_glitch/tool_scroll_glitch_stage13.asm"
-        jmp scrollGlitch_exitTool
     scrollGlitch_stage14:
         incsrc "src/tools/scroll_glitch/tool_scroll_glitch_stage14.asm"
-        jmp scrollGlitch_exitTool
     scrollGlitch_stage17:
         incsrc "src/tools/scroll_glitch/tool_scroll_glitch_stage17.asm"
-        jmp scrollGlitch_exitTool
 
-    
-    killSimon:
-		lda #$00
-		sta {currentPlayerHealth}	
-		rts 
-        
+
+    incsrc "src/tools/scroll_glitch/tool_scroll_glitch_kill_simon.asm"
+
     scrollGlitch_exitTool:
         // restore tool index
         pla 
         tax 
+
+
 
         // execute next tool
 +;      inx 
@@ -64,4 +61,4 @@
         lda ({toolsToRunPointerList})+1,x
         sta $01
 
-            jmp ($0000)
+        jmp ($0000)

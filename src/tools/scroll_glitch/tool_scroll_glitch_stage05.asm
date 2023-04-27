@@ -2,16 +2,15 @@
         beq .stage05Pass
 
         lda {isSimonFacingLeft}
-        bne .stage05Pass
+        beq .stage05Pass
 
         lda $5C7
         beq +
-        jsr killSimon
-        jmp scrollGlitch_exitTool
+        jmp killSimon
 
 +;		lda $5E7
 		bne .stage05Pass
-		jsr killSimon
+		jmp killSimon
 
         .stage05Pass:
             jmp scrollGlitch_exitTool

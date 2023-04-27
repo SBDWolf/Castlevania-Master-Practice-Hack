@@ -1,0 +1,5 @@
+- most end-of-room screen locks seem broken
+- more variants of the scroll glitch tool
+- input display
+- dracula tool
+- cleanup
