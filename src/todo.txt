@@ -1,5 +1,6 @@
 - most end-of-room screen locks seem broken
 - more variants of the scroll glitch tool
+- heart count selection
 - input display
 - dracula tool
 - cleanup
