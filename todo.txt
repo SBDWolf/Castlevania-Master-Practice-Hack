@@ -1,4 +1,0 @@
-- fix life counter refreshing when getting a 1up
-- make timer handle lag
-- make scroll glitch tool
-- make memory watch tool
