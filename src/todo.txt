@@ -8,4 +8,5 @@
 - input display
 - dracula tool
 - fix life counter refreshing when getting a 1up
+- reset timer upon stage selection and stage reset
 - cleanup
