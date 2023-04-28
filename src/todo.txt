@@ -12,4 +12,5 @@
 - feature: input display
 - feature: dracula tool
 - feature: heart count selection
+- feature: add ability to turn off music
 - cleanup
