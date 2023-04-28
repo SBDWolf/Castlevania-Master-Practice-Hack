@@ -1,5 +1,6 @@
 - most end-of-room screen locks seem broken
 - more variants of the scroll glitch tool
+- implement single block mode on the scroll glitch tool
 - add pause before stage reset
 - allow pressing up in the menu to wrap back up
 - allow pressing B to back out of a submenu
