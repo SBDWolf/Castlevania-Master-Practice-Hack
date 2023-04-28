@@ -1,12 +1,15 @@
 - most end-of-room screen locks seem broken
 - more variants of the scroll glitch tool
-- heart count selection
 - add pause before stage reset
 - allow pressing up in the menu to wrap back up
 - allow pressing B to back out of a submenu
-- allow making keybinds
-- input display
-- dracula tool
 - fix life counter refreshing when getting a 1up
 - reset timer upon stage selection and stage reset
+- feature: allow keybinds on 2nd controller
+- feature: allow making keybinds
+- feature: slow down
+- feature: frame advance
+- feature: input display
+- feature: dracula tool
+- feature: heart count selection
 - cleanup
