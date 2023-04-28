@@ -5,6 +5,8 @@
 - allow pressing B to back out of a submenu
 - fix life counter refreshing when getting a 1up
 - reset timer upon stage selection and stage reset
+- fix crash after beating stage with scroll glitch tool active
+- fix frame counter being different on level select (enemy patterns in stage 16 are different at the very least)
 - feature: allow keybinds on 2nd controller
 - feature: allow making keybinds
 - feature: slow down
