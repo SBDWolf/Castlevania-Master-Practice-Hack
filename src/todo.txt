@@ -1,12 +1,13 @@
-- most end-of-room screen locks seem broken on the us version
 - more variants of the scroll glitch tool
 - implement single block mode on the scroll glitch tool
 - add pause before stage reset
 - allow pressing up in the menu to wrap back up
 - allow pressing B to back out of a submenu
-- fix life counter refreshing when getting a 1up
 - reset timer upon stage selection and stage reset
+- fix life counter refreshing when getting a 1up
+- fix broken end-of-room screen locks on the us version
 - fix frame counter being different on level select (enemy patterns in stage 16 are different at the very least)
+- fix occasional glitching that occasionally occurs when closing the menu (probably by doing it in 3 passes)
 - feature: allow keybinds on 2nd controller
 - feature: allow making keybinds
 - feature: slow down

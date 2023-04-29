@@ -13,35 +13,26 @@ org {bank5_freeSpaceData}
 		dw bufferFrame,closeMenu		
     
     textTable_menuOptions:							// this two following tables need to have the same size. They use the same index to execute the program 							
-		dw text_timer
-		dw text_scrollGlitch
-		dw text_memoryWatch00
-		dw text_memoryWatch01
-		dw text_memoryWatch02
-		dw text_memoryWatch03
 		dw text_reset								
+		dw text_stageSelect
 		dw text_whipLevelSelect
 		dw text_subweaponSelect 
 		dw text_subweaponMultiplierSelect
 		dw text_gameLoop           	
-		dw text_stageSelect
+		dw text_memoryWatch00
+		dw text_memoryWatch01
+		dw text_memoryWatch02
+		dw text_memoryWatch03
+		dw text_timer
+		dw text_scrollGlitch
 		dw text_about
         dw $FFFF    
 
-	text_timer:
-		db "TIMER        /"
-	text_scrollGlitch:
-		db "SCROLL GLITCH/"
-	text_memoryWatch00:
-		db "VIEWER 1     /"
-	text_memoryWatch01:
-		db "VIEWER 2     /"
-	text_memoryWatch02:
-		db "VIEWER 3     /"
-	text_memoryWatch03:
-		db "VIEWER 4     /"
+
 	text_reset: 
 		db "RESET STAGE  /"
+	text_stageSelect:
+		db "STAGE SELECT /"
 	text_whipLevelSelect:
 		db "WHIP LEVEL   /"		
 	text_subweaponSelect:
@@ -50,26 +41,36 @@ org {bank5_freeSpaceData}
 		db "MULTIPLIER   /"
 	text_gameLoop:
 		db "GAME LOOP    /"
-	text_stageSelect:
-		db "STAGE SELECT /"
+	text_memoryWatch00:
+		db "VIEWER 1     /"
+	text_memoryWatch01:
+		db "VIEWER 2     /"
+	text_memoryWatch02:
+		db "VIEWER 3     /"
+	text_memoryWatch03:
+		db "VIEWER 4     /"
+	text_timer:
+		db "TIMER        /"
+	text_scrollGlitch:
+		db "SCROLL GLITCH/"
 	text_about:
 		db "ABOUT        /"
 	
 	                     
 
 	pointerTable_actionTable:
-		dw action_timer
-		dw action_scrollGlitch
-		dw action_memoryWatch00
-		dw action_memoryWatch01
-		dw action_memoryWatch02
-		dw action_memoryWatch03
 		dw action_reset
+		dw action_stageSelect
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
 		dw action_subweaponMultiplierSelect
 		dw action_gameLoop
-		dw action_stageSelect
+		dw action_memoryWatch00
+		dw action_memoryWatch01
+		dw action_memoryWatch02
+		dw action_memoryWatch03
+		dw action_timer
+		dw action_scrollGlitch
 		dw action_about
 	
 	
