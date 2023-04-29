@@ -20,6 +20,7 @@ define TRUE #$01
 define PRACTICEMENU_DeconstructMenu00PhaseIndex #$08
 define PRACTICEMENU_MenuActionPhaseIndex #$0E
 define PRACTICEMENU_LastPhaseIndex #$10
+define PRACTICEMENU_MenuEntryCount #$0E
 
 // keep these updated when adding new menu options that uses text selection :)
 define INDEX_TimerTextMasterTableIndex #$00

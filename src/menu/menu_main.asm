@@ -445,15 +445,28 @@
 		tay
 		lda textTable_menuOptions,y
 		cmp #$FF
-		beq endDownCheckInMenu
 		
+		//TODO: there's a bit of spaghetti repeated code here, please clean me up :)
+		beq overflowCursor
+
 		inc {practiceTextPos}					// move list on screen
 		bpl skipCursorMovingPastMenuBounderies
 	+;	sta {practiceMenuCursor}
+
 	skipCursorMovingPastMenuBounderies:
 		
 		lda #$02								// clear redraw
-		sta {practiceMenuPhaseIndex}		
+		sta {practiceMenuPhaseIndex}	
+		bvc endDownCheckInMenu
+
+	overflowCursor:
+		lda #$00
+		sta {practiceTextPos}
+		sta {practiceMenuCursor}
+		lda #$02								// clear redraw
+		sta {practiceMenuPhaseIndex}	
+
+
 	endDownCheckInMenu:	
 	
 		lda {currentInputOneFrame}				// ------------------- press up -------------------------------	
@@ -495,6 +508,7 @@
 		lda {PRACTICEMENU_MenuActionPhaseIndex}	// enter sub menu 
 		sta {practiceMenuPhaseIndex}	
 	+;	rts 
+
 
 	menuAction:
 		jsr menuActionJumpText2MenuTable
