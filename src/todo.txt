@@ -4,6 +4,8 @@
 - allow pressing up in the menu to wrap back up
 - allow pressing B to back out of a submenu
 - reset timer upon stage selection and stage reset
+- music sometimes goes missing when skipping intro screen
+- there is a glitched castle sprite when skipping the credits
 - fix life counter refreshing when getting a 1up
 - fix broken end-of-room screen locks on the us version
 - fix frame counter being different on level select (enemy patterns in stage 16 are different at the very least)
