@@ -163,6 +163,8 @@ org {bank5_freeSpaceData}
 		dw scrollGlitch_stage16
 		dw scrollGlitch_stage17
 		dw scrollGlitch_stage18
+		dw scrollGlitch_stage19Placeholder
+		dw scrollGlitch_stageMap
 	
 	pointerTable_toolsEnd:
 		dw returnToGame

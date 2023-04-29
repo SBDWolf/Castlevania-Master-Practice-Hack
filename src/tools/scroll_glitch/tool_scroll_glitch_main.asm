@@ -28,6 +28,8 @@
     scrollGlitch_stage15:
     scrollGlitch_stage16:
     scrollGlitch_stage18:
+    scrollGlitch_stage19Placeholder:
+	scrollGlitch_stageMap:
         jmp scrollGlitch_exitTool
 
     scrollGlitch_stage05:
