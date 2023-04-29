@@ -1,4 +1,4 @@
-- most end-of-room screen locks seem broken
+- most end-of-room screen locks seem broken on the us version
 - more variants of the scroll glitch tool
 - implement single block mode on the scroll glitch tool
 - add pause before stage reset
