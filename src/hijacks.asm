@@ -53,14 +53,6 @@ org {bank7_mainJumpTable}+30
 		// this is hijacking the credits scene
 		dw allowSkippingCredits
 
-org {bank7_pauseCheck}+14
-		// letting the game pause even when pressing select, on top of start
-		and {MULTIPLEINPUT_StartOrSelect}
-
-org {bank7_pauseCheck}+32
-		// letting the game unpause even when pressing select, on top of start
-		and {MULTIPLEINPUT_StartOrSelect}
-
 org {bank7_deathHijack}
 		jsr levelLoadHijack
 

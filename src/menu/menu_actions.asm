@@ -415,4 +415,10 @@
     exitMenu:
 		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}
 		sta {practiceMenuPhaseIndex}
+		lda {FALSE}
+		sta {pauseFlag}
+		// clear A and B inputs for this frame. this makes it so that it doesn't process a whip when selecting a menu option
+		lda {currentInputOneFrame}
+		and #$3F
+		sta {currentInputOneFrame}
         rts 

@@ -30,21 +30,26 @@
 // -- menu framework and logic --------------------------------------
 	
 	initWhilePause:
-		// check if select is pressed, and open the menu if so 
-		lda {currentInputOneFrame}	
-		and {INPUT_Select}
+		// check if the game is currently paused, don't allow menu to be opened if so
+
 		// branch instructions are a CPU cycle slower if followed...
 		// ...so we want the path that is going to be taken during normal gameplay (that is, during action and the player is not opening the menu)...
 		// ... to be the fastest one.
+		lda {pauseFlag}
+		bne + 
+		rts 
+
+		// check if select is pressed, and open the menu if so 
++;		lda {currentInputOneFrame}	
+		and {INPUT_Select}
+
 		bne +
 		rts 
-	+;	lda #$01
++;		lda #$01
 		sta {practiceMenuPhaseIndex}		
-		// hack: unset the pause flag. if the game is already paused, it'll allow this menu to come up with select while keeping the game paused.
-		// this is because after unsetting this flag, the game will immediately pause again, instead of unpausing.	
-		// other variables are also initialized to 00 here
+
+		// initialize some variables tused in the menu
 		lda #$00
-		sta {pauseFlag}
 		sta {practiceSubMenuCursor}	
 		sta {practiceAboutPrintPhase}
 		rts 
@@ -291,10 +296,6 @@
 		sta {toolsToRunPointerList},y
 		lda pointerTable_toolsEnd+1
 		sta {toolsToRunPointerList}+1,y
-
-		// unpause, intended for if coming after selecting a submenu option
-		lda {FALSE}
-		sta {pauseFlag}
 		
 		
 		// clear hud. this is again done in two passes. this is the first pass
