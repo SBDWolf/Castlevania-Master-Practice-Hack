@@ -310,6 +310,19 @@
         sta {currentSubweaponMultiplier}
 
 		jmp exitMenu
+
+	action_heartSelect:
+		ldx #99
+        jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
+
+		jmp genericMenuPrint_selectBetweenNumericalValue
+     
++;      lda {practiceSubMenuCursor}
+        sta {currentHeartCount}
+
+		jmp exitMenu
 		
 
 	action_gameLoop:

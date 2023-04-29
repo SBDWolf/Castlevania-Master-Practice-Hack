@@ -18,6 +18,7 @@ org {bank5_freeSpaceData}
 		dw text_whipLevelSelect
 		dw text_subweaponSelect 
 		dw text_subweaponMultiplierSelect
+		dw text_heartSelect
 		dw text_gameLoop           	
 		dw text_memoryWatch00
 		dw text_memoryWatch01
@@ -39,6 +40,8 @@ org {bank5_freeSpaceData}
 		db "SUBWEAPON    /"
 	text_subweaponMultiplierSelect:
 		db "MULTIPLIER   /"
+	text_heartSelect:
+		db "HEARTS       /"
 	text_gameLoop:
 		db "GAME LOOP    /"
 	text_memoryWatch00:
@@ -64,6 +67,7 @@ org {bank5_freeSpaceData}
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
 		dw action_subweaponMultiplierSelect
+		dw action_heartSelect
 		dw action_gameLoop
 		dw action_memoryWatch00
 		dw action_memoryWatch01
