@@ -2,7 +2,6 @@
 - implement single block mode on the scroll glitch tool
 - add pause before stage reset
 - allow pressing A to back out of a submenu
-- reset timer upon stage selection and stage reset
 - music sometimes goes missing when skipping intro screen
 - there is a glitched castle sprite when skipping the credits
 - fix life counter refreshing when getting a 1up
@@ -17,3 +16,4 @@
 - feature: dracula tool
 - feature: add ability to turn off music
 - cleanup, particularly in the main menu code area where i made the up underflow and down overflow
+- revisit menu function organization (i don't know if i like having all the incsrc's in main.asm, for example)

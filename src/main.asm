@@ -23,6 +23,7 @@ org {bank5_freeSpaceCode}
 incsrc "src/menu/menu_main.asm"
 incsrc "src/menu/menu_submenu.asm"
 incsrc "src/menu/menu_actions.asm"
+incsrc "src/menu/menu_utility_common.asm"
 
 incsrc "src/tools/tools_main.asm"
 

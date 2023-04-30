@@ -17,19 +17,7 @@
 		sta {activeTools}
 
 		// initialize stuff used for the timer
-		lda #$00
-		sta {timerLevelTimerMinutes}
-		sta {timerLevelTimerSeconds}
-		sta {timerLevelTimerFrames}
-		sta {timerRoomTimerCurrentMinutes}
-		sta {timerRoomTimerCurrentSeconds}
-		sta {timerRoomTimerCurrentFrames}
-		sta {timerRoomTimerPreviousMinutes}
-		sta {timerRoomTimerPreviousSeconds}
-		sta {timerRoomTimerPreviousFrames}
-		sta {timerPreviousFrameStage}
-		sta {timerPreviousFrameSubStage}
-		sta {timerAlreadyRanUpdatesFlag}
+		jsr resetTimerVariables
 
 		jmp exitMenu
 
@@ -264,6 +252,9 @@
 
 		lda {TRUE}
 		sta {practiceShouldKeepPlayerStatsOnDeathFlag}
+
+		// reset timer
+		jsr resetTimerVariables
 		
 		lda {PRACTICEMENU_DeconstructMenu00PhaseIndex}								// exit menu
 		sta {practiceMenuPhaseIndex}
@@ -359,6 +350,10 @@
 		// i don't know what this 08 is, was in the original code for the level select
 		lda #$08
 		sta {systemSubState}
+
+		// reset timer
+		jsr resetTimerVariables
+
 		jmp exitMenu
 
 	action_about:
@@ -398,18 +393,6 @@
 
 		// allow any input to close the menu
 +;		jmp allowAnyInputToCloseMenu 
-
-
-	genericMenuPrint_selectBetweenNumericalValue:
-		jsr printSubMenuCursor
-		jsr printCurrentNumericalValue
-		rts 
-
-	genericMenuPrint_selectBetweenTextValues:
-		// needs x register as a parameter to determine the index of the text master table to be used to print menu options
-		jsr printSubMenuCursor
-      	jsr printCurrentTextValue
-		rts 
 
 
     exitMenu:

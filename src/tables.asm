@@ -131,7 +131,7 @@ org {bank5_freeSpaceData}
 
 	
 	textTable_about:
-		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.1 /"
+		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.2 /"
 		db "    FOR A USER MANUAL VISIT     /"
 		// done in two passes, so the ppu job destination is included in this third line
 		db $01,$20,$60,"   TINYURL.COM SLASH 2P4E6FFM   /"
