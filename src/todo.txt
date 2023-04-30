@@ -1,8 +1,7 @@
 - more variants of the scroll glitch tool
 - implement single block mode on the scroll glitch tool
 - add pause before stage reset
-- allow pressing up in the menu to wrap back up
-- allow pressing B to back out of a submenu
+- allow pressing A to back out of a submenu
 - reset timer upon stage selection and stage reset
 - music sometimes goes missing when skipping intro screen
 - there is a glitched castle sprite when skipping the credits
@@ -17,4 +16,4 @@
 - feature: input display
 - feature: dracula tool
 - feature: add ability to turn off music
-- cleanup
+- cleanup, particularly in the main menu code area where i made the up underflow and down overflow

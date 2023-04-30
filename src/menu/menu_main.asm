@@ -485,7 +485,7 @@
 		bne +
 		
 		adc {practiceTextPos}					// check if we are at the end of the list
-		beq endUpCheckInMenu
+		beq underflowCursorIndex
 		
 		dec {practiceTextPos}
 		bpl doNotUnderflowCursorIndexSkip
@@ -494,7 +494,19 @@
 	doNotUnderflowCursorIndexSkip:	
 		
 		lda #$02								// clear redraw
-		sta {practiceMenuPhaseIndex}		
+		sta {practiceMenuPhaseIndex}
+		clv 
+		bvc endUpCheckInMenu	
+
+	underflowCursorIndex:
+		lda #$0A // make me a constant!
+		sta {practiceTextPos}
+		lda #$03
+		sta {practiceMenuCursor}
+		
+		lda #$02								// clear redraw
+		sta {practiceMenuPhaseIndex}
+
 	endUpCheckInMenu:	
 		
 		lda {currentInputOneFrame}				// ------------------- press B button -------------------------------	
