@@ -19,39 +19,52 @@
 		lda {currentInputOneFrame}
 		and {MULTIPLEINPUT_UpOrDown}
 		cmp #$00
-		beq checkForAPress 
+		beq checkForBPress 
 		cmp {INPUT_Down}
 		beq pressedDown
 		// assuming up got pressed, which means if you press up+down, it will get interpreted as up
 		inc {practiceSubMenuCursor}
 		cpx {practiceSubMenuCursor}
 		bcc +
-		bvc checkForAPress 
+		bvc checkForBPress 
 
 		// overflow cursor value
 +;		lda #$00
 		sta {practiceSubMenuCursor}
-		bvc checkForAPress  
+		bvc checkForBPress  
 
 	pressedDown:
 		dec {practiceSubMenuCursor}
 		lda {practiceSubMenuCursor}
 		cmp #$FF
 		beq +
-		bvc checkForAPress 
+		bvc checkForBPress 
 
 		// underflow cursor value
 +;		stx {practiceSubMenuCursor}
 	
-	checkForAPress:
+	checkForBPress:
 		lda {currentInputOneFrame}
 		and {INPUT_B}
 		cmp {INPUT_B}
-		bne +
+		bne checkForAPress
 		// should execute the menu action
 		ldy {TRUE}
-+;		
 		rts 
+
+	checkForAPress:
+		lda {currentInputOneFrame}
+		and {INPUT_A}
+		cmp {INPUT_A}
+		bne +
+
+		// clear submenu cursor index
+		lda #$00
+		sta {practiceSubMenuCursor}
+		// exit submenu
+		lda #$01
+		sta {practiceMenuPhaseIndex}
++;		rts 
 
 	printCurrentNumericalValue:
 		ldy {practiceSubMenuCursor}

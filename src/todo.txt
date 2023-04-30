@@ -1,13 +1,13 @@
-- more variants of the scroll glitch tool
-- implement single block mode on the scroll glitch tool
-- add pause before stage reset
-- allow pressing A to back out of a submenu
-- music sometimes goes missing when skipping intro screen
-- there is a glitched castle sprite when skipping the credits
+- fix music sometimes going missing when skipping intro screen
+- fix glitched castle sprite when skipping the credits
+- fix fact that the defualt submenu option flashes for one frame when pressing A to quit out of a submenu
 - fix life counter refreshing when getting a 1up
 - fix broken end-of-room screen locks on the us version
 - fix frame counter being different on level select (enemy patterns in stage 16 are different at the very least)
 - fix occasional glitching that occasionally occurs when closing the menu (probably by doing it in 3 passes)
+- feature: more variants of the scroll glitch tool
+- feature: implement single block mode on the scroll glitch tool
+- feature: add pause before stage reset
 - feature: allow keybinds on 2nd controller
 - feature: allow making keybinds
 - feature: slow down
