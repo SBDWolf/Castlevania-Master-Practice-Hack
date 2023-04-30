@@ -26,6 +26,7 @@ org {bank5_freeSpaceData}
 		dw text_memoryWatch03
 		dw text_timer
 		dw text_scrollGlitch
+		dw text_inputDisplay
 		dw text_about
         dw $FFFF    
 
@@ -56,6 +57,8 @@ org {bank5_freeSpaceData}
 		db "TIMER        /"
 	text_scrollGlitch:
 		db "SCROLL GLITCH/"
+	text_inputDisplay:
+		db "INPUT DISPLAY/"
 	text_about:
 		db "ABOUT        /"
 	
@@ -75,25 +78,20 @@ org {bank5_freeSpaceData}
 		dw action_memoryWatch03
 		dw action_timer
 		dw action_scrollGlitch
+		dw action_inputDisplay
 		dw action_about
 	
 	
 
 	submenu_text_master_table:
-		dw textTable_timer
-		dw textTable_scrollGlitch
+		dw textTable_binaryEnable
 		dw textTable_memoryWatch
 		dw textTable_subweaponSelect
 		dw textTable_about
 		// etc
 
-	textTable_timer:
+	textTable_binaryEnable:
 		// header contains index of each text entry
-		db $02,$0E
-		db "DISABLED   /"
-		db "ENABLED    /"
-
-	textTable_scrollGlitch:
 		db $02,$0E
 		db "DISABLED   /"
 		db "ENABLED    /"
@@ -145,7 +143,7 @@ org {bank5_freeSpaceData}
 		dw tool_memoryWatch02
 		dw tool_memoryWatch03
 		dw tool_scrollGlitch
-		dw $FFFF
+		dw tool_inputDisplay
 		dw $FFFF
 
 	pointerTable_scrollGlitchStageCode:
@@ -211,6 +209,10 @@ org {bank5_freeSpaceData}
 		db $01,$20,$31,$DC,"   ",$FF,$00	
 	menuCursorPos:
 		dw $2021,$2041,$2061,$2081,$FF,$FF	
+
+	// used for the input display tool
+	inputDisplay_character_table:
+		db "BATS",$DC,$DC,$DC
 
 	// the subweapon frame is made up of 8 sprites
 	subweapon_frame_sprites:

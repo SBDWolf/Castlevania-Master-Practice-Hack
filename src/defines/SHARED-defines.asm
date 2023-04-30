@@ -20,14 +20,14 @@ define TRUE #$01
 define PRACTICEMENU_DeconstructMenu00PhaseIndex #$08
 define PRACTICEMENU_MenuActionPhaseIndex #$0E
 define PRACTICEMENU_LastPhaseIndex #$10
-define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0A
+// keep this updated if adding new menu entries
+define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0B
 
 // keep these updated when adding new menu options that uses text selection :)
-define INDEX_TimerTextMasterTableIndex #$00
-define INDEX_ScrollGlitchTextMasterTableIndex #$02
-define INDEX_MemoryWatchTextMasterTableIndex #$04
-define INDEX_SubweaponTextMasterTableIndex #$06
-define INDEX_AboutTextMasterTableIndex 8
+define INDEX_BinaryEnableTextMasterTableIndex #$00
+define INDEX_MemoryWatchTextMasterTableIndex #$02
+define INDEX_SubweaponTextMasterTableIndex #$04
+define INDEX_AboutTextMasterTableIndex 6
 
 define SYSTEMSTATE_TitleScreen #$02
 define SYSTEMSTATE_InGame #$05
@@ -64,6 +64,7 @@ define TOOLS_MemoryWatch01ToolBitSet #$20
 define TOOLS_MemoryWatch02ToolBitSet #$10
 define TOOLS_MemoryWatch03ToolBitSet #$08
 define TOOLS_ScrollGlitchToolBitSet #$04
+define TOOLS_InputDisplayToolBitSet #$02
 
 define TOOLS_TimerToolBitUnSet #$7F
 define TOOLS_MemoryWatch00ToolBitUnSet #$BF
@@ -71,6 +72,7 @@ define TOOLS_MemoryWatch01ToolBitUnSet #$DF
 define TOOLS_MemoryWatch02ToolBitUnSet #$EF
 define TOOLS_MemoryWatch03ToolBitUnSet #$F7
 define TOOLS_ScrollGlitchToolBitUnSet #$FB
+define TOOLS_InputDisplayToolBitUnSet #$FD
 
 // -- RAM Addresses -------------------------------------------------
 

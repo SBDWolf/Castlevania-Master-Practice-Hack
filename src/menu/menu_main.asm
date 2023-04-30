@@ -499,7 +499,7 @@
 		bvc endUpCheckInMenu	
 
 	underflowCursorIndex:
-		lda #$0A // make me a constant!
+		lda {PRACTICEMENU_MenuEntryCountForUpPressUnderflow}
 		sta {practiceTextPos}
 		lda #$03
 		sta {practiceMenuCursor}

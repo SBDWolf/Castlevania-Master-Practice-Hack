@@ -44,11 +44,11 @@
 		jmp {bank7_switchToBank_Bank6}
 
 
-incsrc "src/tools/tool_test.asm"
 incsrc "src/tools/timer/tool_timer_main.asm"
 incsrc "src/tools/memory_watch/tool_memory_watch_00.asm"
 incsrc "src/tools/memory_watch/tool_memory_watch_01.asm"
 incsrc "src/tools/memory_watch/tool_memory_watch_02.asm"
 incsrc "src/tools/memory_watch/tool_memory_watch_03.asm"
 incsrc "src/tools/scroll_glitch/tool_scroll_glitch_main.asm"
+incsrc "src/tools/input_display/tool_input_display.asm"
 

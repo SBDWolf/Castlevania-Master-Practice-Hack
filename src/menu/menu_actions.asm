@@ -1,10 +1,40 @@
+	action_inputDisplay:
+        ldx #$01
+		jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
+
+		ldx {INDEX_BinaryEnableTextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// enable/disable input display
+		lda {practiceSubMenuCursor}
+		cmp {TRUE}
+		bne .inputDisplay_disableTool
+		// enable input display
+		lda {activeTools}
+		ora {TOOLS_InputDisplayToolBitSet}
+		sta {activeTools}
+
+		jmp exitMenu
+
+
+		.inputDisplay_disableTool:
+			// disable timer
+			lda {activeTools}
+			and {TOOLS_InputDisplayToolBitUnSet}
+			sta {activeTools}
+
+			jmp exitMenu
+
+
 	action_timer:
         ldx #$01
 		jsr handleSubMenuInputs
         cpy {TRUE}
         beq +
 
-		ldx {INDEX_TimerTextMasterTableIndex}
+		ldx {INDEX_BinaryEnableTextMasterTableIndex}
 		jmp genericMenuPrint_selectBetweenTextValues
         		
 +;		// enable/disable timer
@@ -37,7 +67,7 @@
         cpy {TRUE}
         beq +
 
-		ldx {INDEX_ScrollGlitchTextMasterTableIndex}
+		ldx {INDEX_BinaryEnableTextMasterTableIndex}
 		jmp genericMenuPrint_selectBetweenTextValues
         		
 +;		// enable/disable scroll glitch tool

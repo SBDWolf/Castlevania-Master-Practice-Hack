@@ -12,7 +12,6 @@
 - feature: allow making keybinds
 - feature: slow down
 - feature: frame advance
-- feature: input display
 - feature: dracula tool
 - feature: add ability to turn off music
 - feature: select simon's health
