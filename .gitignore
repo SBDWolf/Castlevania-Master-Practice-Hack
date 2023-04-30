@@ -1,3 +1,4 @@
 output/
-source_rom/
+source_rom/*
+!source_rom/put_source_rom_here.txt
 cv1 us disassembly.md
