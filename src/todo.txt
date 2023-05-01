@@ -14,5 +14,6 @@
 - feature: dracula tool
 - feature: add ability to turn off music
 - feature: select simon's health
+- let default menu option for tools be the one corresponding to their current state (enabled/disabled for example)
 - cleanup, particularly in the main menu code area where i made the up underflow and down overflow
 - revisit menu function organization (i don't know if i like having all the incsrc's in main.asm, for example)
