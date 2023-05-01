@@ -36,6 +36,13 @@ define bank6_hijackedJsr $CC7A
 
 define bank6_subweaponPrintHijack $A113
 
+define bank1_titleScreenPatternTableNumberEdits $8CF0
+define bank1_titleScreenPatternTableLetterEdits $8FA0
+define bank6_titleScreenTextRow1 $B063
+define bank6_titleScreenTextRow2 $B079
+define bank6_titleScreenTextRow3 $BA97
+define bank6_titleScreenTextRow4 $BAA8
+
 // a lot of bank 5 is free space. i am defining my own arbitrary free space ranges to be used by my own code.
 define bank5_freeSpaceData $9E50
 

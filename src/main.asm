@@ -6,15 +6,19 @@ banksize $4000
 incsrc "src/defines/SHARED-defines.asm"
 
 // uncomment the defines file corresponding to the version you want to build, then comment out the other
-//incsrc "src/defines/USPRG1-defines.asm"
-incsrc "src/defines/JP1993-defines.asm"
+incsrc "src/defines/USPRG1-defines.asm"
+//incsrc "src/defines/JP1993-defines.asm"
 
 // -- Text Table in levels ---------------------------------------------
 table "src/cv1Game.tbl"
+table "src/cv1TitleUS.tbl"
 
 incsrc "src/hijacks.asm"
 incsrc "src/tables.asm"
 incsrc "src/mirror_code.asm"
+
+incsrc "src/title_screen/title_screen_us.asm"
+//incsrc "src/title_screen/title_screen_jp.asm"
 
 
 bank 5
@@ -30,3 +34,4 @@ incsrc "src/tools/tools_main.asm"
 incsrc "src/utility.asm"
 
 warnpc $C000
+
