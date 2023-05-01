@@ -1,5 +1,3 @@
-incsrc "src/defines/SHARED-defines.asm"
-
 incsrc "src/hijacks.asm"
 incsrc "src/tables.asm"
 incsrc "src/mirror_code.asm"
