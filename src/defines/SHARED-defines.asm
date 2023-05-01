@@ -182,6 +182,5 @@ define levelTileData $5A0
 define PPUBuffer $700
 // -- ROM Addresses -------------------------------------------------
 
-// extremely tight on free space here, particularly on the US version
-define bank7_freeSpaceforMenu $FF2A
-define bank7_freeSpaceforTools $FF38
+// not much free space here
+define bank7_freeSpaceforTools $FF30
