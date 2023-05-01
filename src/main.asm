@@ -6,8 +6,8 @@ banksize $4000
 incsrc "src/defines/SHARED-defines.asm"
 
 // uncomment the defines file corresponding to the version you want to build, then comment out the other
-incsrc "src/defines/USPRG1-defines.asm"
-//incsrc "src/defines/JP1993-defines.asm"
+//incsrc "src/defines/USPRG1-defines.asm"
+incsrc "src/defines/JP1993-defines.asm"
 
 // -- Text Table in levels ---------------------------------------------
 table "src/cv1Game.tbl"

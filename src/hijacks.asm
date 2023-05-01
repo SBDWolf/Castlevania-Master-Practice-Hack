@@ -1,27 +1,17 @@
 bank 7
 base $C000
 org {bank7_pauseCheckHijack}
-	jsr freeSpaceForMenu
+	jsr {bank7_freedUpSpaceFromReroutedTable}
 
 org {bank7_mainGameLoopHijack}
-	jsr {bank7_freeSpaceforTools}
+	jsr {bank7_naturalFreeSpace}
 	nop 
 
 org {bank7_NMIHijack}
-	jsr {bank7_freedUpSpaceForLagCounter}
+	jsr incrementConsecutiveLagCounter
 	nop 
 
-org {bank7_freedUpSpaceForLagCounter}
-		// this code will only run if the game is lagging. it will also run during lag frames on loading screeens!
-		inc {consecutiveLagFramesCounter}
-		// hijack fix
-		lda $FE
-		ldx $1F
-		rts 
-
-		// this is the hijack code for the menu. i am putting it right after the code for the lag counter as...
-		// this is the only spot where there's enough space for what i need to do
-	freeSpaceForMenu:
+org {bank7_freedUpSpaceFromReroutedTable}
 		lda #$05
 		sta $8000
 		// in menu_main.asm
@@ -30,14 +20,14 @@ org {bank7_freedUpSpaceForLagCounter}
 		jsr {bank7_pauseCheck}
 		rts 
 
-org {bank7_freeSpaceforTools}
+org {bank7_naturalFreeSpace}
 		// switch bank to bank 5. quick! there is no space!
 		lda #$05
 		sta $8000
 		jmp toolsRoutine
 
-org {bank7_freedUpSpaceForLagCounter}
-		// this code will only run if the game is lagging. it will also run during lag frames on loading screeens!
+	// this code will only run if the game is lagging. it will also run during lag frames on loading screeens!
+	incrementConsecutiveLagCounter:
 		inc {consecutiveLagFramesCounter}
 		// hijack fix
 		lda $FE

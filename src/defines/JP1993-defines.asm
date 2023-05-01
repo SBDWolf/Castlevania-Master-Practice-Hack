@@ -51,7 +51,7 @@ define bank5_mirrorCodeToBank6 $A366
 
 define bank6_freeSpace $BF5C
 
-define bank7_freedUpSpaceForLagCounter $FC2E
+define bank7_freedUpSpaceFromReroutedTable $FC2E
 
 define someBank7GenericPrintSubRoutine1 $CC80
 
