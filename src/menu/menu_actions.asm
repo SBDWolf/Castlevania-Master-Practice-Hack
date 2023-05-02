@@ -242,47 +242,6 @@
 
 			jmp exitMenu
 
-
-	action_memoryWatch03:
-		ldx #$05
-		jsr handleSubMenuInputs
-        cpy {TRUE}
-        beq +
-
-		ldx {INDEX_MemoryWatchTextMasterTableIndex}
-		jmp genericMenuPrint_selectBetweenTextValues
-        		
-+;		// select memory watch for slot 03
-		
-		lda {practiceSubMenuCursor}
-		cmp {MEMORYWATCHMENU_DisabledIndex}
-		beq .memoryWatch03_disableTool
-
-		// enable memory watch
-		lda {activeTools}
-		ora {TOOLS_MemoryWatch03ToolBitSet}
-		sta {activeTools}
-
-		// store pointer to memory location it needs to watch
-		lda {practiceSubMenuCursor}
-		asl 
-		tax 
-
-		lda lookupTable_memoryWatchAddresses,x
-		sta {memorywatch03Pointer}
-		lda lookupTable_memoryWatchAddresses+1,x
-		sta {memorywatch03Pointer}+1
-
-		jmp exitMenu
-
-		.memoryWatch03_disableTool:
-			// disable memory watch 03
-			lda {activeTools}
-			and {TOOLS_MemoryWatch03ToolBitUnSet}
-			sta {activeTools}
-
-			jmp exitMenu
-
 	
 	action_reset:
 		// done in two passes to maybe avoid graphical gliches?

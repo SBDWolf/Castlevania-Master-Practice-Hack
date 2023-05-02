@@ -21,7 +21,7 @@ define PRACTICEMENU_DeconstructMenu00PhaseIndex #$08
 define PRACTICEMENU_MenuActionPhaseIndex #$0E
 define PRACTICEMENU_LastPhaseIndex #$10
 // keep this updated if adding new menu entries
-define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0C
+define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0B
 
 // keep these updated when adding new menu options that uses text selection
 define INDEX_BinaryEnableTextMasterTableIndex #$00
@@ -62,7 +62,6 @@ define TOOLS_TimerToolBitSet #$80
 define TOOLS_MemoryWatch00ToolBitSet #$40
 define TOOLS_MemoryWatch01ToolBitSet #$20
 define TOOLS_MemoryWatch02ToolBitSet #$10
-define TOOLS_MemoryWatch03ToolBitSet #$08
 define TOOLS_ScrollGlitchToolBitSet #$04
 define TOOLS_InputDisplayToolBitSet #$02
 define TOOLS_DraculaDiagnosisToolBitSet #$01
@@ -71,7 +70,6 @@ define TOOLS_TimerToolBitUnSet #$7F
 define TOOLS_MemoryWatch00ToolBitUnSet #$BF
 define TOOLS_MemoryWatch01ToolBitUnSet #$DF
 define TOOLS_MemoryWatch02ToolBitUnSet #$EF
-define TOOLS_MemoryWatch03ToolBitUnSet #$F7
 define TOOLS_ScrollGlitchToolBitUnSet #$FB
 define TOOLS_InputDisplayToolBitUnSet #$FD
 define TOOLS_DraculaDiagnosisToolBitUnSet #$FE

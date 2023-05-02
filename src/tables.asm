@@ -23,7 +23,6 @@ org {bank5_freeSpaceData}
 		dw text_memoryWatch00
 		dw text_memoryWatch01
 		dw text_memoryWatch02
-		dw text_memoryWatch03
 		dw text_timer
 		dw text_scrollGlitch
 		dw text_inputDisplay
@@ -52,8 +51,6 @@ org {bank5_freeSpaceData}
 		db "VIEWER 2     /"
 	text_memoryWatch02:
 		db "VIEWER 3     /"
-	text_memoryWatch03:
-		db "VIEWER 4     /"
 	text_timer:
 		db "TIMER        /"
 	text_scrollGlitch:
@@ -78,7 +75,6 @@ org {bank5_freeSpaceData}
 		dw action_memoryWatch00
 		dw action_memoryWatch01
 		dw action_memoryWatch02
-		dw action_memoryWatch03
 		dw action_timer
 		dw action_scrollGlitch
 		dw action_inputDisplay
@@ -141,11 +137,14 @@ org {bank5_freeSpaceData}
 
 	pointerTable_toolsList:
 		// WIP, $FFFF bytes are filler
+		// game crashes when 8 tools are active at the moment!
+		// that is because i am storing these pointers in an area of memory that has up to 16 bytes available...
+		// ...so 8 tools enabled will cause 9 pointers to be stored there, which overflows and kills the game
 		dw tool_timer
 		dw tool_memoryWatch00
 		dw tool_memoryWatch01
 		dw tool_memoryWatch02
-		dw tool_memoryWatch03
+		dw $FFFF
 		dw tool_scrollGlitch
 		dw tool_inputDisplay
 		dw tool_draculaDiagnosis
