@@ -51,4 +51,5 @@ incsrc "src/tools/memory_watch/tool_memory_watch_02.asm"
 incsrc "src/tools/memory_watch/tool_memory_watch_03.asm"
 incsrc "src/tools/scroll_glitch/tool_scroll_glitch_main.asm"
 incsrc "src/tools/input_display/tool_input_display.asm"
+incsrc "src/tools/dracula_diagnosis/tool_dracula_diagnosis_main.asm"
 

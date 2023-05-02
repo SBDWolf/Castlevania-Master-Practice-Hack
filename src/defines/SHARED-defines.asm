@@ -21,9 +21,9 @@ define PRACTICEMENU_DeconstructMenu00PhaseIndex #$08
 define PRACTICEMENU_MenuActionPhaseIndex #$0E
 define PRACTICEMENU_LastPhaseIndex #$10
 // keep this updated if adding new menu entries
-define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0B
+define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0C
 
-// keep these updated when adding new menu options that uses text selection :)
+// keep these updated when adding new menu options that uses text selection
 define INDEX_BinaryEnableTextMasterTableIndex #$00
 define INDEX_MemoryWatchTextMasterTableIndex #$02
 define INDEX_SubweaponTextMasterTableIndex #$04
@@ -56,7 +56,7 @@ define MEMORYWATCHMENU_WhipAnimationTimerIndex #$04
 
 
 // keep these updated when adding a new tool
-define TOOLS_ToolCount #$07
+define TOOLS_ToolCount #$08
 
 define TOOLS_TimerToolBitSet #$80
 define TOOLS_MemoryWatch00ToolBitSet #$40
@@ -65,6 +65,7 @@ define TOOLS_MemoryWatch02ToolBitSet #$10
 define TOOLS_MemoryWatch03ToolBitSet #$08
 define TOOLS_ScrollGlitchToolBitSet #$04
 define TOOLS_InputDisplayToolBitSet #$02
+define TOOLS_DraculaDiagnosisToolBitSet #$01
 
 define TOOLS_TimerToolBitUnSet #$7F
 define TOOLS_MemoryWatch00ToolBitUnSet #$BF
@@ -73,6 +74,7 @@ define TOOLS_MemoryWatch02ToolBitUnSet #$EF
 define TOOLS_MemoryWatch03ToolBitUnSet #$F7
 define TOOLS_ScrollGlitchToolBitUnSet #$FB
 define TOOLS_InputDisplayToolBitUnSet #$FD
+define TOOLS_DraculaDiagnosisToolBitUnSet #$FE
 
 // -- RAM Addresses -------------------------------------------------
 
@@ -131,6 +133,9 @@ define backupCurrentWhipLevel $108
 define backupCurrentSubweapon $109
 define backupCurrentSubweaponMultiplier $10A
 define backupCurrentHeartCount $10B
+
+define draculaToolPauseBufferFrameCount $10C
+define draculaToolJumpWhipStaggerFrameCount $10D
 
 define activeTools $110
 define toolsCountForMenuDeconstruction $111

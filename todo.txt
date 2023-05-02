@@ -2,7 +2,6 @@
 - fix glitched castle sprite when skipping the credits
 - fix fact that the default submenu option flashes for one frame when pressing A to quit out of a submenu
 - fix life counter refreshing when getting a 1up
-- fix frame counter being different on level select (enemy patterns in stage 16 are different at the very least)
 - fix occasional glitching that occasionally occurs when closing the menu (probably by doing it in 3 passes)
 - feature: more variants of the scroll glitch tool
 - feature: implement single block mode on the scroll glitch tool
@@ -11,9 +10,10 @@
 - feature: allow making keybinds
 - feature: slow down
 - feature: frame advance
-- feature: dracula tool
 - feature: add ability to turn off music
 - feature: select simon's health
+- there may be frame counter oddities when using level select/stage reset (for example crushers room feels different)
 - let default menu option for tools be the one corresponding to their current state (enabled/disabled for example)
+- allow a better way of managing stage 05/06 scroll glitches (maybe allow the user to disable individual scroll glitches?)
 - cleanup, particularly in the main menu code area where i made the up underflow and down overflow
 - revisit menu function organization (i don't know if i like having all the incsrc's in main.asm, for example)

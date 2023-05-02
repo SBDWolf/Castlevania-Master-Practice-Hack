@@ -1,3 +1,32 @@
+	action_draculaDiagnosis:
+        ldx #$01
+		jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
+
+		ldx {INDEX_BinaryEnableTextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// enable/disable dracula diagnosis
+		lda {practiceSubMenuCursor}
+		cmp {TRUE}
+		bne .draculaDiagnosis_disableTool
+		// enable racula diagnosis
+		lda {activeTools}
+		ora {TOOLS_DraculaDiagnosisToolBitSet}
+		sta {activeTools}
+
+		jmp exitMenu
+
+
+		.draculaDiagnosis_disableTool:
+			// disable racula diagnosis
+			lda {activeTools}
+			and {TOOLS_DraculaDiagnosisToolBitUnSet}
+			sta {activeTools}
+
+			jmp exitMenu
+
 	action_inputDisplay:
         ldx #$01
 		jsr handleSubMenuInputs

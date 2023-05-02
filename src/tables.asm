@@ -27,6 +27,7 @@ org {bank5_freeSpaceData}
 		dw text_timer
 		dw text_scrollGlitch
 		dw text_inputDisplay
+		dw text_draculaDiagnosis
 		dw text_about
         dw $FFFF    
 
@@ -59,6 +60,8 @@ org {bank5_freeSpaceData}
 		db "SCROLL GLITCH/"
 	text_inputDisplay:
 		db "INPUT DISPLAY/"
+	text_draculaDiagnosis:
+		db "DRACULA TOOL /"
 	text_about:
 		db "ABOUT        /"
 	
@@ -79,6 +82,7 @@ org {bank5_freeSpaceData}
 		dw action_timer
 		dw action_scrollGlitch
 		dw action_inputDisplay
+		dw action_draculaDiagnosis
 		dw action_about
 	
 	
@@ -129,7 +133,7 @@ org {bank5_freeSpaceData}
 
 	
 	textTable_about:
-		db $01,$20,$20,"CASTLEVANIA PRACTICE HACK V0.3.1/"
+		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.4 /"
 		db "    FOR A USER MANUAL VISIT     /"
 		// done in two passes, so the ppu job destination is included in this third line
 		db $01,$20,$60,"   TINYURL.COM SLASH 2P4E6FFM   /"
@@ -144,7 +148,7 @@ org {bank5_freeSpaceData}
 		dw tool_memoryWatch03
 		dw tool_scrollGlitch
 		dw tool_inputDisplay
-		dw $FFFF
+		dw tool_draculaDiagnosis
 
 	pointerTable_scrollGlitchStageCode:
 		dw scrollGlitch_stage00

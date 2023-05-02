@@ -22,7 +22,7 @@ tool_memoryWatch01:
     lda #$20
     sta {PPUBuffer},x
     inx
-    lda #$29
+    lda #$28
     sta {PPUBuffer},x
     inx
 
