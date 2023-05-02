@@ -1,7 +1,7 @@
 # Castlevania-Master-Practice-Hack
 A speedrunning practice hack of the NES Castlevania.
 
-This hack aim to unify various useful tools that prior to this have been floating around as individual patches, as well as add some additional features.
+This hack aims to unify various useful tools that prior to this have been floating around as individual patches, as well as add some additional features.
 
 To use, pause the game by pressing Start, then press Select to pull up a menu.
 
