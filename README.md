@@ -51,6 +51,9 @@ Keep in mind that having any of these tools enabled may cause a little bit more 
 - **Dracula Tool**: Print some useful information for Dracula 2-cycle practice on the top center of the screen (only if in Dracula's room):
   - **Pause Buffer frames**: After pausing and then unpausing, the amount of time the game was paused for is displayed on screen. This is intended for Fast Pattern practice, where the game needs to be paused for exactly 10 frames. If early, an "E" is displayed next to the number, if late it displays an "L", and if pausing for exactly 10 frames, it displays a heart.
   - **Jump-Whip Stagger frames**: Prints the amount of frames elapsed in-between an A press and a B press (up to 8 frames). This is intended for Ascending Crit practice.
+  
+### Miscellaneous
+  - The Intro Screen and the Credits have been made skippable by holding Start.
 
 ## Repository structure
 To be written! If you'd like to contribute, I am open to it, but perhaps reach out to me first so we can talk some details out (preferably on Discord at SBDWolf#3244).
