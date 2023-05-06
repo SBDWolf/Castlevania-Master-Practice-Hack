@@ -63,4 +63,4 @@ To be written! If you'd like to contribute, I am open to it, but perhaps reach o
 
 **bogaa**: Author of a different Practice/Tinkering Hack for which I took and readapted a lot of code (particularly the menu system).
 
-**trisk**: Author of a few Scroll Glitch Death tools and a Dracula Practice tools that I readapted into here.
+**trisk**: Author of a few Scroll Glitch Death tools and a Dracula Practice tool that I readapted into here.
