@@ -100,7 +100,7 @@ org {bank5_freeSpaceData}
 		// header contains index of each text entry
 		db $06,$12,$1E,$2A,$36,$42
 		db "DISABLED   /"
-		db "SIMON K    /"
+		db "SIMON X    /"
 		db "SIMON Y    /"
 		db "WHIP FRAMES/"
 		db "BOSS HEALTH/"
@@ -119,7 +119,7 @@ org {bank5_freeSpaceData}
 		db "DAGGER     /"
 		db "CROSS      /"
 		db "HOLY WATER /"
-		db "HATCHET    /"
+		db "AXE        /"
 		db "STOPWATCH  /"
 		// would be nice to not have to call the axe "hatchet" but there is no X character in castlevania's tileset :(
 
@@ -129,7 +129,7 @@ org {bank5_freeSpaceData}
 
 	
 	textTable_about:
-		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.4 /"
+		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.5D/"
 		db "    FOR A USER MANUAL VISIT     /"
 		// done in two passes, so the ppu job destination is included in this third line
 		db $01,$20,$60,"   TINYURL.COM SLASH 2P4E6FFM   /"

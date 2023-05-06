@@ -185,5 +185,8 @@ define levelTileData $5A0
 define PPUBuffer $700
 // -- ROM Addresses -------------------------------------------------
 
+// this is where the Z character in the HUD is originally stored at
+define bank3_LetterOffset_Z $BE98
+
 // natural free space in both the us and jp version. not much in bank 7!
 define bank7_naturalFreeSpace $FF2A

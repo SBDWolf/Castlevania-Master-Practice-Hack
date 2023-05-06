@@ -1,6 +1,7 @@
 incsrc "src/hijacks.asm"
 incsrc "src/tables.asm"
 incsrc "src/mirror_code.asm"
+incsrc "src/tileset_mods.asm"
 
 
 bank 5
