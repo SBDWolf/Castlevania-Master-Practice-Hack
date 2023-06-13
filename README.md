@@ -56,7 +56,7 @@ Keep in mind that having any of these tools enabled may cause a little bit more 
   - The Intro Screen and the Credits have been made skippable by holding Start.
 
 ## Repository structure
-To be written! If you'd like to contribute, I am open to it, but perhaps reach out to me first so we can talk some details out (preferably on Discord at SBDWolf#3244).
+To be written! If you'd like to contribute, I am open to it, but perhaps reach out to me first so we can talk some details out (preferably on Discord at sbdwolf).
 
 ## Credits
 **SBDWolf**: Main author of this suite of practice tools.
