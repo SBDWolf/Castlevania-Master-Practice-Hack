@@ -1,10 +1,10 @@
         lda {currentSubStage}
         beq .stage14Pass
 
-        // check if we have to process 14 advanced
+        // check if we have to process 14 advanced OR 14 race
         lda {simonXLowByte}
         cmp #$02
-        beq .on14Advanced
+        beq .on02XPositionBranch
 
         // check if we have to process 14 standard
         cmp #$03
@@ -16,9 +16,15 @@
         cmp #$B0
         bcc .on14Top
 
-        // if it falls here, that simon is in a spot where we shouldn't process a scroll glitch
+        // if it falls here, then simon is in a spot where we shouldn't process a scroll glitch
 +;      jmp scrollGlitch_exitTool
         
+        .on02XPositionBranch:
+            lda {simonXHighByte}
+            cmp #$80
+            bcc .on14Race
+            // fall through to .on14Advanced if simonXHighByte is greater or equal than 0x80
+
         .on14Advanced:
             lda {isSimonFacingLeft}
             bne .stage14Pass
@@ -51,6 +57,14 @@
             lda $68A
             beq .stage14Pass
             lda $689
+            beq .stage14Pass
+            jmp killSimon
+
+        .on14Race:
+            // for this, we kill simon only if both blocks fail
+            lda $6A0
+            beq .stage14Pass
+            lda $6C0
             beq .stage14Pass
             jmp killSimon
 
