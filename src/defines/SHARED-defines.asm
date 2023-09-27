@@ -156,19 +156,23 @@ define memorywatch02Pointer $118 // 2 bytes
 
 define memorywatch03Pointer $11A // 2 bytes
 
-define timerLevelTimerMinutes $120
-define timerLevelTimerSeconds $121
-define timerLevelTimerFrames $122
-define timerRoomTimerCurrentMinutes $123
-define timerRoomTimerCurrentSeconds $124
-define timerRoomTimerCurrentFrames $125
-define timerRoomTimerPreviousMinutes $126
-define timerRoomTimerPreviousSeconds $127
-define timerRoomTimerPreviousFrames $128
+define timerLevelTimerMinutes $119
+define timerLevelTimerSeconds $120
+define timerLevelTimerFrames $121
+define timerRoomTimerCurrentMinutes $122
+define timerRoomTimerCurrentSeconds $123
+define timerRoomTimerCurrentFrames $124
+define timerRoomTimerPreviousMinutes $125
+define timerRoomTimerPreviousSeconds $126
+define timerRoomTimerPreviousFrames $127
 
-define timerPreviousFrameStage $129
-define timerPreviousFrameSubStage $12A
-define timerAlreadyRanUpdatesFlag $12B
+define timerPreviousFrameStage $128
+define timerPreviousFrameSubStage $129
+define timerAlreadyRanUpdatesFlag $12A
+
+define scrollGlitchDiagnosticTimer $12B
+define scrollGlitchDiagnosticFirstMovementFlag $12C
+define scrollGlitchDiagnosticSimonPreviousX $12D
 
 define toolsToRunPointerList $12E
 
