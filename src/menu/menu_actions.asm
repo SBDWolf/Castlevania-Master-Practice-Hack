@@ -11,7 +11,7 @@
 		lda {practiceSubMenuCursor}
 		cmp {TRUE}
 		bne .draculaDiagnosis_disableTool
-		// enable racula diagnosis
+		// enable dracula diagnosis
 		lda {activeTools}
 		ora {TOOLS_DraculaDiagnosisToolBitSet}
 		sta {activeTools}
@@ -20,7 +20,7 @@
 
 
 		.draculaDiagnosis_disableTool:
-			// disable racula diagnosis
+			// disable dracula diagnosis
 			lda {activeTools}
 			and {TOOLS_DraculaDiagnosisToolBitUnSet}
 			sta {activeTools}
