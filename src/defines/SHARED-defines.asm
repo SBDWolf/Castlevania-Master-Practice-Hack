@@ -55,6 +55,8 @@ define MEMORYWATCHMENU_SimonXHighByteIndex #$02
 define MEMORYWATCHMENU_SimonYIndex #$03
 define MEMORYWATCHMENU_WhipAnimationTimerIndex #$04
 
+define SCROLLGLITCHDIAGNOSTIC_MaxHudCursorValue #$20
+define SCROLLGLITCHDIAGNOSTIC_TimerMaxValue #23 // decimal!
 
 // keep these updated when adding a new tool
 define TOOLS_ToolCount #$08

@@ -129,7 +129,6 @@ org {bank5_freeSpaceData}
 		db "HOLY WATER /"
 		db "AXE        /"
 		db "STOPWATCH  /"
-		// would be nice to not have to call the axe "hatchet" but there is no X character in castlevania's tileset :(
 
 	lookupTable_subweaponSelect:
 		// 0x08 = dagger, 0x09 = cross, 0x0B = holy water 0x0D = axe, 0x0F = stopwatch
@@ -211,19 +210,31 @@ org {bank5_freeSpaceData}
 		dw onScrollGlitchMovementLeft
 
 	lookupTable_scrollGlitchDiagnosticHudDestinations:
-		db $03, $23
-		db $05, $25
-		db $07, $27
-		db $09, $29
+		db $22,$42
+		db $23,$43
+		db $24,$44
+		db $25,$45
+		db $26,$46
+		db $27,$47
+		db $28,$48
+		db $29,$49
+		db $2A,$4A
+		db $2B,$4B
+		db $2C,$4C
+		db $2D,$4D
+		db $2E,$4E
+		db $2F,$4F
+		db $30,$50
+		db $31,$51
 
 	pointerTable_toolsEnd:
 		dw returnToGame
 
 
 
-	// lookup table for printing a hex number on screen.
-	hex_digits_table:
-		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9,$E0,$E1,$E2,$E3,$E4,$E5
+	// lookup table for printing a "base24" number on screen. this is used by the scroll glitch diagnostic tool
+	base24_digits_table:
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9,$E0,$E1,$E2,$E3,$E4,$E5,$E6,$E7,$E8,$E9,$EA,$EB,$EC,$ED
 
 	// lookup tables for quick hex to dec conversion. this saves CPU time at the expense of ROM space.
 	tens_digits_table:

@@ -1,3 +1,4 @@
+    //TODO: this entire file can probably be deleted?
     checkIfSimonIsMoving:
         // compares previous simon X with his current X, and returns #$00 if he's not moving, #$01 if he is moving left, and #$02 if he is moving right, on the Y register
         lda {simonXHighByte}

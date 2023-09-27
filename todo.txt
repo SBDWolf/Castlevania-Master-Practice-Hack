@@ -18,3 +18,6 @@
 - allow a better way of managing stage 05/06 scroll glitches (maybe allow the user to disable individual scroll glitches?)
 - cleanup, particularly in the main menu code area where i made the up underflow and down overflow
 - revisit menu function organization (i don't know if i like having all the incsrc's in main.asm, for example)
+
+- clean up hud clear on diagnostic scroll glitch tool (clearing every frame can cause graphical glitches)
+- possibly extend the range of pixels in while the diagnostic scroll glitch tool info gets printed?

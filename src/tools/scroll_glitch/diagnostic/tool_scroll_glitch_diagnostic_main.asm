@@ -46,7 +46,9 @@
         incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage17.asm"
 
 
-        incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_utility.asm"
+        incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_logic.asm"
+        incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_print_movement.asm"
+        incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_clear_hud.asm"
 
 
     scrollGlitchDiagnostic_exitTool:

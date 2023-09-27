@@ -1,6 +1,10 @@
+print_movement_data:
+    // this functions expects the value to print to be passed to the y register
+    tya 
+    pha 
+
     ldx {tileDataPointer}
 
-    // previous room timer
     lda #$01
     sta {PPUBuffer},x
     inx 
@@ -11,15 +15,16 @@
     lda lookupTable_scrollGlitchDiagnosticHudDestinations,y
     sta {PPUBuffer},x
     iny 
-    cpy maxcursorvalue
-    bne +
+    cpy {SCROLLGLITCHDIAGNOSTIC_MaxHudCursorValue}
+    bne + 
     ldy #$00
 +;  sty {scrollGlitchDiagnosticHudCursor}
     inx 
 
     
-    ldy {scrollGlitchDiagnosticTimer}
-    lda hex_digits_table,y
+    pla 
+    tay 
+    lda base24_digits_table,y
     sta {PPUBuffer},x
     inx 
 
@@ -29,3 +34,4 @@
     inx 
 
     stx {tileDataPointer}
+    rts 
