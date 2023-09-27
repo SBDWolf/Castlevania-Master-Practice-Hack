@@ -106,6 +106,12 @@ define blockCounter $30
 define rightBookendColumn $35
 define leftBookendColumn $36
 
+// if Simon is moving right, bit 0 is set
+// if Simon is moving left, bit 1 is set
+// if Simon is idle, both bits 0 and 1 are unset
+// if Simon is at the edge of a room (no scrolling), bit 2 is set
+define simonMovementState $3C
+
 define simonY $3F
 define simonXHighByte $40
 define simonXLowByte $41
@@ -156,23 +162,25 @@ define memorywatch02Pointer $118 // 2 bytes
 
 define memorywatch03Pointer $11A // 2 bytes
 
-define timerLevelTimerMinutes $119
-define timerLevelTimerSeconds $120
-define timerLevelTimerFrames $121
-define timerRoomTimerCurrentMinutes $122
-define timerRoomTimerCurrentSeconds $123
-define timerRoomTimerCurrentFrames $124
-define timerRoomTimerPreviousMinutes $125
-define timerRoomTimerPreviousSeconds $126
-define timerRoomTimerPreviousFrames $127
+define timerLevelTimerMinutes $118
+define timerLevelTimerSeconds $119
+define timerLevelTimerFrames $120
+define timerRoomTimerCurrentMinutes $121
+define timerRoomTimerCurrentSeconds $122
+define timerRoomTimerCurrentFrames $123
+define timerRoomTimerPreviousMinutes $124
+define timerRoomTimerPreviousSeconds $125
+define timerRoomTimerPreviousFrames $126
 
-define timerPreviousFrameStage $128
-define timerPreviousFrameSubStage $129
-define timerAlreadyRanUpdatesFlag $12A
+define timerPreviousFrameStage $127
+define timerPreviousFrameSubStage $128
+define timerAlreadyRanUpdatesFlag $129
 
-define scrollGlitchDiagnosticTimer $12B
-define scrollGlitchDiagnosticFirstMovementFlag $12C
-define scrollGlitchDiagnosticSimonPreviousX $12D
+define scrollGlitchDiagnosticTimer $12A
+// 0x01 on "first movement right", 0x02 on "first movement left", 0x00 on "idle", 0x03 on "scroll glitch movement right", 0x04 on "scroll glitch movement left"
+define scrollGlitchDiagnosticPhaseCounter $12B
+define scrollGlitchDiagnosticSimonPreviousX $12C
+define scrollGlitchDiagnosticHudCursor $12D
 
 define toolsToRunPointerList $12E
 

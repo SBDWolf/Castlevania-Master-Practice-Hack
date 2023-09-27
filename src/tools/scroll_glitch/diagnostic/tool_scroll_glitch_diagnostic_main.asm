@@ -46,6 +46,9 @@
         incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage17.asm"
 
 
+        incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_utility.asm"
+
+
     scrollGlitchDiagnostic_exitTool:
         // restore tool index
         pla 

@@ -1,0 +1,31 @@
+    ldx {tileDataPointer}
+
+    // previous room timer
+    lda #$01
+    sta {PPUBuffer},x
+    inx 
+    lda #$20
+    sta {PPUBuffer},x
+    inx 
+    ldy {scrollGlitchDiagnosticHudCursor}
+    lda lookupTable_scrollGlitchDiagnosticHudDestinations,y
+    sta {PPUBuffer},x
+    iny 
+    cpy maxcursorvalue
+    bne +
+    ldy #$00
++;  sty {scrollGlitchDiagnosticHudCursor}
+    inx 
+
+    
+    ldy {scrollGlitchDiagnosticTimer}
+    lda hex_digits_table,y
+    sta {PPUBuffer},x
+    inx 
+
+
+    lda #$FF
+    sta {PPUBuffer},x
+    inx 
+
+    stx {tileDataPointer}

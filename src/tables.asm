@@ -203,10 +203,27 @@ org {bank5_freeSpaceData}
 		dw scrollGlitchDiagnostic_stage19Placeholder
 		dw scrollGlitchDiagnostic_stageMap
 	
+	pointerTable_scrollGlitchDiagnosticMovementCode:
+		dw onIdle
+		dw onFirstMovementRight
+		dw onFirstMovementLeft
+		dw onScrollGlitchMovementRight
+		dw onScrollGlitchMovementLeft
+
+	lookupTable_scrollGlitchDiagnosticHudDestinations:
+		db $03, $23
+		db $05, $25
+		db $07, $27
+		db $09, $29
+
 	pointerTable_toolsEnd:
 		dw returnToGame
 
 
+
+	// lookup table for printing a hex number on screen.
+	hex_digits_table:
+		db $D0,$D1,$D2,$D3,$D4,$D5,$D6,$D7,$D8,$D9,$E0,$E1,$E2,$E3,$E4,$E5
 
 	// lookup tables for quick hex to dec conversion. this saves CPU time at the expense of ROM space.
 	tens_digits_table:
