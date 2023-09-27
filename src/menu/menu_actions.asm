@@ -91,30 +91,43 @@
 
 
 	action_scrollGlitch:
-	    ldx #$01
+	    ldx #$02
 		jsr handleSubMenuInputs
         cpy {TRUE}
         beq +
 
-		ldx {INDEX_BinaryEnableTextMasterTableIndex}
+		ldx {INDEX_ScrollGlitchTextMasterTableIndex}
 		jmp genericMenuPrint_selectBetweenTextValues
         		
 +;		// enable/disable scroll glitch tool
 		lda {practiceSubMenuCursor}
-		cmp {TRUE}
-		bne .scrollGlitch_disableTool
-		// enable scroll glitch tool
+		cmp #$01
+		bcc .scrollGlitch_disableTool
+		beq .scrollGlitch_enableDeathTool
+		// enable diagnostic scroll glitch tool and disable death scroll glitch tool
 		lda {activeTools}
-		ora {TOOLS_ScrollGlitchToolBitSet}
+		ora {TOOLS_ScrollGlitchDiagnosticToolBitSet}
+		and {TOOLS_ScrollGlitchDeathToolBitUnSet}
 		sta {activeTools}
 
 		jmp exitMenu
 
 
-		.scrollGlitch_disableTool:
-			// disable scroll glitch tool
+		.scrollGlitch_enableDeathTool:
+			// enable death scroll glitch tool and disable diagnostic scroll glitch tool
 			lda {activeTools}
-			and {TOOLS_ScrollGlitchToolBitUnSet}
+			ora {TOOLS_ScrollGlitchDeathToolBitSet}
+			and {TOOLS_ScrollGlitchDiagnosticToolBitUnSet}
+			sta {activeTools}
+
+			jmp exitMenu
+
+
+		.scrollGlitch_disableTool:
+			// disable all scroll glitch tools
+			lda {activeTools}
+			and {TOOLS_ScrollGlitchDeathToolBitUnSet}
+			and {TOOLS_ScrollGlitchDiagnosticToolBitUnSet}
 			sta {activeTools}
 
 			jmp exitMenu	

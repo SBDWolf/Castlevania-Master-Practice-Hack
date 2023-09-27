@@ -1,0 +1,1 @@
+        jmp scrollGlitchDiagnostic_exitTool

@@ -25,9 +25,10 @@ define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0B
 
 // keep these updated when adding new menu options that uses text selection
 define INDEX_BinaryEnableTextMasterTableIndex #$00
-define INDEX_MemoryWatchTextMasterTableIndex #$02
-define INDEX_SubweaponTextMasterTableIndex #$04
-define INDEX_AboutTextMasterTableIndex 6
+define INDEX_ScrollGlitchTextMasterTableIndex #$02
+define INDEX_MemoryWatchTextMasterTableIndex #$04
+define INDEX_SubweaponTextMasterTableIndex #$06
+define INDEX_AboutTextMasterTableIndex 8
 
 define SYSTEMSTATE_TitleScreen #$02
 define SYSTEMSTATE_InGame #$05
@@ -49,7 +50,7 @@ define SPRITE0_MenuMovedPosition #$2F
 define SPRITE0_OriginalPosition #$25
 
 define MEMORYWATCHMENU_DisabledIndex #$00
-define MEMORYWATCHMENU_TotalLagFrameCounterIndex #$01
+define MEMORYWATCHMENU_TotalLagFrameCounterIndex #$01 // TODO: is this right? double check
 define MEMORYWATCHMENU_SimonXHighByteIndex #$02
 define MEMORYWATCHMENU_SimonYIndex #$03
 define MEMORYWATCHMENU_WhipAnimationTimerIndex #$04
@@ -62,7 +63,8 @@ define TOOLS_TimerToolBitSet #$80
 define TOOLS_MemoryWatch00ToolBitSet #$40
 define TOOLS_MemoryWatch01ToolBitSet #$20
 define TOOLS_MemoryWatch02ToolBitSet #$10
-define TOOLS_ScrollGlitchToolBitSet #$04
+define TOOLS_ScrollGlitchDiagnosticToolBitSet #$08
+define TOOLS_ScrollGlitchDeathToolBitSet #$04
 define TOOLS_InputDisplayToolBitSet #$02
 define TOOLS_DraculaDiagnosisToolBitSet #$01
 
@@ -70,7 +72,8 @@ define TOOLS_TimerToolBitUnSet #$7F
 define TOOLS_MemoryWatch00ToolBitUnSet #$BF
 define TOOLS_MemoryWatch01ToolBitUnSet #$DF
 define TOOLS_MemoryWatch02ToolBitUnSet #$EF
-define TOOLS_ScrollGlitchToolBitUnSet #$FB
+define TOOLS_ScrollGlitchDiagnosticToolBitUnSet #$F7
+define TOOLS_ScrollGlitchDeathToolBitUnSet #$FB
 define TOOLS_InputDisplayToolBitUnSet #$FD
 define TOOLS_DraculaDiagnosisToolBitUnSet #$FE
 
@@ -99,6 +102,9 @@ define currentLifeCount $2A
 define currentGameLoop $2B
 
 define blockCounter $30
+
+define rightBookendColumn $35
+define leftBookendColumn $36
 
 define simonY $3F
 define simonXHighByte $40
@@ -164,7 +170,7 @@ define timerPreviousFrameStage $129
 define timerPreviousFrameSubStage $12A
 define timerAlreadyRanUpdatesFlag $12B
 
-define toolsToRunPointerList $130
+define toolsToRunPointerList $12E
 
 define currentBossHealth $1A9
 

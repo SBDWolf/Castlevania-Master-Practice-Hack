@@ -13,4 +13,4 @@
 		jmp killSimon
 
         .stage05Pass:
-            jmp scrollGlitch_exitTool
+            jmp scrollGlitchDeath_exitTool

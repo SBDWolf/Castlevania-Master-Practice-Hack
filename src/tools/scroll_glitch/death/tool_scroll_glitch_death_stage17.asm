@@ -19,4 +19,4 @@
 
 
         .stage17Pass:
-            jmp scrollGlitch_exitTool
+            jmp scrollGlitchDeath_exitTool

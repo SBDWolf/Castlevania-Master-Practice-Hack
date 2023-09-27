@@ -26,4 +26,4 @@
         jmp killSimon
 
         .stage07Pass:
-            jmp scrollGlitch_exitTool
+            jmp scrollGlitchDeath_exitTool

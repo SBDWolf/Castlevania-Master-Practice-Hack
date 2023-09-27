@@ -17,7 +17,7 @@
         bcc .on14Top
 
         // if it falls here, then simon is in a spot where we shouldn't process a scroll glitch
-+;      jmp scrollGlitch_exitTool
++;      jmp scrollGlitchDeath_exitTool
         
         .on02XPositionBranch:
             lda {simonXHighByte}
@@ -70,4 +70,4 @@
 
 
         .stage14Pass:
-            jmp scrollGlitch_exitTool
+            jmp scrollGlitchDeath_exitTool

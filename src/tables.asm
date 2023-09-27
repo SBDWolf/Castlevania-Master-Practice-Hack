@@ -85,6 +85,7 @@ org {bank5_freeSpaceData}
 
 	submenu_text_master_table:
 		dw textTable_binaryEnable
+		dw textTable_scrollGlitch
 		dw textTable_memoryWatch
 		dw textTable_subweaponSelect
 		dw textTable_about
@@ -95,6 +96,13 @@ org {bank5_freeSpaceData}
 		db $02,$0E
 		db "DISABLED   /"
 		db "ENABLED    /"
+
+	textTable_scrollGlitch:
+		// header contains index of each text entry
+		db $03,$0F,$1B
+		db "DISABLED   /"
+		db "DEATH      /"
+		db "DIAGNOSTIC /"
 
 	textTable_memoryWatch:
 		// header contains index of each text entry
@@ -137,40 +145,63 @@ org {bank5_freeSpaceData}
 
 	pointerTable_toolsList:
 		// WIP, $FFFF bytes are filler
-		// game crashes when 8 tools are active at the moment!
+		// game crashes when 9 tools are active at the moment!
 		// that is because i am storing these pointers in an area of memory that has up to 16 bytes available...
 		// ...so 8 tools enabled will cause 9 pointers to be stored there, which overflows and kills the game
 		dw tool_timer
 		dw tool_memoryWatch00
 		dw tool_memoryWatch01
 		dw tool_memoryWatch02
-		dw $FFFF
-		dw tool_scrollGlitch
+		dw tool_scrollGlitchDiagnostic
+		dw tool_scrollGlitchDeath
 		dw tool_inputDisplay
 		dw tool_draculaDiagnosis
 
-	pointerTable_scrollGlitchStageCode:
-		dw scrollGlitch_stage00
-		dw scrollGlitch_stage01
-		dw scrollGlitch_stage02
-		dw scrollGlitch_stage03
-		dw scrollGlitch_stage04
-		dw scrollGlitch_stage05
-		dw scrollGlitch_stage06
-		dw scrollGlitch_stage07
-		dw scrollGlitch_stage08
-		dw scrollGlitch_stage09
-		dw scrollGlitch_stage10
-		dw scrollGlitch_stage11
-		dw scrollGlitch_stage12
-		dw scrollGlitch_stage13
-		dw scrollGlitch_stage14
-		dw scrollGlitch_stage15
-		dw scrollGlitch_stage16
-		dw scrollGlitch_stage17
-		dw scrollGlitch_stage18
-		dw scrollGlitch_stage19Placeholder
-		dw scrollGlitch_stageMap
+	pointerTable_scrollGlitchDeathStageCode:
+		dw scrollGlitchDeath_stage00
+		dw scrollGlitchDeath_stage01
+		dw scrollGlitchDeath_stage02
+		dw scrollGlitchDeath_stage03
+		dw scrollGlitchDeath_stage04
+		dw scrollGlitchDeath_stage05
+		dw scrollGlitchDeath_stage06
+		dw scrollGlitchDeath_stage07
+		dw scrollGlitchDeath_stage08
+		dw scrollGlitchDeath_stage09
+		dw scrollGlitchDeath_stage10
+		dw scrollGlitchDeath_stage11
+		dw scrollGlitchDeath_stage12
+		dw scrollGlitchDeath_stage13
+		dw scrollGlitchDeath_stage14
+		dw scrollGlitchDeath_stage15
+		dw scrollGlitchDeath_stage16
+		dw scrollGlitchDeath_stage17
+		dw scrollGlitchDeath_stage18
+		dw scrollGlitchDeath_stage19Placeholder
+		dw scrollGlitchDeath_stageMap
+
+	pointerTable_scrollGlitchDiagnosticStageCode:
+		dw scrollGlitchDiagnostic_stage00
+		dw scrollGlitchDiagnostic_stage01
+		dw scrollGlitchDiagnostic_stage02
+		dw scrollGlitchDiagnostic_stage03
+		dw scrollGlitchDiagnostic_stage04
+		dw scrollGlitchDiagnostic_stage05
+		dw scrollGlitchDiagnostic_stage06
+		dw scrollGlitchDiagnostic_stage07
+		dw scrollGlitchDiagnostic_stage08
+		dw scrollGlitchDiagnostic_stage09
+		dw scrollGlitchDiagnostic_stage10
+		dw scrollGlitchDiagnostic_stage11
+		dw scrollGlitchDiagnostic_stage12
+		dw scrollGlitchDiagnostic_stage13
+		dw scrollGlitchDiagnostic_stage14
+		dw scrollGlitchDiagnostic_stage15
+		dw scrollGlitchDiagnostic_stage16
+		dw scrollGlitchDiagnostic_stage17
+		dw scrollGlitchDiagnostic_stage18
+		dw scrollGlitchDiagnostic_stage19Placeholder
+		dw scrollGlitchDiagnostic_stageMap
 	
 	pointerTable_toolsEnd:
 		dw returnToGame
