@@ -67,7 +67,12 @@
             beq .onMovingRightNow
 
             .onMovingLeftNow:
-                ldy #$00
+                lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+                bne +
+                jsr print_scroll_glitch_fail
+                lda #$02
+                sta {scrollGlitchDiagnosticHScrollGlitchStatus}
++;              ldy #$00
                 jsr print_movement_data
                 lda #$04
                 sta {scrollGlitchDiagnosticPhaseCounter}
@@ -78,7 +83,12 @@
                 jmp scrollGlitchDiagnostic_exitTool
 
             .onIdleNow:
-                lda #$00
+                lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+                bne +
+                jsr print_scroll_glitch_fail
+                lda #$02
+                sta {scrollGlitchDiagnosticHScrollGlitchStatus}
++;              lda #$00
                 sta {scrollGlitchDiagnosticPhaseCounter}
                 jmp scrollGlitchDiagnostic_exitTool
 
@@ -113,7 +123,12 @@
 
 
             .onMovingRightNow:
-                ldy #$00
+                lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+                bne +
+                jsr print_scroll_glitch_fail
+                lda #$02
+                sta {scrollGlitchDiagnosticHScrollGlitchStatus}
++;              ldy #$00
                 jsr print_movement_data
                 lda #$03
                 sta {scrollGlitchDiagnosticPhaseCounter}
@@ -121,7 +136,12 @@
 
 
             .onIdleNow:
-                lda #$00
+                lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+                bne +
+                jsr print_scroll_glitch_fail
+                lda #$02
+                sta {scrollGlitchDiagnosticHScrollGlitchStatus}
++;              lda #$00
                 sta {scrollGlitchDiagnosticPhaseCounter}
                 jmp scrollGlitchDiagnostic_exitTool
 
@@ -148,7 +168,12 @@
             ldy {scrollGlitchDiagnosticTimer}
             iny 
             jsr print_movement_data
-            ldy #$00
+            lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+            bne +
+            jsr print_scroll_glitch_fail
+            lda #$02
+            sta {scrollGlitchDiagnosticHScrollGlitchStatus}
++;          ldy #$00
             jsr print_movement_data
             lda #$04
             sta {scrollGlitchDiagnosticPhaseCounter}
@@ -171,7 +196,12 @@
             ldy {scrollGlitchDiagnosticTimer}
             iny 
             jsr print_movement_data
-            lda #$00
+            lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+            bne +
+            jsr print_scroll_glitch_fail
+            lda #$02
+            sta {scrollGlitchDiagnosticHScrollGlitchStatus}
++;          lda #$00
             sta {scrollGlitchDiagnosticPhaseCounter}
             sta {scrollGlitchDiagnosticTimer}
             jmp scrollGlitchDiagnostic_exitTool
@@ -200,7 +230,12 @@
             ldy {scrollGlitchDiagnosticTimer}
             iny 
             jsr print_movement_data
-            ldy #$00
+            lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+            bne +
+            jsr print_scroll_glitch_fail
+            lda #$02
+            sta {scrollGlitchDiagnosticHScrollGlitchStatus}
++;          ldy #$00
             jsr print_movement_data
             lda #$03
             sta {scrollGlitchDiagnosticPhaseCounter}
@@ -213,7 +248,12 @@
             ldy {scrollGlitchDiagnosticTimer}
             iny 
             jsr print_movement_data
-            lda #$00
+            lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+            bne +
+            jsr print_scroll_glitch_fail
+            lda #$02
+            sta {scrollGlitchDiagnosticHScrollGlitchStatus}
++;          lda #$00
             sta {scrollGlitchDiagnosticPhaseCounter}
             sta {scrollGlitchDiagnosticTimer}
             jmp scrollGlitchDiagnostic_exitTool

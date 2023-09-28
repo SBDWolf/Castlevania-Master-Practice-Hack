@@ -55,7 +55,7 @@ define MEMORYWATCHMENU_SimonXHighByteIndex #$02
 define MEMORYWATCHMENU_SimonYIndex #$03
 define MEMORYWATCHMENU_WhipAnimationTimerIndex #$04
 
-define SCROLLGLITCHDIAGNOSTIC_MaxHudCursorValue #$20
+define SCROLLGLITCHDIAGNOSTIC_MaxHudCursorValue #$22
 define SCROLLGLITCHDIAGNOSTIC_TimerMaxValue #23 // decimal!
 
 // keep these updated when adding a new tool
@@ -162,28 +162,28 @@ define memorywatch01Pointer $116 // 2 bytes
 
 define memorywatch02Pointer $118 // 2 bytes
 
-define memorywatch03Pointer $11A // 2 bytes
+define timerLevelTimerMinutes $11A
+define timerLevelTimerSeconds $11B
+define timerLevelTimerFrames $11C
+define timerRoomTimerCurrentMinutes $11D
+define timerRoomTimerCurrentSeconds $11E
+define timerRoomTimerCurrentFrames $11F
+define timerRoomTimerPreviousMinutes $120
+define timerRoomTimerPreviousSeconds $121
+define timerRoomTimerPreviousFrames $122
 
-define timerLevelTimerMinutes $11C
-define timerLevelTimerSeconds $11D
-define timerLevelTimerFrames $11E
-define timerRoomTimerCurrentMinutes $11F
-define timerRoomTimerCurrentSeconds $120
-define timerRoomTimerCurrentFrames $121
-define timerRoomTimerPreviousMinutes $122
-define timerRoomTimerPreviousSeconds $123
-define timerRoomTimerPreviousFrames $124
+define timerPreviousFrameStage $123
+define timerPreviousFrameSubStage $124
+define timerAlreadyRanUpdatesFlag $125
 
-define timerPreviousFrameStage $125
-define timerPreviousFrameSubStage $126
-define timerAlreadyRanUpdatesFlag $127
-
-define scrollGlitchDiagnosticTimer $128
+define scrollGlitchDiagnosticTimer $126
 // 0x01 on "first movement right", 0x02 on "first movement left", 0x00 on "idle", 0x03 on "scroll glitch movement right", 0x04 on "scroll glitch movement left"
-define scrollGlitchDiagnosticPhaseCounter $129
-define scrollGlitchDiagnosticSimonPreviousX $12A
-define scrollGlitchDiagnosticHudCursor $12B
-define scrollGlitchDiagnosticHudClearPhase $12C
+define scrollGlitchDiagnosticPhaseCounter $127
+define scrollGlitchDiagnosticSimonPreviousX $128
+define scrollGlitchDiagnosticHudCursor $129
+define scrollGlitchDiagnosticHudClearPhase $12A
+// 0x00 if scroll glitch is not failed (yet :) ), 0x01 if scroll glitch is failed
+define scrollGlitchDiagnosticHScrollGlitchStatus $12B
 
 define toolsToRunPointerList $12E
 

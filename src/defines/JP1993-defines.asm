@@ -14,6 +14,8 @@ define bank7_pauseCheck $CF7B
 
 define bank7_deathHijack $C2BE
 
+define bank7_stageTimerPPUDestination $CDAC
+
 define bank7_sprite0Hijack $C165
 define bank7_sprite0LocalOAMTable $C161
 
@@ -27,6 +29,8 @@ define bank7_originalCreditsGameStatePointer $8B4B
 define bank7_stagePropertyTableReadingHijack $D079
 
 define bank7_switchToBank_Bank6 $C1FA
+
+define bank6_stageTimerPrintHijack $A0DC
 
 define bank6_hudPrintHijack $A192
 
@@ -63,3 +67,7 @@ define someBank7GenericPrintSubRoutine1 $CC80
 define someBank7GenericPrintSubRoutine2 $CC53
 
 define someBank7GenericPrintSubRoutine3 $CC4A
+
+define bank7_printStageTimerFirstDigit $CC53
+
+define bank7_printStageTimerSecondDigit $CC5E

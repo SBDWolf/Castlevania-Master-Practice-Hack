@@ -68,6 +68,9 @@ org {bank7_sprite0Hijack}
 org {bank7_stagePropertyTableReadingHijack}
 	lda reroutedStagePropertyTableFromBank7,x
 
+org {bank7_stageTimerPPUDestination}+1
+	db $53
+
 
 bank 6
 base $8000
@@ -121,8 +124,8 @@ org {bank6_freeSpace}
 
 	
 	levelLoadHijack:
-		tya
-		pha
+		//tya
+		//pha
 
 		lda {practiceShouldKeepPlayerStatsOnDeathFlag}
 		cmp {TRUE}
@@ -142,8 +145,8 @@ org {bank6_freeSpace}
 		sta {practiceShouldKeepPlayerStatsOnDeathFlag}
 		
 	deathEnd:			
-		pla 
-		tay 
+		//pla 
+		//tay 
 		lda $19								// hijack fix
 		clc 
 		rts 
@@ -174,6 +177,12 @@ org {bank6_freeSpace}
 		db $FF,$FF,$FF,$FF,$0F,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$3F,$1F
 		db $FF,$FF,$0F
 
+	printStageTimerIfNotThousandsDigit:
+		cpy #$01
+		beq +
+		jmp {bank7_printStageTimerFirstDigit}
++;		jmp {bank7_printStageTimerSecondDigit}
+
 	warnpc $C000
 
 org {bank6_hudPrintHijack}
@@ -184,3 +193,6 @@ org {bank6_hudPrintHijack}
 		nop 
 		nop 
 		nop 
+
+org {bank6_stageTimerPrintHijack}
+		jsr printStageTimerIfNotThousandsDigit
