@@ -1,4 +1,4 @@
-clear_movement_data:
+clear_movement_data_part1:
     ldx {tileDataPointer}
 
     lda #$01
@@ -22,6 +22,12 @@ clear_movement_data:
     sta {PPUBuffer},x
     inx 
 
+    stx {tileDataPointer}
+    rts 
+
+clear_movement_data_part2:
+    ldx {tileDataPointer}
+
     lda #$01
     sta {PPUBuffer},x
     inx 
@@ -39,7 +45,6 @@ clear_movement_data:
     inx 
     cpy {SCROLLGLITCHDIAGNOSTIC_MaxHudCursorValue}/$2
     bcc - 
-
 
     lda #$FF
     sta {PPUBuffer},x

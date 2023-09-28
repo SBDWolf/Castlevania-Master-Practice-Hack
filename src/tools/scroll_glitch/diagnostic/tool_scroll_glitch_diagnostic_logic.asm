@@ -52,58 +52,88 @@
 
 
     onFirstMovementRight:
-        jsr clear_movement_data
-        lda {simonMovementState}
-        and #$03
-        beq .onIdleNow
-
+        lda {scrollGlitchDiagnosticHudClearPhase}
+        beq .onFirstClear
         cmp #$01
-        beq .onMovingRightNow
+        beq .onSecondClear
 
-        .onMovingLeftNow:
-            ldy #$00
-            jsr print_movement_data
-            lda #$04
-            sta {scrollGlitchDiagnosticPhaseCounter}
-            jmp scrollGlitchDiagnostic_exitTool
+        
+        .mainFirstMovementRightLogic:
+            lda {simonMovementState}
+            and #$03
+            beq .onIdleNow
+
+            cmp #$01
+            beq .onMovingRightNow
+
+            .onMovingLeftNow:
+                ldy #$00
+                jsr print_movement_data
+                lda #$04
+                sta {scrollGlitchDiagnosticPhaseCounter}
+                jmp scrollGlitchDiagnostic_exitTool
 
 
-        .onMovingRightNow:
-            jmp scrollGlitchDiagnostic_exitTool
+            .onMovingRightNow:
+                jmp scrollGlitchDiagnostic_exitTool
 
-        .onIdleNow:
-            lda #$00
-            sta {scrollGlitchDiagnosticPhaseCounter}
-            jmp scrollGlitchDiagnostic_exitTool
-    
+            .onIdleNow:
+                lda #$00
+                sta {scrollGlitchDiagnosticPhaseCounter}
+                jmp scrollGlitchDiagnostic_exitTool
+
+        .onFirstClear:
+            jsr clear_movement_data_part1
+            inc {scrollGlitchDiagnosticHudClearPhase}
+            bvc .mainFirstMovementRightLogic
+
+        .onSecondClear:
+            jsr clear_movement_data_part2
+            inc {scrollGlitchDiagnosticHudClearPhase}
+            bvc .mainFirstMovementRightLogic
     
     
     onFirstMovementLeft:
-        jsr clear_movement_data
-        lda {simonMovementState}
-        and #$03
-        beq .onIdleNow
-
+        lda {scrollGlitchDiagnosticHudClearPhase}
+        beq .onFirstClear
         cmp #$01
-        beq .onMovingRightNow
-
-        .onMovingLeftNow:
-            jmp scrollGlitchDiagnostic_exitTool
+        beq .onSecondClear
 
 
-        .onMovingRightNow:
-            ldy #$00
-            jsr print_movement_data
-            lda #$03
-            sta {scrollGlitchDiagnosticPhaseCounter}
-            jmp scrollGlitchDiagnostic_exitTool
+        .mainFirstMovementLeftLogic:
+            lda {simonMovementState}
+            and #$03
+            beq .onIdleNow
+
+            cmp #$01
+            beq .onMovingRightNow
+
+            .onMovingLeftNow:
+                jmp scrollGlitchDiagnostic_exitTool
 
 
-        .onIdleNow:
-            lda #$00
-            sta {scrollGlitchDiagnosticPhaseCounter}
-            jmp scrollGlitchDiagnostic_exitTool
+            .onMovingRightNow:
+                ldy #$00
+                jsr print_movement_data
+                lda #$03
+                sta {scrollGlitchDiagnosticPhaseCounter}
+                jmp scrollGlitchDiagnostic_exitTool
 
+
+            .onIdleNow:
+                lda #$00
+                sta {scrollGlitchDiagnosticPhaseCounter}
+                jmp scrollGlitchDiagnostic_exitTool
+
+        .onFirstClear:
+            jsr clear_movement_data_part1
+            inc {scrollGlitchDiagnosticHudClearPhase}
+            bvc .mainFirstMovementLeftLogic
+
+        .onSecondClear:
+            jsr clear_movement_data_part2
+            inc {scrollGlitchDiagnosticHudClearPhase}
+            bvc .mainFirstMovementLeftLogic
     
     
     onScrollGlitchMovementRight:

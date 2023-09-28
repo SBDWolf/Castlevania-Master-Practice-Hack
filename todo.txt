@@ -19,5 +19,4 @@
 - cleanup, particularly in the main menu code area where i made the up underflow and down overflow
 - revisit menu function organization (i don't know if i like having all the incsrc's in main.asm, for example)
 
-- clean up hud clear on diagnostic scroll glitch tool (clearing every frame can cause graphical glitches)
-- possibly extend the range of pixels in while the diagnostic scroll glitch tool info gets printed?
+- use some kind of indicator for the diagnostic scroll glitch tool for letting the player know if the scroll glitch has been failed or not

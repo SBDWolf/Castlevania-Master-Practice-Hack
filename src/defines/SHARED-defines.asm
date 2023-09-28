@@ -164,25 +164,26 @@ define memorywatch02Pointer $118 // 2 bytes
 
 define memorywatch03Pointer $11A // 2 bytes
 
-define timerLevelTimerMinutes $118
-define timerLevelTimerSeconds $119
-define timerLevelTimerFrames $120
-define timerRoomTimerCurrentMinutes $121
-define timerRoomTimerCurrentSeconds $122
-define timerRoomTimerCurrentFrames $123
-define timerRoomTimerPreviousMinutes $124
-define timerRoomTimerPreviousSeconds $125
-define timerRoomTimerPreviousFrames $126
+define timerLevelTimerMinutes $11C
+define timerLevelTimerSeconds $11D
+define timerLevelTimerFrames $11E
+define timerRoomTimerCurrentMinutes $11F
+define timerRoomTimerCurrentSeconds $120
+define timerRoomTimerCurrentFrames $121
+define timerRoomTimerPreviousMinutes $122
+define timerRoomTimerPreviousSeconds $123
+define timerRoomTimerPreviousFrames $124
 
-define timerPreviousFrameStage $127
-define timerPreviousFrameSubStage $128
-define timerAlreadyRanUpdatesFlag $129
+define timerPreviousFrameStage $125
+define timerPreviousFrameSubStage $126
+define timerAlreadyRanUpdatesFlag $127
 
-define scrollGlitchDiagnosticTimer $12A
+define scrollGlitchDiagnosticTimer $128
 // 0x01 on "first movement right", 0x02 on "first movement left", 0x00 on "idle", 0x03 on "scroll glitch movement right", 0x04 on "scroll glitch movement left"
-define scrollGlitchDiagnosticPhaseCounter $12B
-define scrollGlitchDiagnosticSimonPreviousX $12C
-define scrollGlitchDiagnosticHudCursor $12D
+define scrollGlitchDiagnosticPhaseCounter $129
+define scrollGlitchDiagnosticSimonPreviousX $12A
+define scrollGlitchDiagnosticHudCursor $12B
+define scrollGlitchDiagnosticHudClearPhase $12C
 
 define toolsToRunPointerList $12E
 

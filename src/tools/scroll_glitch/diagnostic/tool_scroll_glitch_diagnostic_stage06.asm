@@ -1,18 +1,32 @@
         lda {currentSubStage}
         bne stage06Pass
 
-        lda {leftBookendColumn}
-        cmp #$09
-        bcc stage06Pass
-        cmp #$0B
+        lda {simonXLowByte}
+        cmp #$01
+        bne stage06Pass
+
+        lda {simonXHighByte}
+        cmp #$E8
         bcs stage06Pass
+        cmp #$98
+        bcc stage06Pass
 
         jmp logic_start
+
+
+        //lda {leftBookendColumn}
+        //cmp #$08
+        //bcc stage06Pass
+        //cmp #$0C
+        //bcs stage06Pass
+
+        //jmp logic_start
 
     stage06Pass:
         lda #$00
         sta {scrollGlitchDiagnosticTimer}
         sta {scrollGlitchDiagnosticHudCursor}
+        sta {scrollGlitchDiagnosticHudClearPhase}
         lda {simonMovementState}
         and #$03
         sta {scrollGlitchDiagnosticPhaseCounter}
