@@ -91,7 +91,7 @@
 
 
 	action_scrollGlitch:
-	    ldx #$02
+	    ldx #$03
 		jsr handleSubMenuInputs
         cpy {TRUE}
         beq +
@@ -101,16 +101,36 @@
         		
 +;		// enable/disable scroll glitch tool
 		lda {practiceSubMenuCursor}
-		cmp #$01
-		bcc .scrollGlitch_disableTool
-		beq .scrollGlitch_enableDeathTool
-		// enable diagnostic scroll glitch tool and disable death scroll glitch tool
+		beq .scrollGlitch_disableTool
+		cmp #$02
+		bcc .scrollGlitch_enableDeathTool
+		beq .enableDiagnosticTool
+		// enable both tools
 		lda {activeTools}
+		// these ora's could be optimized into one instruction
 		ora {TOOLS_ScrollGlitchDiagnosticToolBitSet}
-		and {TOOLS_ScrollGlitchDeathToolBitUnSet}
+		ora {TOOLS_ScrollGlitchDeathToolBitSet}
+		// disable all memory watches since they occupy the same area of the screen
+		and {TOOLS_MemoryWatch00ToolBitUnSet}
+		and {TOOLS_MemoryWatch01ToolBitUnSet}
+		and {TOOLS_MemoryWatch02ToolBitUnSet}
 		sta {activeTools}
 
 		jmp exitMenu
+
+		.enableDiagnosticTool:
+			// enable diagnostic scroll glitch tool and disable death scroll glitch tool
+			lda {activeTools}
+			ora {TOOLS_ScrollGlitchDiagnosticToolBitSet}
+			and {TOOLS_ScrollGlitchDeathToolBitUnSet}
+			// disable all memory watches since they occupy the same area of the screen
+			and {TOOLS_MemoryWatch00ToolBitUnSet}
+			and {TOOLS_MemoryWatch01ToolBitUnSet}
+			and {TOOLS_MemoryWatch02ToolBitUnSet}
+
+			sta {activeTools}
+
+			jmp exitMenu
 
 
 		.scrollGlitch_enableDeathTool:
@@ -119,6 +139,10 @@
 			ora {TOOLS_ScrollGlitchDeathToolBitSet}
 			and {TOOLS_ScrollGlitchDiagnosticToolBitUnSet}
 			sta {activeTools}
+			// disable all memory watches since they occupy the same area of the screen
+			and {TOOLS_MemoryWatch00ToolBitUnSet}
+			and {TOOLS_MemoryWatch01ToolBitUnSet}
+			and {TOOLS_MemoryWatch02ToolBitUnSet}
 
 			jmp exitMenu
 
@@ -151,6 +175,8 @@
 		// enable memory watch
 		lda {activeTools}
 		ora {TOOLS_MemoryWatch00ToolBitSet}
+		// disable diagnostic scroll glitch tool since it occupies the same area of the screen
+		and {TOOLS_ScrollGlitchDiagnosticToolBitUnSet}
 		sta {activeTools}
 
 		// store pointer to memory location it needs to watch
@@ -192,6 +218,8 @@
 		// enable memory watch
 		lda {activeTools}
 		ora {TOOLS_MemoryWatch01ToolBitSet}
+		// disable diagnostic scroll glitch tool since it occupies the same area of the screen
+		and {TOOLS_ScrollGlitchDiagnosticToolBitUnSet}
 		sta {activeTools}
 
 		// store pointer to memory location it needs to watch
@@ -233,6 +261,8 @@
 		// enable memory watch
 		lda {activeTools}
 		ora {TOOLS_MemoryWatch02ToolBitSet}
+		// disable diagnostic scroll glitch tool since it occupies the same area of the screen
+		and {TOOLS_ScrollGlitchDiagnosticToolBitUnSet}
 		sta {activeTools}
 
 		// store pointer to memory location it needs to watch

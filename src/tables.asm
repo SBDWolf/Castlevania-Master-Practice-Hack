@@ -99,10 +99,11 @@ org {bank5_freeSpaceData}
 
 	textTable_scrollGlitch:
 		// header contains index of each text entry
-		db $03,$0F,$1B
+		db $04,$10,$1C,$28
 		db "DISABLED   /"
 		db "DEATH      /"
 		db "DIAGNOSTIC /"
+		db "BOTH       /"
 
 	textTable_memoryWatch:
 		// header contains index of each text entry
@@ -136,7 +137,7 @@ org {bank5_freeSpaceData}
 
 	
 	textTable_about:
-		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.5 /"
+		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.6B/"
 		db "    FOR A USER MANUAL VISIT     /"
 		// done in two passes, so the ppu job destination is included in this third line
 		db $01,$20,$60,"   TINYURL.COM SLASH 2P4E6FFM   /"
