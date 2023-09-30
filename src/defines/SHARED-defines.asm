@@ -183,9 +183,7 @@ define scrollGlitchDiagnosticSimonPreviousX $128
 define scrollGlitchDiagnosticHudCursor $129
 define scrollGlitchDiagnosticHudClearPhase $12A
 // 0x00 if scroll glitch is not failed (yet :) ), 0x01 if scroll glitch is failed
-define scrollGlitchDiagnosticScrollGlitchStatus $12B
-define scrollGlitchDiagnosticBlockPreviousState1 $12C
-define scrollGlitchDiagnosticBlockPreviousState2 $12D
+define scrollGlitchDiagnosticHScrollGlitchStatus $12B
 
 define toolsToRunPointerList $12E
 
