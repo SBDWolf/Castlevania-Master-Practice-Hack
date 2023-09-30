@@ -12,16 +12,20 @@
         cmp #$C8
         bcs stage13Pass
 
-		lda $5D4
+		lda {scrollGlitchDiagnosticBlockPreviousState1}
 		beq +
-        lda {scrollGlitchDiagnosticHScrollGlitchStatus}
+        lda {scrollGlitchDiagnosticScrollGlitchStatus}
         and #$FE
-        sta {scrollGlitchDiagnosticHScrollGlitchStatus}
+        sta {scrollGlitchDiagnosticScrollGlitchStatus}
+        lda $5D4
+        sta {scrollGlitchDiagnosticBlockPreviousState1}
         jmp logic_start
 
-+;      lda {scrollGlitchDiagnosticHScrollGlitchStatus}
++;      lda {scrollGlitchDiagnosticScrollGlitchStatus}
         ora #$01
-        sta {scrollGlitchDiagnosticHScrollGlitchStatus}
+        sta {scrollGlitchDiagnosticScrollGlitchStatus}
+        lda $5D4
+        sta {scrollGlitchDiagnosticBlockPreviousState1}
         jmp logic_start
 
     stage13Pass:
@@ -29,7 +33,8 @@
         sta {scrollGlitchDiagnosticTimer}
         sta {scrollGlitchDiagnosticHudCursor}
         sta {scrollGlitchDiagnosticHudClearPhase}
-        sta {scrollGlitchDiagnosticHScrollGlitchStatus}
+        sta {scrollGlitchDiagnosticScrollGlitchStatus}
+        sta {scrollGlitchDiagnosticBlockPreviousState1}
         lda {simonMovementState}
         and #$03
         sta {scrollGlitchDiagnosticPhaseCounter}

@@ -23,6 +23,23 @@
             bcc stage14Pass
             cmp #$68
             bcs stage14Pass
+
+            lda {scrollGlitchDiagnosticBlockPreviousState1}
+            beq +
+            lda {scrollGlitchDiagnosticScrollGlitchStatus}
+            and #$FE
+            sta {scrollGlitchDiagnosticScrollGlitchStatus}
+            lda $68A
+            sta {scrollGlitchDiagnosticBlockPreviousState1}
+
+            jmp logic_start
+
++;          lda {scrollGlitchDiagnosticScrollGlitchStatus}
+            ora #$01
+            sta {scrollGlitchDiagnosticScrollGlitchStatus}
+            lda $68A
+            sta {scrollGlitchDiagnosticBlockPreviousState1}
+
             jmp logic_start
 
         .on14Standard:
@@ -47,36 +64,13 @@
             jmp logic_start
 
 
-        //lda {leftBookendColumn}
-        //cmp #$20
-        //bcs stage14Pass
-        //cmp #$1C
-        //bcc +
-        //jmp executeLogic
-//+;      cmp #$12
-        //bcc stage14Pass
-        //cmp #$17
-        //bcs stage14Pass
-        //jmp executeLogic
-
-
-
-
-        //cmp #$1D
-        //beq executeLogic
-        //cmp #$1E
-        //beq executeLogic
-        //cmp #$12
-        //beq executeLogic
-        //cmp #$15
-        //beq executeLogic
-
-
     stage14Pass:
         lda #$00
         sta {scrollGlitchDiagnosticTimer}
         sta {scrollGlitchDiagnosticHudCursor}
         sta {scrollGlitchDiagnosticHudClearPhase}
+        sta {scrollGlitchDiagnosticBlockPreviousState1}
+        sta {scrollGlitchDiagnosticBlockPreviousState2}
         lda {simonMovementState}
         and #$03
         sta {scrollGlitchDiagnosticPhaseCounter}
