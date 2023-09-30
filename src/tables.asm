@@ -227,7 +227,6 @@ org {bank5_freeSpaceData}
 		db $2F,$4F
 		db $30,$50
 		db $31,$51
-		db $32,$52
 
 	pointerTable_toolsEnd:
 		dw returnToGame
