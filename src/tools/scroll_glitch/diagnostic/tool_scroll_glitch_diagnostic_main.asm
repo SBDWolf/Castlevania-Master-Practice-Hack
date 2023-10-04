@@ -15,7 +15,6 @@
         sta $01
         jmp ($0000)
 
-    scrollGlitchDiagnostic_stage00:
     scrollGlitchDiagnostic_stage01:
     scrollGlitchDiagnostic_stage02:
     scrollGlitchDiagnostic_stage03:
@@ -32,6 +31,8 @@
 	scrollGlitchDiagnostic_stageMap:
         jmp scrollGlitchDiagnostic_exitTool
 
+    scrollGlitchDiagnostic_stage00:
+        incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage00.asm"
     scrollGlitchDiagnostic_stage05:
         incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage05.asm"
     scrollGlitchDiagnostic_stage06:

@@ -47,31 +47,6 @@
             jmp logic_start
 
 
-        //lda {leftBookendColumn}
-        //cmp #$20
-        //bcs stage14Pass
-        //cmp #$1C
-        //bcc +
-        //jmp executeLogic
-//+;      cmp #$12
-        //bcc stage14Pass
-        //cmp #$17
-        //bcs stage14Pass
-        //jmp executeLogic
-
-
-
-
-        //cmp #$1D
-        //beq executeLogic
-        //cmp #$1E
-        //beq executeLogic
-        //cmp #$12
-        //beq executeLogic
-        //cmp #$15
-        //beq executeLogic
-
-
     stage14Pass:
         lda #$00
         sta {scrollGlitchDiagnosticTimer}

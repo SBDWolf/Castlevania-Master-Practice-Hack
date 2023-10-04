@@ -10,14 +10,6 @@
 
         bvc stage07Pass
 
-
-        //lda {leftBookendColumn}
-        //cmp #$0F
-        //bcs stage07Pass
-        //cmp #$0A
-        //bcc stage07Pass
-        //jmp logic_start
-
         .onHighByte02:
             lda {simonXHighByte}
             cmp #$68

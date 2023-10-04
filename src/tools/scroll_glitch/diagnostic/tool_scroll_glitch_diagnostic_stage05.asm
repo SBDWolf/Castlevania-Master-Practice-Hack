@@ -20,12 +20,6 @@
             jmp logic_start
 
 
-        //lda {leftBookendColumn}
-        //cmp #$03
-        //bne stage05Pass
-
-        //jmp logic_start
-
     stage05Pass:
         lda #$00
         sta {scrollGlitchDiagnosticTimer}

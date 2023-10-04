@@ -21,15 +21,6 @@
             jmp logic_start
 
 
-        
-
-        //lda {leftBookendColumn}
-        //cmp #$0A
-        //bcc stage17Pass
-        //cmp #$0E
-        //bcs stage17Pass
-
-
     stage17Pass:
         lda #$00
         sta {scrollGlitchDiagnosticTimer}
