@@ -26,7 +26,7 @@ To use, pause the game by pressing Start, then press Select to pull up a menu.
   - 01 = Second Quest
 ### Practice Tools
 Keep in mind that having any of these tools enabled may cause a little bit more lag. They are all disabled by default.
-- **Viewer 1,2,3,4**: Sets a memory watch around the top left side of the screen. There are 4 slots available, so you can have up to 4 memory values displayed at the same time. The options are the following:
+- **Viewer 1,2,3**: Sets a memory watch around the top left side of the screen. There are 3 slots available, so you can have up to 3 memory values displayed at the same time. The options are the following:
   - **Simon X**: The most significant byte of Simon's X position on screen
   - **Simon Y**: Simon's Y position on screen
   - **Whip Frames**: The animation timer for Simon's Whip. Particularly useful for Crit practice, since it freezes when Simon gets hit. You want this value to be frozen at 0x11 when getting hit.
