@@ -20,10 +20,12 @@ To use, pause the game by pressing Start, then press Select to pull up a menu.
   - 00 = No Multiplier
   - 01 = Double Shot
   - 02 = Triple Shot
+- **Health**: Sets Simon's Heart Count.
 - **Hearts**: Sets Simon's Heart Count.
 - **Game Loop**: Sets whether the game's difficulty setting is that of first quest or second quest.
   - 00 = First Quest
   - 01 = Second Quest
+- **Music**: Toggles the music on/off.
 ### Practice Tools
 Keep in mind that having any of these tools enabled may cause a little bit more lag. They are all disabled by default.
 - **Viewer 1,2,3**: Sets a memory watch around the top left side of the screen. There are 3 slots available, so you can have up to 3 memory values displayed at the same time. The options are the following:
@@ -32,6 +34,7 @@ Keep in mind that having any of these tools enabled may cause a little bit more 
   - **Whip Frames**: The animation timer for Simon's Whip. Particularly useful for Crit practice, since it freezes when Simon gets hit. You want this value to be frozen at 0x11 when getting hit.
   - **Boss Health**: The numerical value of the boss's health for the current stage.
   - **Blk Counter**: The index for the block that's being processed in a column by Castlevania's stage loading algorithm. Can be useful for Scroll Glitch practice.
+  - **Step Counter**: One of the memory addresses that controls Simon's walking animation. Important for Credits Warp practice.
 - **Timer**: Enables an in-game timer.
   This timer will not visually update on screen, but rather on stage and level transitions.
   The format for this timer is 1M23.45 (reads: 1 minute, 23 seconds and 45 frames). One second is assumed to be exactly equal to 60 frames, even though technically a   real time second is actually 60.098 frames.
@@ -44,8 +47,8 @@ Keep in mind that having any of these tools enabled may cause a little bit more 
   In addition, in the top left is displayed a counter that represents how many total lag frames have occurred so far (capped at 99). It counts loading frames in-between rooms, as well.
   This lag counter also resets when going into a new level or using one of the Stage Control features.
 - **Scroll Glitch**: Enables a tool to help practice Scroll Glitches. There are three options for this:
-  - **Death**: If in a stage where an RTA-viable Scroll Glitch is present (that is: 05-2, 06-1, 07-1, 13-1, 14-2, 17-1), the game will start checking if the blocks that need to be manipulated have been manipped correctly, and kill Simon if they haven't. This is intended to be used in combination with savestates. There are a few additional conditions to prevent early deaths, such as not killing Simon in Stage 05-2 if he's not facing left. For the Stage 14 Top Block and the rightmost block of Stage 17, Simon will only be killed if either of the 2 blocks that can work have not been manipped.
-  - **Diagnostic** : If in the castle courtyard or in area where an RTA-viable Scroll Glitch is present (that is: 05-2, 06-1, 07-1, 13-1, 14-2, 17-1), information will be printed on screen regarding your movement. Every column represents information regarding your movement: the number at the top indicates the amount of frames the dpad has been neutral before starting a movement, and the number at the bottom is the amount of frames Simon has moved for. The digits printed are in base-24 (basically hexadecimal, but making use of more letter, so for example A=10, B=11, F=15, G=16, I=18, etc.). Ideally, for the 4-12 method, the numbers at the bottom should be as close as possible to 4-C and the numbers at the top should be as close as possible to 0. The castle courtyard is programmed to just print the movement information anywhere on that screen for freeform practice.
+  - **Death**: If in a stage where an RTA-viable Scroll Glitch is present (that is: 05-2, 06-1, 06-2, 07-1, 10-1, 12-1, 13-1, 13-2, 14-2, 17-1), the game will start checking if the blocks that need to be manipulated have been manipped correctly, and kill Simon if they haven't. This is intended to be used in combination with savestates. There are a few additional conditions to prevent early deaths, such as not killing Simon in Stage 05-2 if he's not facing left. For the Stage 14 Top Block and the rightmost block of Stage 17, Simon will only be killed if either of the 2 blocks that can work have not been manipped.
+  - **Diagnostic** : If in the castle courtyard or in area where an RTA-viable Scroll Glitch is present (that is: 05-2, 06-1, 06-2, 07-1, 10-1, 12-1, 13-1, 13-2, 14-2, 17-1), information will be printed on screen regarding your movement. Every column represents information regarding your movement: the number at the top indicates the amount of frames the dpad has been neutral before starting a movement, and the number at the bottom is the amount of frames Simon has moved for. The digits printed are in base-24 (basically hexadecimal, but making use of more letter, so for example A=10, B=11, F=15, G=16, I=18, etc.). Ideally, for the 4-12 method, the numbers at the bottom should be as close as possible to 4-C and the numbers at the top should be as close as possible to 0. The castle courtyard is programmed to just print the movement information anywhere on that screen for freeform practice.
   - **Both**: This enables both the Death Tool and the Diagnostic tool at once. So, the movement information will be printed on screen, but Simon will also be killed if the targeted Scroll Glitch is missed.
 - **Input Display**: Shows the currently held inputs on the top right side of the screen.
 - **Dracula Tool**: Print some useful information for Dracula 2-cycle practice on the top center of the screen (only if in Dracula's room):
