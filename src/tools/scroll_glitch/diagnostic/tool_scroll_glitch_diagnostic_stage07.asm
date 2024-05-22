@@ -3,20 +3,20 @@
 
         lda {simonXLowByte}
         cmp #$02
-        beq .onHighByte02
+        beq .onLowByte02
 
         cmp #$01
-        beq .onHighByte01
+        beq .onLowByte01
 
         bvc stage07Pass
 
-        .onHighByte02:
+        .onLowByte02:
             lda {simonXHighByte}
             cmp #$68
             bcs stage07Pass
             jmp logic_start
 
-        .onHighByte01:
+        .onLowByte01:
             lda {simonXHighByte}
             cmp #$D8
             bcc stage07Pass

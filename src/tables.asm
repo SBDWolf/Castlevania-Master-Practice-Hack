@@ -18,8 +18,10 @@ org {bank5_freeSpaceData}
 		dw text_whipLevelSelect
 		dw text_subweaponSelect 
 		dw text_subweaponMultiplierSelect
+		dw text_healthSelect
 		dw text_heartSelect
 		dw text_gameLoop           	
+		dw text_music
 		dw text_memoryWatch00
 		dw text_memoryWatch01
 		dw text_memoryWatch02
@@ -41,10 +43,14 @@ org {bank5_freeSpaceData}
 		db "SUBWEAPON    /"
 	text_subweaponMultiplierSelect:
 		db "MULTIPLIER   /"
+	text_healthSelect:
+		db "HEALTH       /"
 	text_heartSelect:
 		db "HEARTS       /"
 	text_gameLoop:
 		db "GAME LOOP    /"
+	text_music:
+		db "MUSIC        /"
 	text_memoryWatch00:
 		db "VIEWER 1     /"
 	text_memoryWatch01:
@@ -70,8 +76,10 @@ org {bank5_freeSpaceData}
 		dw action_whipLevelSelect
 		dw action_subweaponSelect
 		dw action_subweaponMultiplierSelect
+		dw action_healthSelect
 		dw action_heartSelect
 		dw action_gameLoop
+		dw action_music
 		dw action_memoryWatch00
 		dw action_memoryWatch01
 		dw action_memoryWatch02
@@ -107,13 +115,14 @@ org {bank5_freeSpaceData}
 
 	textTable_memoryWatch:
 		// header contains index of each text entry
-		db $06,$12,$1E,$2A,$36,$42
-		db "DISABLED   /"
-		db "SIMON X    /"
-		db "SIMON Y    /"
-		db "WHIP FRAMES/"
-		db "BOSS HEALTH/"
-		db "BLK COUNTER/"
+		db $07,$14,$21,$2E,$3B,$48,$55
+		db "DISABLED    /"
+		db "SIMON X     /"
+		db "SIMON Y     /"
+		db "WHIP FRAMES /"
+		db "BOSS HEALTH /"
+		db "BLK COUNTER /"
+		db "STEP COUNTER/"
 
 	lookupTable_memoryWatchAddresses:
 		dw $0000
@@ -122,6 +131,7 @@ org {bank5_freeSpaceData}
 		dw {whipAnimationTimer}
 		dw {currentBossHealth}
 		dw {blockCounter}
+		dw {attackState}
 
 	textTable_subweaponSelect:
 		db $05,$11,$1D,$29,$35
@@ -137,7 +147,7 @@ org {bank5_freeSpaceData}
 
 	
 	textTable_about:
-		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.6 /"
+		db $01,$20,$20," CASTLEVANIA PRACTICE HACK V0.7 /"
 		db "    FOR A USER MANUAL VISIT     /"
 		// done in two passes, so the ppu job destination is included in this third line
 		db $01,$20,$60,"   TINYURL.COM SLASH 2P4E6FFM   /"

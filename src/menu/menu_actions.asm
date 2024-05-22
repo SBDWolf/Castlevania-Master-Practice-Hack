@@ -158,7 +158,7 @@
 
 
 	action_memoryWatch00:
-		ldx #$05
+		ldx #$06
 		jsr handleSubMenuInputs
         cpy {TRUE}
         beq +
@@ -375,6 +375,20 @@
         sta {currentHeartCount}
 
 		jmp exitMenu
+
+	action_healthSelect:
+		ldx #64
+        jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
+
+		jmp genericMenuPrint_selectBetweenNumericalValue
+     
++;      lda {practiceSubMenuCursor}
+        sta {currentPlayerHealth}
+		sta {currentPlayerDisplayHealth}
+
+		jmp exitMenu
 		
 
 	action_gameLoop:
@@ -390,7 +404,44 @@
 
 		jmp exitMenu      
 
+	action_music:
+	    ldx #$01
+		jsr handleSubMenuInputs
+        cpy {TRUE}
+        beq +
 
+		ldx {INDEX_BinaryEnableTextMasterTableIndex}
+		jmp genericMenuPrint_selectBetweenTextValues
+        		
++;		// enable/disable music
+		lda {practiceSubMenuCursor}
+		cmp {TRUE}
+		bne .music_disable
+		// enable music
+		lda #$00
+		sta {disableMusic}
+
+
+		jmp exitMenu
+
+
+		.music_disable:
+			// disable music
+			
+			// set flag
+			lda #$01
+			sta {disableMusic}
+
+			// also immediately zero out the volume for all audio channels
+			lda #$10
+			sta {musicSquare1Volume}
+			sta {musicSquare2Volume}
+			lda #$00
+			sta {musicTriangleLinearCounter}
+			sta {noiseVolume}
+
+			jmp exitMenu
+	
 
 
 	action_stageSelect:

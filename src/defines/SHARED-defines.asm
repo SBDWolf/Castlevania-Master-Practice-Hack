@@ -21,7 +21,7 @@ define PRACTICEMENU_DeconstructMenu00PhaseIndex #$08
 define PRACTICEMENU_MenuActionPhaseIndex #$0E
 define PRACTICEMENU_LastPhaseIndex #$10
 // keep this updated if adding new menu entries
-define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0B
+define PRACTICEMENU_MenuEntryCountForUpPressUnderflow #$0D
 
 // keep these updated when adding new menu options that uses text selection
 define INDEX_BinaryEnableTextMasterTableIndex #$00
@@ -48,6 +48,10 @@ define STAGE_DraculaSubStage #$01
 
 define SPRITE0_MenuMovedPosition #$2F
 define SPRITE0_OriginalPosition #$25
+
+define SFX_OrbGrab #$48
+define SFX_OrbGrabDracula #$48
+define SFX_GameOverTrack #$4E
 
 define MEMORYWATCHMENU_DisabledIndex #$00
 define MEMORYWATCHMENU_TotalLagFrameCounterIndex #$01 // TODO: is this right? double check
@@ -118,6 +122,7 @@ define simonY $3F
 define simonXHighByte $40
 define simonXLowByte $41
 
+define currentPlayerDisplayHealth $44
 define currentPlayerHealth $45
 
 define currentSubStage $46
@@ -127,6 +132,16 @@ define currentSubweaponMultiplier $64
 define currentWhipLevel $70
 
 define currentHeartCount $71
+
+define musicSquare1Track $82
+define musicSquare1Volume $85
+define musicSquare2Volume $95
+define musicTriangleLinearCounter $A5
+define noiseTrack $B2
+define noiseNoteAddressHigh $B3
+define noiseNoteAddressLow $B4
+define noiseVolume $B7
+define audioTrack $E5
 
 define currentInputOneFrame $F5
 
@@ -148,6 +163,8 @@ define backupCurrentHeartCount $10B
 
 define draculaToolPauseBufferFrameCount $10C
 define draculaToolJumpWhipStaggerFrameCount $10D
+
+define disableMusic $10E
 
 define activeTools $110
 define toolsCountForMenuDeconstruction $111
@@ -199,6 +216,8 @@ define subweaponSprite2ForOAM $240
 // if left then 0x01, else 0x00
 define isSimonFacingLeft $0450
 
+define attackState $530
+
 define whipAnimationTimer $568
 
 define levelTileData $5A0
@@ -211,3 +230,5 @@ define bank3_LetterOffset_Z $BE98
 
 // natural free space in both the us and jp version. not much in bank 7!
 define bank7_naturalFreeSpace $FF2A
+
+define bank0_freeSpace $BB10

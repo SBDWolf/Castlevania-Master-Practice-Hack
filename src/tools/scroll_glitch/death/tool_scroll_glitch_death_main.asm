@@ -3,7 +3,7 @@
         txa 
         pha 
 
-
+        
         // we use a table that contains all the pointers to the scroll glitch code for the current stage. we read from this table, then jump to that pointer
         ldy {currentStage}
         tya 
@@ -22,9 +22,7 @@
     scrollGlitchDeath_stage04:
     scrollGlitchDeath_stage08:
     scrollGlitchDeath_stage09:
-    scrollGlitchDeath_stage10:
     scrollGlitchDeath_stage11:
-    scrollGlitchDeath_stage12:
     scrollGlitchDeath_stage15:
     scrollGlitchDeath_stage16:
     scrollGlitchDeath_stage18:
@@ -38,6 +36,10 @@
         incsrc "src/tools/scroll_glitch/death/tool_scroll_glitch_death_stage06.asm"
     scrollGlitchDeath_stage07:
         incsrc "src/tools/scroll_glitch/death/tool_scroll_glitch_death_stage07.asm"
+    scrollGlitchDeath_stage10:
+        incsrc "src/tools/scroll_glitch/death/tool_scroll_glitch_death_stage10.asm"
+    scrollGlitchDeath_stage12:
+        incsrc "src/tools/scroll_glitch/death/tool_scroll_glitch_death_stage12.asm"
     scrollGlitchDeath_stage13:
         incsrc "src/tools/scroll_glitch/death/tool_scroll_glitch_death_stage13.asm"
     scrollGlitchDeath_stage14:

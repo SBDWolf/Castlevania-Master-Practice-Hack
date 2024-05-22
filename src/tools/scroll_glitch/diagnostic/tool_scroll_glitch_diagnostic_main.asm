@@ -21,9 +21,7 @@
     scrollGlitchDiagnostic_stage04:
     scrollGlitchDiagnostic_stage08:
     scrollGlitchDiagnostic_stage09:
-    scrollGlitchDiagnostic_stage10:
     scrollGlitchDiagnostic_stage11:
-    scrollGlitchDiagnostic_stage12:
     scrollGlitchDiagnostic_stage15:
     scrollGlitchDiagnostic_stage16:
     scrollGlitchDiagnostic_stage18:
@@ -39,6 +37,10 @@
         incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage06.asm"
     scrollGlitchDiagnostic_stage07:
         incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage07.asm"
+    scrollGlitchDiagnostic_stage10:
+        incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage10.asm"
+    scrollGlitchDiagnostic_stage12:
+        incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage12.asm"
     scrollGlitchDiagnostic_stage13:
         incsrc "src/tools/scroll_glitch/diagnostic/tool_scroll_glitch_diagnostic_stage13.asm"
     scrollGlitchDiagnostic_stage14:

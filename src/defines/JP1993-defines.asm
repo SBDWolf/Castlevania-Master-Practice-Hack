@@ -4,6 +4,11 @@ define currentInputHeld $F6
 
 // -- ROM Addresses -------------------------------------------------
 
+define bank0_musicVolumeMelodyHijack $85F8
+define bank0_musicVolumeNoiseHijack $84F1
+define bank0_musicValueNoiseDirectHijack $84EA
+define bank0_musicBossFadeOutHijack $8396
+
 define bank7_scorePrintHijack $CC6F
 
 define bank7_pauseCheckHijack $CF46
@@ -27,6 +32,9 @@ define bank7_originalCreditsGameStatePointer $8B4B
 define bank7_stagePropertyTableReadingHijack $D079
 
 define bank7_switchToBank_Bank6 $C1FA
+
+define bank7_stopMusic $C171
+define bank7_playSfx $C1CD
 
 define bank6_hudPrintHijack $A192
 

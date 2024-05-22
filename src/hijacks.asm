@@ -68,6 +68,56 @@ org {bank7_sprite0Hijack}
 org {bank7_stagePropertyTableReadingHijack}
 	lda reroutedStagePropertyTableFromBank7,x
 
+// hardcoded music removal - has issues such as playing a screeching sound when a holy water bottle explodes...
+// ...at the same time as an end-stage orb is grabbed
+// most addresses are for the JP version
+
+// stages
+//org $C097
+//org $C2C8 - US
+//org $C2E7
+		//lda #$00
+		//nop
+
+// orb
+//org $E8B5
+		//lda #$00
+
+// dracula orb
+//org $E8B0
+		//lda #$00
+
+// cookie monster
+//org $FD5B
+		//lda #$00
+
+// boss music
+//bank 6
+//org $998A
+		//lda #$00
+		//sta $60
+
+// credits music
+//org $8C9A
+		//lda #$00
+
+//org $B727
+		//lda #$00
+//org $c1bf
+		//nop
+		//nop
+		//nop
+
+//bank 0
+//base $8000
+//org $8187
+//		rts
+//		nop
+//org $83ac
+//		nop
+//		nop
+//		nop
+
 
 bank 6
 base $8000
@@ -78,6 +128,7 @@ org {bank6_subweaponPrintHijack}
 
 org {bank6_scoreCheckHijack}
     	jsr scoreUpdate
+
 
 org {bank6_freeSpace}
     scoreUpdate:		
@@ -127,7 +178,7 @@ org {bank6_freeSpace}
 		lda {practiceShouldKeepPlayerStatsOnDeathFlag}
 		cmp {TRUE}
 		bne deathEnd
-		
+
 		lda {backupCurrentWhipLevel}
 		sta {currentWhipLevel}
 		lda {backupCurrentSubweaponMultiplier}					
@@ -136,8 +187,7 @@ org {bank6_freeSpace}
 		sta {currentSubweapon}
 		lda {backupCurrentHeartCount}
 		sta {currentHeartCount}
-		lda #$04						// make the multiplier appear again
-		sta	$141
+
 		lda {FALSE}
 		sta {practiceShouldKeepPlayerStatsOnDeathFlag}
 		
@@ -184,3 +234,96 @@ org {bank6_hudPrintHijack}
 		nop 
 		nop 
 		nop 
+
+bank 0
+base $8000
+org {bank0_musicVolumeMelodyHijack}
+	jsr complyWithUserMusicSettingMelody
+
+org {bank0_musicVolumeNoiseHijack}
+	jsr complyWithUserMusicSettingNoise
+	nop 
+
+org {bank0_musicValueNoiseDirectHijack}
+	jsr complyWithUserMusicSettingAdditionalNoise
+
+org {bank0_musicBossFadeOutHijack}
+	jsr checkIfShouldSkipFadeOut
+	nop 
+	nop 
+	nop 
+
+org {bank0_freeSpace}
+	complyWithUserMusicSettingMelody:
+		// restore hijacked instructions
+		sta $05,x
+		iny 
+
+		lda {disableMusic}
+		beq complyWithUserMusicSettingMelodyExit
+		// add exceptions for some jingles
+		lda {musicSquare1Track}
+		cmp {SFX_GameOverTrack}
+		beq complyWithUserMusicSettingMelodyExit
+
+
+
+		// if processing the triangle channel, write a #$00, otherwise write a #$10
+		cpx #$A0
+		bne +
+
+		lda #$00
+		sta $05,x
+		rts 
+
++;		lda #$10
+		sta $05,x
+
+	complyWithUserMusicSettingMelodyExit:
+		rts 
+
+
+	complyWithUserMusicSettingNoise:
+		// restore hijacked instructions
+		beq +
+		sta $07,x
+
+		lda {disableMusic}
+		beq +
+
+		// only process for specifically the noise channel
+		cpx #$B0
+		bne +
+
+		// add exception for whip SFX (which should get processed)
+		lda {noiseTrack}
+		cmp #$05
+		bcs +
+
+		lda #$00
+		sta $07,x
+
++;		rts 
+
+	checkIfShouldSkipFadeOut:
+		lda {disableMusic}
+		beq +
+		lda #$00
+		rts 
+
+
+		// restore hijacked instructions
++;		dec $85
+		lda $85
+		and #$0F
+		rts 
+
+	complyWithUserMusicSettingAdditionalNoise:
+		cmp #$FF
+		bne +
+		lda #$30
++;		sta $4000,x
+		rts 
+
+
+

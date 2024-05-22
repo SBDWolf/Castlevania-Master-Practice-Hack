@@ -1,7 +1,7 @@
         lda {currentSubStage}
         bne .stage07Pass
 
-        // don't run checks unless simon is far left enough
+        // don't run checks unless simon is far enough left
         // otherwise simon will gets spawnkilled...
         clc 
         lda {simonXLowByte}
