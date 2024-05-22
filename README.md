@@ -20,7 +20,7 @@ To use, pause the game by pressing Start, then press Select to pull up a menu.
   - 00 = No Multiplier
   - 01 = Double Shot
   - 02 = Triple Shot
-- **Health**: Sets Simon's Heart Count.
+- **Health**: Sets Simon's Health.
 - **Hearts**: Sets Simon's Heart Count.
 - **Game Loop**: Sets whether the game's difficulty setting is that of first quest or second quest.
   - 00 = First Quest
