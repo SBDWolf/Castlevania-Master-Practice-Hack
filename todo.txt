@@ -10,8 +10,6 @@
 - feature: allow making keybinds
 - feature: slow down
 - feature: frame advance
-- feature: add ability to turn off music
-- feature: select simon's health
 - feature: show the frame an enemy died on
 - there may be frame counter oddities when using level select/stage reset (for example crushers room feels different)
 - let default menu option for tools be the one corresponding to their current state (enabled/disabled for example)
