@@ -1,4 +1,3 @@
-- fix music sometimes going missing when skipping intro screen
 - fix glitched castle sprite when skipping the credits
 - fix fact that the default submenu option flashes for one frame when pressing A to quit out of a submenu
 - fix life counter refreshing when getting a 1up
