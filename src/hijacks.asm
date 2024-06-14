@@ -34,11 +34,15 @@ org {bank7_naturalFreeSpace}
 		ldx $1F
 		rts 
 
-org {bank7_scorePrintHijack}
+//org {bank7_scorePrintHijack}
 		// don't ever draw the score. overwriting a jsr instruction
-		nop 
-		nop 
-		nop 
+		//nop 
+		//nop 
+		//nop 
+
+org {bank7_scorePrintHijack}
+		// don't ever draw the score.
+		bvc {bank7_scorePrintBranchDestination}
 
 org {bank7_mainJumpTable}+2
 		// this is hijacking the title screen
@@ -129,6 +133,25 @@ org {bank6_subweaponPrintHijack}
 org {bank6_scoreCheckHijack}
     	jsr scoreUpdate
 
+org {bank6_demoSetupHijack}
+		jsr addSimonStats
+		nop 
+		nop 
+
+org {bank6_demoSetup2Hijack}
+		nop 
+		nop 
+		nop 
+		nop 
+		nop 
+
+org {bank6_musicContinuityHijack}
+		jsr checkIfInDemoModeMusicContinuity
+		nop 
+		nop 
+		nop 
+		nop 
+		nop 
 
 org {bank6_freeSpace}
     scoreUpdate:		
@@ -224,7 +247,34 @@ org {bank6_freeSpace}
 		db $FF,$FF,$FF,$FF,$0F,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$3F,$1F
 		db $FF,$FF,$0F
 
-	warnpc $C000
+	addSimonStats:
+		lda #$01
+		sta {currentWhipLevel}
+		lda #$02
+		sta {currentSubweaponMultiplier}
+		lda #$0B
+		sta {currentSubweapon}
+		rts 
+
+	checkIfInDemoModeMusicContinuity:
+		lda {systemState}
+		cmp #$02
+		bne +
+		
+		lda #$00
+		sta $4A
+		lda #$05
+		sta $18
+		sta $1F
+		rts 
+
++;  	lda #$05
+		sta $18
+		sta $4A
+		sta $1F
+		rts 
+
+warnpc $C000
 
 org {bank6_hudPrintHijack}
 		// skips the writing of any unnecessary text in the HUD, such as SCORE-, PLAYER, ENEMY, TIME, etc.
@@ -325,5 +375,12 @@ org {bank0_freeSpace}
 +;		sta $4000,x
 		rts 
 
+bank 5
+base $8000
 
+org {bank5_cookieMonsterMusicChangeHijack}
+	jsr checkIfInDemoModeCookieMonster
 
+org {bank5_draculaPatternHijack}
+	jsr checkifInDemoModeDracula
+	nop 

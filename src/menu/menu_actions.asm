@@ -474,7 +474,7 @@
 		lda {practiceAboutPrintPhase}
 		cmp #$02
 		bcs +
-		// beq might be enough here
+
 		cmp #$00
 		bne phase2
 

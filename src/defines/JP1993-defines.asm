@@ -9,7 +9,8 @@ define bank0_musicVolumeNoiseHijack $84F1
 define bank0_musicValueNoiseDirectHijack $84EA
 define bank0_musicBossFadeOutHijack $8396
 
-define bank7_scorePrintHijack $CC6F
+define bank7_scorePrintHijack $CC6A
+define bank7_scorePrintBranchDestination $CC4A
 
 define bank7_pauseCheckHijack $CF46
 
@@ -49,6 +50,18 @@ define bank6_titleScreenTextRow2 $BA9B
 define bank6_titleScreenTextRow3 $BABA
 define bank6_titleScreenTextCommaPixel $BA97
 
+define bank6_demoSetupHijack $B66E
+define bank6_demoSetup2Hijack $B67E
+define bank6_demoStageList $B6BD
+define bank6_demoCHRList $B6C0
+define bank6_demoInputsPointerList $BB47
+define bank6_demoInputsSpaceStart $BB4D
+define bank5_cookieMonsterMusicChangeHijack $9759
+define bank7_playCookieMonsterMusicEntryPoint $FD5D
+define bank5_draculaPatternHijack $9614
+define bank6_musicContinuityHijack $95E9
+
+
 // a lot of bank 5 is free space. i am defining my own arbitrary free space ranges to be used by my own code.
 define bank5_freeSpaceData $9A40
 
@@ -62,7 +75,7 @@ define bank5_mirrorCodeToBank6 $A366
 // there is an ok amount of free space in bank 6 on the us version, but not so much on the jp version.
 // i only use this in a couple bank 6 hijacks
 
-define bank6_freeSpace $BF5C
+define bank6_freeSpace $BF3C                    // this can be pushed back earlier, but needs to not clash with the demo inputs which are defined separately
 
 define bank7_freedUpSpaceFromReroutedTable $FC2E
 

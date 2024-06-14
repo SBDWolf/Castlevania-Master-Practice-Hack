@@ -127,7 +127,12 @@ define currentPlayerHealth $45
 
 define currentSubStage $46
 
+// this address is responsible for the demo music glitch
+define musicContinuity $4A
+
 define currentSubweaponMultiplier $64
+
+define RNG $6F
 
 define currentWhipLevel $70
 

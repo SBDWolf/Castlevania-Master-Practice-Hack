@@ -14,4 +14,6 @@ incsrc "src/title_screen/title_screen_us.asm"
 cleartable
 table "src/cv1Game.tbl"
 
+incsrc "src/demos/demos_us.asm"
+
 incsrc "src/main_full.asm"

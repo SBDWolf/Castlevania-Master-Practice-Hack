@@ -9,10 +9,8 @@ define bank0_musicVolumeNoiseHijack $84F1
 define bank0_musicValueNoiseDirectHijack $84EA
 define bank0_musicBossFadeOutHijack $8396
 
-
-
-
-define bank7_scorePrintHijack $CC84
+define bank7_scorePrintHijack $CC7F
+define bank7_scorePrintBranchDestination $CC5F
 
 define bank7_pauseCheckHijack $CEF3
 
@@ -53,6 +51,17 @@ define bank6_titleScreenTextRow1 $B063
 define bank6_titleScreenTextRow2 $B079
 define bank6_titleScreenTextRow3 $BA97
 define bank6_titleScreenTextRow4 $BAA8
+
+define bank6_demoSetupHijack $B886
+define bank6_demoSetup2Hijack $B896
+define bank6_demoStageList $B8CC
+define bank6_demoCHRList $B8CF
+define bank7_demoInputsPointerList $FF24
+define bank5_demoInputsSpaceStart $9A38
+define bank5_cookieMonsterMusicChangeHijack $9759
+define bank7_playCookieMonsterMusicEntryPoint $FCF2
+define bank5_draculaPatternHijack $9614
+define bank6_musicContinuityHijack $95E9
 
 // a lot of bank 5 is free space. i am defining my own arbitrary free space ranges to be used by my own code.
 define bank5_freeSpaceData $9E50
