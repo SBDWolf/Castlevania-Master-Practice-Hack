@@ -150,6 +150,8 @@ define audioTrack $E5
 
 define currentInputOneFrame $F5
 
+define PPUMask $FE
+
 define currentSubweapon $15B
 
 define practiceMenuPhaseIndex $100		// (NEW!) used to determine in what phase of the menu drawing we're currently on
@@ -170,6 +172,8 @@ define draculaToolPauseBufferFrameCount $10C
 define draculaToolJumpWhipStaggerFrameCount $10D
 
 define disableMusic $10E
+
+define previousInput $10F
 
 define activeTools $110
 define toolsCountForMenuDeconstruction $111
@@ -207,7 +211,10 @@ define scrollGlitchDiagnosticSimonPreviousX $12A
 define scrollGlitchDiagnosticHudCursor $12B
 define scrollGlitchDiagnosticHudClearPhase $12C
 
+define refreshPaletteTimer $12D
+
 define toolsToRunPointerList $12E
+
 
 define currentBossHealth $1A9
 

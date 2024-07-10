@@ -2,7 +2,7 @@
 	// backup state of the x register
 		txa 
 		pha 
-		
+
 		jsr menuManager
 
 		// hijack fix

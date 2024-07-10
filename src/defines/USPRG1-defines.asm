@@ -37,6 +37,9 @@ define bank7_switchToBank_Bank6 $C1D4
 define bank7_stopMusic $C14B
 define bank7_playSfx $C1A7
 
+define bank7_pushPaletteUpdate $CC95
+define bank7_stagePaletteTable $FB9B
+
 define bank6_hudPrintHijack $A18D
 
 define bank6_scoreCheckHijack $A091

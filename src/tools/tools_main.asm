@@ -30,6 +30,8 @@
 		// start going through tools. the last pointer is the address of returnToGame
 		// the x register is the index of the tool being run
 		.runTools:
+			incsrc "src/menu/savestate_fix.asm" 
+
 			ldx #$00
 			jmp ({toolsToRunPointerList})
 

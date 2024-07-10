@@ -1,5 +1,6 @@
 bank 7
 base $C000
+
 org {bank7_pauseCheckHijack}
 	jsr {bank7_freedUpSpaceFromReroutedTable}
 
